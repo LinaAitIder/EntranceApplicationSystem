@@ -1,22 +1,13 @@
 <?php  
+require 'utils/functions.php';
 require 'ConnectFunc.php';
 require 'Token_code.php';
 require 'Mail_Handler.php';
 session_start();
-// si authentifie , ne pas avoir la possibilite de returner a cette page jusqu'a deconnexion
-if(isset($_SESSION['USER'])) {
-    // Redirect based on the user type
-    if($_SESSION['USER'] == 'etud') {
-        header("location:recap.php");
-        exit; // Terminate script execution after redirection
-    } elseif($_SESSION['USER'] == 'admin') {
-        header("location:administration.php");
-        exit; // Terminate script execution after redirection
-    }
-}
-//Calling function connect() to connect to DB
+pageAccess();
+
 $connexion= connect();
-//if the form is submitted :
+
 if (isset($_POST['submit'])) {
     // Retrieving data form 
     $nom = $_POST['nom'];
