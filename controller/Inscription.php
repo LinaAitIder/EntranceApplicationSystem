@@ -1,6 +1,6 @@
 <?php  
 require 'utils/functions.php';
-require 'data/ConnectFunc.php';
+require 'data/config.php';
 require 'data/userData.php';
 require 'Token_code.php';
 require 'Mail_Handler.php';
