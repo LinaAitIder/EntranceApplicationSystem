@@ -3,6 +3,7 @@ session_start();
 if($_SESSION['USER']!== 'admin'){ header("location: inscriptions.php");}
 #how are we going to do with session_id()
 require("ConnectFunc.php");
+
 $con=connect();
 $query="SELECT * FROM etud3a Union SELECT * FROM etud4a ";
 $data = $con->query($query);
