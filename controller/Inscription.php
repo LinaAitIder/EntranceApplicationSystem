@@ -1,14 +1,32 @@
 <?php  
 require 'utils/functions.php';
 require 'data/ConnectFunc.php';
+require 'data/userData.php';
 require 'Token_code.php';
 require 'Mail_Handler.php';
 session_start();
 pageAccess();
 
 $db = new Database;
-$connexion= $db->connect();
-retrieveFormData();
+$user = new User ;
+if (isset($_POST['submit'])) {
+  $user->nom = $_POST['nom'];
+  $user->prenom = $_POST['prenom'];
+  $user->$login = $_POST['log'];
+  $user->$email = $_POST['email'];
+  $user->$pass = crypt($_POST['mdp'],'blowfish');
+  $user->$date = $_POST['naissance'];
+  $user->$diplome = $_POST['diplome'];
+  // $user->$nv3 = isset($_POST['niveau3']) ;
+  // $user->$nv4 = isset($_POST['niveau4']) ;
+  $user->$etab = $_POST['etablissement'];
+ 
+  uploadFiles($_FILES['photo'], $_FILES['cv'] , $user);
+}
+//email Verification with token
+insertData($user , $db);
+
+
 
 
 

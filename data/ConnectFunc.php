@@ -1,4 +1,5 @@
 <?php
+require 'userData.php';
     class Database{
         private $localhost = "localhost";
         private $db = "concours";
@@ -15,9 +16,10 @@
                 }
                 return null;
         } 
-        
-        function insertData(){
 
+        function insertData($user , $db){
+            $connexion= $db->connect();
+            $insertReq="Insert into $this->db VALUES '$user->name ,  $user->prenom , $user->email , $user->naissance , $user->diplome , '3' , $user->etab' , $user->cv , $user-> photo ";
         }
 
       

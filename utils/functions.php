@@ -18,7 +18,7 @@ function dislayErrors($errors){
       }
     }
   };
-  function uploadFiles($photo , $cv){
+  function uploadFiles($photo , $cv , $user){
     //Manage Image
     $photoName = $photo['name'];
     $photoTmpName = $photo['tmp_name'];
@@ -60,24 +60,31 @@ function dislayErrors($errors){
       $uploadPathCv= $uploadDir . $cvName;
       $uploadPathPhoto= $uploadDir . $photoName;
   
-      move_uploaded_file($cvTmpName, $uploadPathCv);
-      move_uploaded_file($photoTmpName, $uploadPathPhoto);
-  
+      $uploadCOk = move_uploaded_file($cvTmpName, $uploadPathCv);
+      $uploadPOk = move_uploaded_file($photoTmpName, $uploadPathPhoto);
+      // Just to test
+      if($uploadCOk &&   $uploadPOk){
+        echo "<alert> Les fichier sont bien telecharge</alert>";
+      }
+      $user->cv = $uploadPathCv ;
+      $user->photo = $uploadPathPhoto;
+      ;
     }
 }
-function retrieveFormData(){
-    if (isset($_POST['submit'])) {
-      $nom = $_POST['nom'];
-      $prenom = $_POST['prenom'];
-      $login = $_POST['log'];
-      $email = $_POST['email'];
-      $pass = crypt($_POST['mdp'],'blowfish');
-      $date = $_POST['naissance'];
-      $diplome = $_POST['diplome'];
-      $nv3 = isset($_POST['niveau3']) ;
-      $nv4 = isset($_POST['niveau4']) ;
-      $etab = $_POST['etablissement'];
-      uploadFiles($_FILES['photo'], $_FILES['cv']);
-    }
-  };
+// }
+// function retrieveFormData($postData , $fileData){
+//     if (isset($submit)) {
+//       $nom = $_POST['nom'];
+//       $prenom = $_POST['prenom'];
+//       $login = $_POST['log'];
+//       $email = $_POST['email'];
+//       $pass = crypt($_POST['mdp'],'blowfish');
+//       $date = $_POST['naissance'];
+//       $diplome = $_POST['diplome'];
+//       $nv3 = isset($_POST['niveau3']) ;
+//       $nv4 = isset($_POST['niveau4']) ;
+//       $etab = $_POST['etablissement'];
+//       uploadFiles($_FILES['photo'], $_FILES['cv']);
+//     }
+//   };
 ?>
