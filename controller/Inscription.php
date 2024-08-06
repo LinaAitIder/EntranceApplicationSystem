@@ -1,7 +1,7 @@
 <?php  
 require 'utils/functions.php';
-require 'data/config.php';
 require 'data/userData.php';
+require '../data/config.php';
 require 'Token_code.php';
 require 'Mail_Handler.php';
 session_start();
@@ -24,7 +24,8 @@ if (isset($_POST['submit'])) {
   uploadFiles($_FILES['photo'], $_FILES['cv'] , $user);
 }
 //email Verification with token
-insertData($user , $db);
+$connexion= $db->connect();
+$db->insertData($user , $connexion);
 
 
 

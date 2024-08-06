@@ -17,9 +17,38 @@ require 'userData.php';
                 return null;
         } 
 
-        function insertData($user , $db){
-            $connexion= $db->connect();
-            $insertReq="Insert into $this->db VALUES '$user->name ,  $user->prenom , $user->email , $user->naissance , $user->diplome , '3' , $user->etab' , $user->cv , $user-> photo ";
+        function insertData($user , $connexion){
+            // Preparing parameter
+            $insertReq=$connexion->prepare(" INSERT INTO users  (name, prenom, email, naissance, diplome, niveau, etablissement, cv, photo, department_id) 
+            VALUES 
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            );
+            $niveau = 3; // Assuming 'niveau' is always 3
+            $insertReq->bind_param(
+                "sssssssssi", 
+                $user->name, 
+                $user->prenom, 
+                $user->email, 
+                $user->naissance, 
+                $user->diplome, 
+                $niveau, 
+                $user->etab, 
+                $user->photo, 
+                $user->cv,
+                $user->login,
+                $user->pass,
+            );
+               // Execute the query and check for errors
+            if ($insertReq->execute()) {
+                echo "<alert> Data inserted successfully! </alert>";
+            } else {
+                echo " <alert> Error inserting data: </alert>" . $insertReq->error;
+            }
+            
+            // Close the statement and connection
+            $insertReq->close();
+            $connexion->close();
+           
         }
 
       
