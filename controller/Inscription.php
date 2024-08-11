@@ -1,31 +1,68 @@
 <?php  
-require 'utils/functions.php';
-require 'data/userData.php';
+require '../utils/functions.php';
+include_once '../data/userData.php';
 require '../data/config.php';
-require 'Token_code.php';
-require 'Mail_Handler.php';
+
 session_start();
 pageAccess();
 
 $db = new Database;
 $user = new User ;
-if (isset($_POST['submit'])) {
+
+if (isset($_POST)) {
+  //Manual Testing
+  echo "Data submitted </br> </br>";
+
   $user->nom = $_POST['nom'];
   $user->prenom = $_POST['prenom'];
-  $user->$login = $_POST['log'];
-  $user->$email = $_POST['email'];
-  $user->$pass = crypt($_POST['mdp'],'blowfish');
-  $user->$date = $_POST['naissance'];
-  $user->$diplome = $_POST['diplome'];
-  // $user->$nv3 = isset($_POST['niveau3']) ;
-  // $user->$nv4 = isset($_POST['niveau4']) ;
-  $user->$etab = $_POST['etablissement'];
- 
+  $user->log = $_POST['log'];
+  $user->email = $_POST['email'];
+  $user->mdp = crypt($_POST['mdp'],'blowfish');
+  $user->naissance = $_POST['naissance'];
+  $user->diplome = $_POST['diplome'];
+  $user->etab = $_POST['etab'];
+
+  // Call function Verifylevel()
+  $niveau3=$_POST['niveau3'];
+  $niveau4=$_POST['niveau4'];
+  $niveau = verifyLevel($niveau3 , $niveau4);  
+  $user->niveau = $niveau;
+  echo "<br> le niveau d'user :" . $user->niveau . "</br>" ;
+
+  // Uploading Files
   uploadFiles($_FILES['photo'], $_FILES['cv'] , $user);
+
+  // Connecting to DB & Manual Testing
+  $connexion= $db->connect();
+  if($connexion) echo '</br> </br> Connexion is Working </br>';
+
+  // Inserting Depending on the Application
+  if($user->niveau==='3'){
+    $db->insertData($user , $connexion, 'etud3a');
+  }
+  else if($niveau==='4'){
+    $db->insertData($user , $connexion , 'etud4a');
+  }
+  else if($niveau === '3 et 4'){
+
+    // Constraint : The user should have a diplome of bac+3 and have an application for both the 3thrd year and the 4th year
+
+    if($user->diplome === 'Bac+2'){
+      $db->insertData($user , $connexion , 'etud3a');
+      $db->insertData($user , $connexion , 'etud4a');
+    }
+    else{
+      echo '<alert>Un etudiant Bac+3  peut pas présenter sa candidature en 3ème et 4ème année en même temps.</alert>';
+    }
+
+  }
+  //email Verification with token
+
 }
-//email Verification with token
-$connexion= $db->connect();
-$db->insertData($user , $connexion);
+else {
+  echo "Data not submitted ";
+}
+ 
 
 
 

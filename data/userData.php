@@ -2,17 +2,17 @@
 class User {
   public $nom;
   public $prenom;
-  public $login;
+  public $log;
   public $email ;
-  public $pass ;
-  public $date;
+  public $mdp ;
+  public $naissance;
   public $diplome;
-  public $niveu;
+  public $niveau;
   public $etab ;
   public $cv;
   public $photo;
-  
-  
+  // function __construct($nom , $prenom , $login , $email , $pass , $date , $ diplome , $ niveau , $etab , $cv , $photo)
+
 }
 
 ?>

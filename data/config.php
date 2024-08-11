@@ -1,5 +1,4 @@
 <?php
-require 'userData.php';
     class Database{
         private $localhost = "localhost";
         private $db = "concours";
@@ -17,39 +16,34 @@ require 'userData.php';
                 return null;
         } 
 
-        function insertData($user , $connexion){
+        function insertData($user , $connexion , $table){
             // Preparing parameter
-            $insertReq=$connexion->prepare(" INSERT INTO users  (name, prenom, email, naissance, diplome, niveau, etablissement, cv, photo, department_id) 
+            $insertReq=$connexion->prepare(" INSERT INTO  $table (nom, prenom, email, naissance, diplome, niveau, etablissement,photo , cv , log , mdp) 
             VALUES 
-            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            (:nom,:prenom,:email,:naissance,:diplome,:niveau,:etablissement,:photo,:cv,:log, :mdp)"
             );
-            $niveau = 3; // Assuming 'niveau' is always 3
-            $insertReq->bind_param(
-                "sssssssssi", 
-                $user->name, 
-                $user->prenom, 
-                $user->email, 
-                $user->naissance, 
-                $user->diplome, 
-                $niveau, 
-                $user->etab, 
-                $user->photo, 
-                $user->cv,
-                $user->login,
-                $user->pass,
-            );
-               // Execute the query and check for errors
+            $insertReq->bindValue(':nom', $user->nom, PDO::PARAM_STR);
+            $insertReq->bindValue(':prenom', $user->prenom, PDO::PARAM_STR);
+            $insertReq->bindValue(':email', $user->email, PDO::PARAM_STR);
+            $insertReq->bindValue(':naissance', $user->naissance, PDO::PARAM_STR); // Date as a string
+            $insertReq->bindValue(':diplome', $user->diplome, PDO::PARAM_STR);
+            $insertReq->bindValue(':niveau', $user->niveau, PDO::PARAM_STR);
+            $insertReq->bindValue(':etablissement', $user->etab, PDO::PARAM_STR);
+            $insertReq->bindValue(':cv', $user->cv, PDO::PARAM_STR);
+            $insertReq->bindValue(':photo', $user->photo, PDO::PARAM_STR);
+            $insertReq->bindValue(':log', $user->log, PDO::PARAM_STR);
+            $insertReq->bindValue(':mdp', $user->mdp, PDO::PARAM_STR);
             if ($insertReq->execute()) {
                 echo "<alert> Data inserted successfully! </alert>";
             } else {
-                echo " <alert> Error inserting data: </alert>" . $insertReq->error;
+                $errorInfo = $insertReq->errorInfo();
+                echo "Error inserting data: " . $errorInfo[2];
             }
             
-            // Close the statement and connection
-            $insertReq->close();
-            $connexion->close();
            
         }
+      
+
 
       
     }
