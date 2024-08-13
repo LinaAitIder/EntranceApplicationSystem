@@ -2,6 +2,8 @@
 require '../utils/functions.php';
 include_once '../data/userData.php';
 require '../data/config.php';
+require './Token_code.php';
+
 
 session_start();
 pageAccess();
@@ -9,10 +11,13 @@ pageAccess();
 $db = new Database;
 $user = new User ;
 
-if (isset($_POST)) {
+if (isset($_POST['signUp'])) {
   //Manual Testing
   echo "Data submitted </br> </br>";
-
+  $user->token = rand(0000,9999);
+  //For testing
+  echo "<script>console.log(".$user->token.")</script>";
+  $user->verifStatus = false;
   $user->nom = $_POST['nom'];
   $user->prenom = $_POST['prenom'];
   $user->log = $_POST['log'];
@@ -35,26 +40,37 @@ if (isset($_POST)) {
   // Connecting to DB & Manual Testing
   $connexion= $db->connect();
   if($connexion) echo '</br> </br> Connexion is Working </br>';
-
+  // tokenpdf
+  $tokenpdf = CreatefpdfToken($user->token);
+  //just For testing
+  if($tokenpdf){
+    echo "pdf is created";
+  }
+  else{
+    echo "There is a problem with the pdf";
+  }
   // Inserting Depending on the Application
   if($user->niveau==='3'){
     $db->insertData($user , $connexion, 'etud3a');
-  }
-  else if($niveau==='4'){
+    if(sendMail($user->nom , $user->prenom , $user->email , $tokenpdf)){
+      header('Verify_account.php');
+    };
+  } else if($user->niveau==='4'){
     $db->insertData($user , $connexion , 'etud4a');
-  }
-  else if($niveau === '3 et 4'){
-
+    if(sendMail($user->nom , $user->prenom , $user->email , $tokenpdf)){
+      header('Verify_account.php');
+    };
+  } else if($user->niveau === '3 et 4'){
     // Constraint : The user should have a diplome of bac+3 and have an application for both the 3thrd year and the 4th year
-
     if($user->diplome === 'Bac+2'){
       $db->insertData($user , $connexion , 'etud3a');
       $db->insertData($user , $connexion , 'etud4a');
-    }
-    else{
+      if(sendMail($user->nom , $user->prenom , $user->email , $tokenpdf)){
+        header('Verify_account.php');
+      };
+    }else{
       echo '<alert>Un etudiant Bac+3  peut pas présenter sa candidature en 3ème et 4ème année en même temps.</alert>';
     }
-
   }
   //email Verification with token
 
@@ -64,96 +80,25 @@ else {
 }
  
 
+//User Verification form 
 
+if(isset($_POST['verify'])){
+  $code=$_POST['tokenCode'];
+  //$code_ver should be taken from the DB
+  $token_ver = $db->getToken($user, $connexion);
+  if($code === $token_ver ){
+      $user->verifStatus = true;
+      $user->token = $code;
+      //Creating an update function
+      $db->updateVerifStatus($user , $connexion);
+      header("location: authen.php");
+      exit();
+  }
+  else {
+      echo "<script src='errorMessage.js'></script>";
+      echo "<script>CodeVerifError();</script>";
 
-
-
-
-
-  
-
-    
-    // if ($nv3 && !$nv4) { 
-    //     $niveau = 'nv3';
-    // } elseif ($nv4 && !$nv3) { 
-    //     $niveau = 'nv4';
-    // } elseif (!$nv3 && !$nv4) { 
-    //     echo "<script>alert('Choisissez un seul niveau!');</script>";
-    //     header("refresh:5;url=Inscription.php");
-    //     return; 
-    // }
-
-    // // Random value for token 
-    // $randomNumber = rand(1, 9999);
-    // $token =  $randomNumber;
-
-    // Level input Verification + Insertion to database
-    // if ( $diplome && $nv3 && $nv4) {
-    //     if ($diplome=='Bac+3') echo "<script>alert('Vous ne pouvez pas choisir les deux niveaux en tant que Candidat de BAC+3')</script>";
-    //     elseif ($diplome=='Bac+2') {
-    //             // Insertion into etud3a : Candidature 3eme annees
-    //             $niveau = 'nv3';
-    //             try{
-    //             $sql = "INSERT INTO etud3a (nom, prenom, email, naissance, diplome, niveau, etablissement, photo, cv, log, mdp, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    //             $stmt = $connexion->prepare($sql);
-    //             $reg1= $stmt->execute([$nom, $prenom, $email, $date, $diplome, $niveau, $etab, $photoPath, $cvPath, $login, $pass, $token]) ;
-    //             // Verification de l'insertion
-    
-    //             // Insertion into etud3a : Candidature 4eme annees
-    //             $niveau = 'nv4';
-    //             $sql = "INSERT INTO etud4a (nom, prenom, email, naissance, diplome, niveau, etablissement, photo, cv, log, mdp, token) VALUES (?,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    //             $stmt = $connexion->prepare($sql);
-    //             $reg2 =$stmt->execute([$nom, $prenom, $email, $date, $diplome, $niveau, $etab, $photoPath, $cvPath, $login , $pass , $token]);
-    //             } catch (PDOException $e) {
-    //                 if ($e->errorInfo[1] === 1062) { 
-    //                     echo '<script>alert("Vous etes deja inscrit!");</script>';
-    //                     header("Refresh:5; url=authen.php");
-    //                 } else {  
-    //                     echo "Une erreur est survenue : " . $e->getMessage(); 
-    //                 }
-    //             }
-    //             if($reg1 && $reg2) {
-    //                 echo "<script>alert('Inscription enregistree!');</script>";    
-    //                 $Tpdf=CreatefpdfToken($token);
-    //                 if(sendmail($nom , $prenom ,$email , $Tpdf)){
-    //                     header("Refresh:5; url=Verify_account.php?code=$token");
-    //                     exit();
-    //                 }
-    //                 else {
-    //                     echo "<script>alert('Erreur : Email pas envoye!')</script>";
-    //                 }
-    //             }
-    //       // Verification de l'insertion
-    //  }}
-    // elseif ($diplome && ($nv3 || $nv4)) {
-    //     $table = $niveau === 'nv3' ? 'etud3a' : 'etud4a';
-    //     try {
-    //         $sql = "INSERT INTO $table (nom, prenom, email, naissance, diplome, niveau, etablissement, photo, cv, log , mdp, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    //         $stmt = $connexion->prepare($sql);
-    //         if ($stmt->execute([$nom, $prenom, $email, $date, $diplome, $niveau, $etab,  $photoPath, $cvPath, $login, $pass, $token])) {
-    //             echo "<script>alert('Inscription enregistree');</script>";    
-    //             $Tpdf=CreatefpdfToken($token);
-    //             if(sendmail($nom , $prenom ,$email , $Tpdf)){
-    //                 echo '<script>alert("Message envoye!");</script>';
-    //                 header("Refresh:5; url=Verify_account.php?code=$token");
-    //                 exit();
-    //             }
-    //             else {
-    //                 echo "<script>alert('Erreur : Email pas envoye!')</script>";
-    //             }
-    //         }
-    //     } catch (PDOException $e) {
-    //         // Check if the error is related to a unique constraint violation
-    //         if ($e->errorInfo[1] === 1062) {     
-    //              echo "<script>alert('Vous etes deja inscrit!')</script>";
-    //         } else {
-    //             // If it's another type of error, you can handle it differently
-    //             echo "Une erreur est survenu: " . $e->getMessage();
-    //         }
-    //     }
-    // }
-
-
-
+  }
+}
 
 ?>

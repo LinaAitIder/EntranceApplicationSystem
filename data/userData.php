@@ -11,7 +11,9 @@ class User {
   public $etab ;
   public $cv;
   public $photo;
-  // function __construct($nom , $prenom , $login , $email , $pass , $date , $ diplome , $ niveau , $etab , $cv , $photo)
+  public $token;
+  public $verifStatus;
+  // function __construct($userDetails)
 
 }
 
