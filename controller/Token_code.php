@@ -31,5 +31,8 @@ function CreatefpdfToken($token){
     $filename='CodeConfirmation.pdf';
     $pdf->Output('F', $filename);  // Save to a file
     return $filename;
+
 }
+
 ?>
+
