@@ -1,5 +1,4 @@
-<?php session_start();
-if($_SESSION['USER'] != 'admin') header("location:Inscription.php"); ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,16 +16,9 @@ if($_SESSION['USER'] != 'admin') header("location:Inscription.php"); ?>
         <form method="post" action="lister.php">
             <button type="submit" color="yellow">Obtenir Les Informations Des Condidats</button><br><br><br><br><br>
         </form>
-        <a href="deconnexion.php">se deconnecter</a><br>
+        <a href="./controller/logout.php">se deconnecter</a><br>
     </div>
 </body>
-<?php       
-    if(isset($_POST['list'])){
-        header("location:lister.php");
-    }
-             
 
-
-?>
 </body>
 </html>
