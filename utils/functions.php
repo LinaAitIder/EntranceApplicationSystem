@@ -1,5 +1,4 @@
 <?php
-define('BASE_DIR', __DIR__);
 function pageAccess(){
   if(isset($_SESSION['USER'])) {
       // Redirect based on the user type
@@ -60,7 +59,7 @@ function displayErrors($errors){
       displayErrors($errors);
     } else{
       //Create the uploads folder
-      $uploadDir = BASE_DIR ."\../uploads/";
+      $uploadDir = "../uploads/";
       echo $uploadDir;
       if(!is_dir($uploadDir)){
         mkdir($uploadDir , 0777, true);

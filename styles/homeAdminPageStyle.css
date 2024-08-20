@@ -1,0 +1,18 @@
+html {
+  width:100% !important;
+  height:100% !important;
+}
+
+
+.childContainer{
+  position : absolute;
+  top : 50%;
+  left : 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgb(255, 155, 155);
+  padding:10px ;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+
+  
+}
