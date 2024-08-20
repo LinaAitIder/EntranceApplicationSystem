@@ -129,7 +129,7 @@
     
 
     public static function getAllUsers($connexion){
-        $htmlCandidatsLists = `
+        $htmlCandidatsLists = '
         <html>
         <head>
             <meta charset="UTF-8">
@@ -152,8 +152,8 @@
                     <th >photo</th>   
                     <th >cv</th>
                 </tr>
-        `;
-        $query=" SELECT * FROM etud3a Union SELECT * FROM etud4a ";
+    ';
+        $query = "SELECT * FROM etud3a UNION SELECT * FROM etud4a";
         $data = $connexion->query($query);
         $rows = $data->fetchAll(PDO::FETCH_ASSOC);
         foreach($rows as $row){ 
@@ -167,7 +167,7 @@
                     <td  >{$row['niveau']}</td>   
                     <td >{$row['etablissement']}</td>   
                     <td ><img src='{$row['photo']}' style='width: 100px; height: auto;'></td>   
-                    <td ><a href='{$row['cv']} download'> CV</a></td>
+                    <td ><a href='{$row['cv']}' download> CV</a></td>
                 </tr>
                 
                 ";
@@ -178,7 +178,7 @@
         <br>
         <br>
 
-        <a href="deconnexion.php">se deconnecter</a>
+        <a href="../controller/logout.php">se deconnecter</a>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         </body>
