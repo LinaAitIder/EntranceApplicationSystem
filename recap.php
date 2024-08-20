@@ -11,7 +11,7 @@
     }
 
     function deconnecter() {
-        window.location.href = 'deconnexion.php';
+        window.location.href = 'controller/logout.php';
     }
 
     function suppr_cmpt() {
