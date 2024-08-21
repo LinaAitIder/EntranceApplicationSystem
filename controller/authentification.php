@@ -34,7 +34,7 @@
                 $result = $stmt->fetch(PDO::FETCH_ASSOC); 
                 $_SESSION['recap_etud']=$result;
                 $_SESSION['USER'] = 'etud';
-                header("Location:./../recap.php?login=".$login);
+                header("Location:./../View/recap.php?login=".$login);
             } else {
                 echo "<script>alert('Vous n'êtes pas inscrit, Veuillez vous reinscrire !');</script>";
             }}

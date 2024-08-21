@@ -1,4 +1,5 @@
 <?php
+    ini_set('memory_limit', '1024M');
     class Database{
         private $localhost = "localhost";
         private $db = "concours";
@@ -123,10 +124,139 @@
                     echo "Something is wrong with the extration of the data";
                 }
             }
+            if($user->niveau === '3 et 4'){
+                $updateReq= $connexion->prepare("UPDATE etud4a , etud3a SET etud3a.verif_token = :verif_token , etud4a.verif_token = :verif_token WHERE etud3a.email= :email AND etud4a.email= :email");
+                $updateReq->bindValue(':email',$user->email , PDO::PARAM_STR);
+                $updateReq->bindValue(':verif_token',$user->verifStatus , PDO::PARAM_BOOL);
+                if($updateReq->execute()){
+                    echo " Data updated in etud4a";
+                }
+                else {
+                    echo "Something is wrong with the extration of the data";
+                }
+            }
+            
           
         }
       
-    
+        function updateData($user, $connexion , $userLogin) {
+            // Update for niveau 3
+            if ($user->niveau === "3") {
+                $dateUpdateReq = "
+                UPDATE etud3a
+                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
+                WHERE log = :userLogin;
+                ";
+                $stmt = $connexion->prepare($dateUpdateReq);
+                // Binding parameters
+                $stmt->bindParam(':nom', $user->nom);
+                $stmt->bindParam(':prenom', $user->prenom);
+                $stmt->bindParam(':email', $user->email);
+                $stmt->bindParam(':naissance', $user->naissance);
+                $stmt->bindParam(':diplome', $user->diplome);
+                $stmt->bindParam(':niveau', $user->niveau);
+                $stmt->bindParam(':etab', $user->etab);
+                $stmt->bindParam(':photo', $user->photo);
+                $stmt->bindParam(':cv', $user->cv);
+                $stmt->bindParam(':log', $user->log);
+                $stmt->bindParam(':mdp', $user->mdp);
+                $stmt->bindParam(':userLogin', $userLogin);
+                if ($stmt->execute()) {
+                    echo "Updated data in etud3a";
+                } else {
+                    print_r($stmt->errorInfo());
+                }
+            }
+        
+            // Update for niveau 4
+            if ($user->niveau === "4") {
+                $dateUpdateReq = "
+                UPDATE etud4a
+                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
+                WHERE log = :userLogin;
+                ";
+                $stmt = $connexion->prepare($dateUpdateReq);
+                // Binding parameters
+                $stmt->bindParam(':nom', $user->nom);
+                $stmt->bindParam(':prenom', $user->prenom);
+                $stmt->bindParam(':email', $user->email);
+                $stmt->bindParam(':naissance', $user->naissance);
+                $stmt->bindParam(':diplome', $user->diplome);
+                $stmt->bindParam(':niveau', $user->niveau);
+                $stmt->bindParam(':etab', $user->etab);
+                $stmt->bindParam(':photo', $user->photo);
+                $stmt->bindParam(':cv', $user->cv);
+                $stmt->bindParam(':log', $user->log);
+                $stmt->bindParam(':mdp', $user->mdp);
+                $stmt->bindParam(':userLogin', $userLogin);
+                if ($stmt->execute()) {
+                    echo "Updated data in etud4a";
+                } else {
+                    print_r($stmt->errorInfo());
+                }
+            }
+        
+            // Update for niveau 3 et 4
+            if ($user->niveau === "3 et 4") {
+                // Update etud3a
+                $dateUpdateReq = "
+                UPDATE etud3a 
+                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
+                WHERE log = :userLogin;
+                ";
+                $stmt = $connexion->prepare($dateUpdateReq);
+                // Binding parameters
+                $stmt->bindParam(':nom', $user->nom);
+                $stmt->bindParam(':prenom', $user->prenom);
+                $stmt->bindParam(':email', $user->email);
+                $stmt->bindParam(':naissance', $user->naissance);
+                $stmt->bindParam(':diplome', $user->diplome);
+                $stmt->bindParam(':niveau', $user->niveau);
+                $stmt->bindParam(':etab', $user->etab);
+                $stmt->bindParam(':photo', $user->photo);
+                $stmt->bindParam(':cv', $user->cv);
+                $stmt->bindParam(':log', $user->log);
+                $stmt->bindParam(':mdp', $user->mdp);
+                $stmt->bindParam(':userLogin', $userLogin);
+                if ($stmt->execute()) {
+                    echo "Updated data in etud3a";
+                } else {
+                    print_r($stmt->errorInfo());
+                }
+        
+                // Update etud4a
+                $dateUpdateReqS = "
+                UPDATE etud4a 
+                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
+                WHERE log = :userLogin;
+                ";
+                $stmtS = $connexion->prepare($dateUpdateReqS);
+                // Binding parameters
+                $stmtS = $connexion->prepare($dateUpdateReqS);
+
+                $stmtS->bindParam(':nom', $user->nom);
+                $stmtS->bindParam(':prenom', $user->prenom);
+                $stmtS->bindParam(':email', $user->email);
+                $stmtS->bindParam(':naissance', $user->naissance);
+                $stmtS->bindParam(':diplome', $user->diplome);
+                $stmtS->bindParam(':niveau', $user->niveau);
+                $stmtS->bindParam(':etab', $user->etab);
+                $stmtS->bindParam(':photo', $user->photo);
+                $stmtS->bindParam(':cv', $user->cv);
+                $stmtS->bindParam(':log', $user->log);
+                $stmtS->bindParam(':mdp', $user->mdp);
+                $stmtS->bindParam(':userLogin', $userLogin);
+                if ($stmtS->execute()) {
+                    echo "Updated data in etud4a";
+                } else {
+                    print_r($stmtS->errorInfo());
+                }
+                
+                $_SESSION['recap_etud']['log']= $user->log;
+                
+            }
+        }
+        
 
     public static function getAllUsers($connexion){
         $htmlCandidatsLists = '
@@ -152,7 +282,7 @@
                     <th >photo</th>   
                     <th >cv</th>
                 </tr>
-    ';
+            ';
         $query = "SELECT * FROM etud3a UNION SELECT * FROM etud4a";
         $data = $connexion->query($query);
         $rows = $data->fetchAll(PDO::FETCH_ASSOC);
@@ -188,6 +318,6 @@
 
     }
 
-} 
 
+}
 ?>
