@@ -106,7 +106,7 @@ echo "<pre>".print_r($_POST)."</pre>";
           $db->updateVerifStatus($user , $connexion);
           $_SESSION['USER'] == 'etud';
           echo "I guess the problem is in the header";
-          header("Location: ../authen.html");
+          header("Location: ../View/authen.html");
           exit();
       }
       else {

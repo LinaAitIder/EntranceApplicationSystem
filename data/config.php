@@ -65,13 +65,15 @@
             if($user->niveau === '4'){
                 $getReq= $connexion->prepare("SELECT token FROM etud4a WHERE email= :email");
                 $getReq->bindValue(':email',$user->email , PDO::PARAM_STR);
-                $token = $getReq->execute();
-                if($token){
-                    $tokenV = $token->fetchColumn(); 
-                    return $tokenV;
-                }
-                // id user niveau = '3 et 4';
-                else {
+                if ($getReq->execute()) {
+                    $tokenV = $getReq->fetchColumn(); 
+        
+                    if ($tokenV) {
+                        return $tokenV;
+                    } else {
+                        echo "No matching token found.";
+                    }
+                } else {
                     echo "Something is wrong with the extration of the data";
                 }
             }

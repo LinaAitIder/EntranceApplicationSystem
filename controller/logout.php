@@ -2,5 +2,5 @@
 session_start();
 session_destroy();
 
-header('Location:../Inscription.html');
+header('Location:../index.html');
 ?>
