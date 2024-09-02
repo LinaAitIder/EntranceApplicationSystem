@@ -4,6 +4,8 @@
         require '../data/config.php';
         require '../data/userData.php';
 
+
+
         session_start();
         $user=new User;
         $db=new Database;
@@ -14,12 +16,17 @@
             $result= $user->getUserInformation($connexion , $userLogin);
             if($result['niveau'] === "3"){
                 $niveau ="3ème année";
+                $_SESSION['recap_etud']['nivName'] = $niveau;
             } 
             else if ($result['niveau'] === "4"){
                 $niveau ="4ème année";
+                $_SESSION['recap_etud']['nivName'] = $niveau;
+
             } 
             else{
                 $niveau ="3ème année et 4ème année";
+                $_SESSION['recap_etud']['nivName'] = $niveau;
+
             }
             $candidatInfo = '
             <!DOCTYPE html>
@@ -51,7 +58,7 @@
                     <button type="button" onclick="window.location.href = \'./modif.html\';">Modifier</button> 
                     <button type="button" onclick="window.location.href =  \'../controller/logout.php \';">Se déconnecter</button>
                     <button type="button" onclick="window.location.href = \'./controller/deleteUser.php\';">Supprimer le compte</button>
-                    <button type="button" onclick="window.location.href = \'./../pdf_gen.php \'">Obtenir votre reçu PDF</button>
+                    <button type="button" onclick="window.location.href = \'./pdf_gen.php\';">Obtenir votre reçu PDF</button>
                 </div>
                 
                 <script src="./../scripts/functions.js"></script>
