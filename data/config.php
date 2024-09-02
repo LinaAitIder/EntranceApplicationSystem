@@ -319,7 +319,26 @@
         return $htmlCandidatsLists;
 
     }
-
+ 
+    function deleteUserData($login , $niveau){
+        $connexion = $this->connect();
+      // IF IN ETUD3A
+        if($niveau === '3'){
+          $query="DELETE FROM etud3a WHERE log = :login";
+          $stmt = $connexion->prepare($query);
+           if($stmt->execute(['login' => $login])){echo "done";}; 
+        }
+        if($niveau === '4'){
+          $query="DELETE FROM etud4a WHERE log = :login";
+          $stmt = $connexion->prepare($query);
+          if($stmt->execute(['login' => $login])){echo "done";};    }
+        if($niveau === '3 et 4'){
+          $query="DELETE FROM etud3a , etud4a WHERE log = :login AND etud3a.email = etud4a.email";
+          $stmt = $connexion->prepare($query);
+          if($stmt->execute(['login' => $login])){echo "done";};   }
+     
+       }
+     
 
 }
 ?>

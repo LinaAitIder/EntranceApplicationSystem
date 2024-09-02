@@ -57,7 +57,7 @@
                 <div class="button-container">
                     <button type="button" onclick="window.location.href = \'./modif.html\';">Modifier</button> 
                     <button type="button" onclick="window.location.href =  \'../controller/logout.php \';">Se déconnecter</button>
-                    <button type="button" onclick="window.location.href = \'./controller/deleteUser.php\';">Supprimer le compte</button>
+                    <button type="button" onclick="window.location.href = \'./../controller/deleteUser.php\';">Supprimer le compte</button>
                     <button type="button" onclick="window.location.href = \'./pdf_gen.php\';">Obtenir votre reçu PDF</button>
                 </div>
                 
