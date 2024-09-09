@@ -1,5 +1,5 @@
 <?php
-
+  
   class userController{
     private $user ;
     private $db;
@@ -24,6 +24,22 @@
     function logout(){
       session_destroy();
       header('Location:../index.html');
+    }
+
+     public static function showAllUsers(){
+      $db = new Database();
+      $connexion = $db->connect();
+      $users = User::getAllUsers($connexion);
+      
+      // Pass data to the View
+      echo UserView::renderUserList($users);
+      
+    }
+
+    public static function SearchUser($user ,$db){
+      $connexion = $db->connect();
+      $existingUsers = User::SearchUsers($connexion, $user);
+      echo UserView::showFoundUsers($existingUsers);
     }
 
   }

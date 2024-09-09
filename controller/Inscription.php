@@ -7,7 +7,10 @@ require './Mail_Handler.php';
 
 
 session_start();
-pageAccess();
+$userUrl = '../View/recap.php';
+$adminUrl = '../administration.html ';
+$home = '../View/inscription.html';
+pageAccess($userUrl , $adminUrl , $home);
 
 $db = new Database;
 
