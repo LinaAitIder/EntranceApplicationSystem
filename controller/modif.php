@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 require_once('../utils/functions.php');
 require_once('./../View/recap.php');
@@ -31,13 +30,24 @@ if (isset($_POST['confirmer'])) {
 
     // Uploading Files
     uploadFiles($_FILES['photo'], $_FILES['cv'] , $user);
+    if($user->log !== $_SESSION['recap_etud']['log']){
+      //Verify if log already exists in database 
+      $_SESSION['recap_etud']['log'] = $user->log;
+    }
     // SERIALIZE THE USER OBJECT IN THE SESSION
     $_SESSION['user'] = serialize($user);
  
 
     // Updating Data
-     if( $db->updateData($user , $connexion, $userLogin)) echo "Updated!";
-      header("refresh:8; url='../View/recap.php'");
+
+     try { 
+        $db->updateData($user , $connexion, $userLogin);
+        header("refresh:8; url='../View/recap.php'");
+      } catch(Exception $error){
+        echo 'Error : '. $error->getMessage();
+      };
+    
+   
     //email Verification with token
 
   
