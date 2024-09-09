@@ -1,15 +1,19 @@
 <?php
 
-function pageAccess(){
+function pageAccess($userUrl , $adminUrl , $home){
   if(isset($_SESSION['USER'])) {
       // Redirect based on the user type
-      if($_SESSION['USER'] == 'etud') {
-          header("location:recap.php");
+      if($_SESSION['USER'] === 'etud') {
+          header("location:$userUrl");
           exit; // Terminate script execution after redirection
-      } elseif($_SESSION['USER'] == 'admin') {
-          header("location:administration.php");
+      } else if($_SESSION['USER'] === 'admin') {
+          header("location:$adminUrl");
           exit; // Terminate script execution after redirection
       }
+  }
+  else {
+    header("location:$home");
+
   }
 }
 
@@ -112,7 +116,7 @@ function verifyLevel($niveau3 , $niveau4){
       $niveau = '3';
     }
   } else{
-    echo "Aucun iveau n'a ete selectionne !";
+    echo "Aucun niveau n'a ete selectionne !";
   }
   return $niveau;
 }

@@ -21,6 +21,7 @@ if (isset($_POST['confirmer'])) {
     $user->diplome = $_POST['diplome'];
     $user->etab = $_POST['etab'];
     
+    // Updating level [In DB]
     // Call function Verifylevel()
     $niveau3=$_POST['niveau3'];
     $niveau4=$_POST['niveau4'];
