@@ -8,11 +8,11 @@
     //Manage the Acess of the page
     $userUrl = '../View/recap.php';
     $adminUrl = '../administration.html ';
-    if(isset($_SESSION['USER'])) {
-        if($_SESSION['USER'] === 'etud') {
+    if(isset($_SESSION['userType'])) {
+        if($_SESSION['userType'] === 'etud') {
             header("location:$userUrl");
             exit;  
-        } else if($_SESSION['USER'] === 'admin') {
+        } else if($_SESSION['userType'] === 'admin') {
             header("location:$adminUrl");
             exit; 
         }

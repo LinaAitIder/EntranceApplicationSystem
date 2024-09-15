@@ -18,7 +18,7 @@
   
       if ($result && password_verify($pass, $result['mdp'])) {
           $_SESSION['recap_etud']=$result;
-          $_SESSION['USER'] = 'etud';
+          $_SESSION['userType'] = 'etud';
           header("Location:./../View/recap.php?login=".$login);
       } else {
           header("Location:./../authentification.html?error=not_existing");
