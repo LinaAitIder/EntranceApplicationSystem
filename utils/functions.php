@@ -1,6 +1,6 @@
 <?php
 
-function pageAccess($userUrl , $adminUrl , $home){
+function pageAccess($userUrl , $adminUrl){
   if(isset($_SESSION['USER'])) {
       // Redirect based on the user type
       if($_SESSION['USER'] === 'etud') {
@@ -10,10 +10,6 @@ function pageAccess($userUrl , $adminUrl , $home){
           header("location:$adminUrl");
           exit; // Terminate script execution after redirection
       }
-  }
-  else {
-    header("location:$home");
-
   }
 }
 

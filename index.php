@@ -4,5 +4,5 @@
     $userUrl = './View/recap.php';
     $adminUrl = './administration.html ';
     $homeUrl = './inscription.html';
-    pageAccess($userUrl , $adminUrl ,$homeUrl)
+    pageAccess($userUrl , $adminUrl)
 ?>
