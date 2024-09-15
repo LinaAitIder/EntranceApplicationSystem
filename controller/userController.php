@@ -1,7 +1,6 @@
   <?php
-  
   class userController{
-    private $user ;
+    private $user;
     private $db;
 
     function __construct($user, $db){
@@ -9,59 +8,59 @@
       $this->db = $db;
     }
 
-    function SignIn($user){
+    function SignIn(){
        //Manual Testing
             // echo "Data submitted </br> </br>";
             $connexion = $this->db->connect();
-            $user->token = rand(0000,9999);
+            $this->user->token = rand(0000,9999);
             // echo "<script>console.log(".$user->token.")</script>";
-            $user->verifStatus = false;
-            $user->nom = $_POST['nom'];
-            $user->prenom = $_POST['prenom'];
-            $user->log = $_POST['log'];
-            $user->email = $_POST['email'];
-            $user->mdp = crypt($_POST['mdp'],'blowfish');
-            $user->naissance = $_POST['naissance'];
-            $user->diplome = $_POST['diplome'];
-            $user->etab = $_POST['etab'];
+            $this->user->verifStatus = false;
+            $this->user->nom = $_POST['nom'];
+            $this->user->prenom = $_POST['prenom'];
+            $this->user->log = $_POST['log'];
+            $this->user->email = $_POST['email'];
+            $this->user->mdp = crypt($_POST['mdp'],'blowfish');
+            $this->user->naissance = $_POST['naissance'];
+            $this->user->diplome = $_POST['diplome'];
+            $this->user->etab = $_POST['etab'];
         
             // Call function Verifylevel()
             $niveau3=$_POST['niveau3'];
             $niveau4=$_POST['niveau4'];
             $niveau = verifyLevel($niveau3 , $niveau4);  
-            $user->niveau = $niveau;
-            echo "<br> le niveau d'user :" . $user->niveau . "</br>" ;
+            $this->user->niveau = $niveau;
+            echo "<br> le niveau d'user :" . $this->user->niveau . "</br>" ;
         
             // Uploading Files
-            uploadFiles($_FILES['photo'], $_FILES['cv'] , $user);
+            uploadFiles($_FILES['photo'], $_FILES['cv'] , $this->user);
 
-            $_SESSION['user'] = serialize($user);
+            $_SESSION['user'] = serialize($this->user);
          
             // if($connexion) echo '</br> </br> Connexion is Working </br>';
 
-            $tokenpdf = CreatefpdfToken($user->token);
+            $tokenpdf = CreatefpdfToken($this->user->token);
             //just For testing
             if($tokenpdf){
               echo "pdf is created";
             } else { echo "There is a problem with the pdf";}
 
             // Inserting Depending on the Application
-            if($user->niveau==='3'){
-              $this->db->insertData($user , $connexion, 'etud3a');
-              if(sendMail($user->nom , $user->prenom , $user->email , $tokenpdf)){
+            if($this->user->niveau==='3'){
+              $this->db->insertData($this->user , $connexion, 'etud3a');
+              if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
                 header('Location:../Verify_account.html');
                 exit();
-              };} else if($user->niveau==='4'){
-              $this->db->insertData($user , $connexion , 'etud4a');
-              if(sendMail($user->nom , $user->prenom , $user->email , $tokenpdf)){
+              };} else if($this->user->niveau==='4'){
+              $this->db->insertData($this->user , $connexion , 'etud4a');
+              if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
                 header('Location:../Verify_account.html');
                 exit();
-              };} else if($user->niveau === '3 et 4'){
+              };} else if($this->user->niveau === '3 et 4'){
               // Constraint : The user should have a diplome of bac+3 and have an application for both the 3thrd year and the 4th year
-              if($user->diplome === 'Bac+2'){
-                $this->db->insertData($user , $connexion , 'etud3a');
-                $this->db->insertData($user , $connexion , 'etud4a');
-                if(sendMail($user->nom , $user->prenom , $user->email , $tokenpdf)){
+              if($this->user->diplome === 'Bac+2'){
+                $this->db->insertData($this->user , $connexion , 'etud3a');
+                $this->db->insertData($this->user , $connexion , 'etud4a');
+                if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
                   header('Location:../Verify_account.html');
                   exit();
                 };
@@ -95,9 +94,6 @@
 
       }
     }
-            
-        
-  
 
     function deleteAccount(){    
       $connexion = $this->db->connect();
@@ -111,24 +107,18 @@
       
     }
 
-    function logout(){
-      session_destroy();
-      header('Location:../index.html');
-    }
-
-     public static function showAllUsers(){
-      $db = new Database();
-      $connexion = $db->connect();
-      $users = User::getAllUsers($connexion);
+    function showAllUsers(){
+      $connexion = $this->db->connect();
+      $users = user::getAllUsers($connexion);
       
       // Pass data to the View
       echo UserView::renderUserList($users);
       
     }
 
-    public static function SearchUser($user ,$db){
-      $connexion = $db->connect();
-      $existingUsers = User::SearchUsers($connexion, $user);
+    function SearchUser(){
+      $connexion = $this->db->connect();
+      $existingUsers = User::SearchUsers($connexion, $this->user);
       echo UserView::showFoundUsers($existingUsers);
     }
 

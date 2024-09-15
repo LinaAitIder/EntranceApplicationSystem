@@ -14,6 +14,7 @@ if($_SESSION['USER']!== 'admin'){ header("Location:Inscriptions.php");}
 
 $db = new Database;
 $connexion= $db->connect();
-userController::showAllUsers();
+$userController=new userController($db , $connexion);
+$userController->showAllUsers();
 
 ?>
