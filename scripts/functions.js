@@ -4,8 +4,14 @@ function CodeVerifError(msgCodeVError){
   msgCodeVError.innerHTML = "Vous avez saisi un code incorrect , Veuillez ressayer !";
 }
 
-function vers_Modif() {
-    window.location.href = 'modif.php';
+function message(msg,id) {
+    let msgElement = document.querySelector(`#${id}`);
+    msgElement.innerHTML = `
+    <div class="container-fluid">
+    <p class="text-center">${msg}</p>
+    </div>
+    `;
+    msgElement.style.backgroundColor='rgba(255, 15, 11, 0.46)'  ;
 }
 
 function deconnecter() {
