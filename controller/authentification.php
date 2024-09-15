@@ -3,7 +3,7 @@
     require '../data/config.php';
     require '../data/userData.php';
     require '../utils/functions.php';
-    require './userController.php';
+    require './accountController.php';
 
     //Manage the Acess of the page
     $userUrl = '../View/recap.php';
@@ -19,7 +19,7 @@
     }
     else {
         $user=new user;
-        $userController = new userController(new Database , $user);
+        $authController = new authController(new Database , $user);
 
         //Authentification process
         if(isset($_POST['submit'])){
@@ -33,41 +33,13 @@
             }
 
             else {
-                $userController->login($login,$pass);
+                $accountController->login($login,$pass);
             }
         }
 
        
         // VerificationAccount Process
-        if(isset($_POST['verify'])){
-            if(isset($_SESSION['user'])){
-                $user = unserialize($_SESSION['user']);
-                ECHO "name of user :" .$user->nom;
-                $code = trim($_POST['tokenCode']);
-                $token_ver = trim($db->getToken($user, $connexion));
-                echo "Entered Code: " . htmlspecialchars($code) . "<br>";
-                echo "Token from DB: " . htmlspecialchars($token_ver) . "<br>";
-                if($code === $token_ver ){
-                    $user->verifStatus = true;
-                    $user->token = $code;
-                    //Creating an update function
-                    $db->updateVerifStatus($user , $connexion);
-                    $_SESSION['USER'] == 'etud';
-                    echo "I guess the problem is in the header";
-                    header("Location: ../View/authen.html");
-                    exit();
-                }
-                else {
-                    echo "<script src='errorMessage.js'></script>";
-                    echo "<script>CodeVerifError();</script>";
-                    echo " pas le mm code";
-            
-                }
-            }
-            else{
-                echo "verify data not submitted";
-            }
-        }
+       
     }
   
     
