@@ -1,12 +1,12 @@
 <?php
 
 function pageAccess($userUrl , $adminUrl){
-  if(isset($_SESSION['USER'])) {
+  if(isset($_SESSION['userType'])) {
       // Redirect based on the user type
-      if($_SESSION['USER'] === 'etud') {
+      if($_SESSION['userType'] === 'etud') {
           header("location:$userUrl");
           exit; // Terminate script execution after redirection
-      } else if($_SESSION['USER'] === 'admin') {
+      } else if($_SESSION['userType'] === 'admin') {
           header("location:$adminUrl");
           exit; // Terminate script execution after redirection
       }
@@ -16,7 +16,7 @@ function pageAccess($userUrl , $adminUrl){
 function displayErrors($errors){
     if(!empty($errors)){
       foreach($errors as $error){
-        echo $error.'</br>' ;
+        echo "<script>alert('$error');</script>" ;
       }
     }
   };
@@ -62,7 +62,7 @@ function uploadFiles($photo , $cv , $user){
       displayErrors($errors);
     } else{
       //Create the uploads folder
-      $uploadDir = "../uploads/";
+      $uploadDir = "./uploads/";
       echo $uploadDir;
       if(!is_dir($uploadDir)){
         mkdir($uploadDir , 0777, true);
@@ -72,9 +72,9 @@ function uploadFiles($photo , $cv , $user){
       $uploadPathPhoto= $uploadDir . $photoName;
 
       //Moving Files Verifivation Path
-      echo "</br> Attempting to move files </br>";
-      echo "</br> cv temporary path : $cvTmpName , photo temporary path : $photoTmpName </br> ";
-      echo "</br>Upload path Cv : $uploadPathCv , Upload path  :Photo $uploadPathPhoto</br>";
+      // echo "</br> Attempting to move files </br>";
+      // echo "</br> cv temporary path : $cvTmpName , photo temporary path : $photoTmpName </br> ";
+      // echo "</br>Upload path Cv : $uploadPathCv , Upload path  :Photo $uploadPathPhoto</br>";
       
       //Ensure there are no errors before moving the files
       if($cvError === UPLOAD_ERR_OK && $photoError === UPLOAD_ERR_OK){
@@ -112,7 +112,7 @@ function verifyLevel($niveau3 , $niveau4){
       $niveau = '3';
     }
   } else{
-    echo "Aucun niveau n'a ete selectionne !";
+    echo "<script>alert('aucun niveau n'a ete selectionne !');</script>";
   }
   return $niveau;
 }

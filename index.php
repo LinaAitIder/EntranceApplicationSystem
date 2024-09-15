@@ -3,6 +3,11 @@
     session_start();
     $userUrl = './View/recap.php';
     $adminUrl = './administration.html ';
-    $homeUrl = './inscription.html';
-    pageAccess($userUrl , $adminUrl)
+    if($_SESSION['userType'] === "admin" && $_SESSION['userType'] === "etud"){
+        pageAccess($userUrl , $adminUrl);
+    } else {
+        header('Location:./View/authentification.html');
+    }
+    
+
 ?>

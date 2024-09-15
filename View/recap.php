@@ -1,5 +1,6 @@
 
     <?php
+        session_start();
 
         require '../data/config.php';
         require '../data/userData.php';
@@ -8,13 +9,12 @@
 
 
 
-        session_start();
         $user=new User;
         $db=new Database;
         $userController = new userController($user, $db);
         $connexion = $db->connect();
         $userLogin = $_SESSION['recap_etud']['log'];
-
+       
         if (isset($_SESSION['recap_etud'])) {
             $result= $user->getUserInformation($connexion , $userLogin);
             if($result['niveau'] === "3"){
@@ -59,7 +59,7 @@
                 <br>           
                 <div class="button-container">
                     <button type="button" onclick="window.location.href = \'./modif.html\';">Modifier</button> 
-                    <button type="button" onclick="window.location.href =  \'../controller/logout.php \';">Se déconnecter</button>
+                    <button type="button" onclick="window.location.href =  \'../logout.php \';">Se déconnecter</button>
                     <button type="button" onclick="window.location.href =  \'../controller/deleteUser.php \'">Supprimer le compte</button>
                     <button type="button" onclick="window.location.href = \'../utils/pdf_gen.php\';">Obtenir votre reçu PDF</button>
                 </div>

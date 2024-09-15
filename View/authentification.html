@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/StylePage.css">
+    <link rel="stylesheet" href="../styles/StylePage.css">
     <title>Authentification</title>
 </head>
 <body>
     <div class="container">
-        <form method="post" class="form" action="./controller/authentification.php">
+        <form method="post" class="form" action="../authentification.php">
             <table>
                 <legend>
                         <p style="font-family: arial;font-size: 20px; font-weight:bold; text-align:center; color:black; margin-bottom:10px; ">Authentification</p>
@@ -34,14 +34,17 @@
             </table>
         </form>
     </div>
-    <div id="notifUserNotExisting"></div>
+    <div id="notifError"></div>
 </body>
-<script src="./scripts/functions.js"></script>
+<script src="../scripts/functions.js"></script>
 <script>
       const urlParams = new URLSearchParams(window.location.search);
       const error = urlParams.get('error');
     if(error === 'not_existing'){
-        message('Vous n\'etes pas inscrit!, Veuillez verifier vos donnees','notifUserNotExisting');
+        message('Vous n\'etes pas inscrit!, Veuillez verifier vos donnees','notifError');
+    }
+    if(error === 'wrong_password'){
+        message('Veuillez verifier vos donnees','notifErrror');
     }
 </script>
 </html>

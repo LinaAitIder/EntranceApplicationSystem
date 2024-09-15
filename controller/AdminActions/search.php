@@ -9,7 +9,8 @@ require '../userController.php';
 if(isset($_POST['user'])){
   $user = (String) trim($_POST['user']);
   $db= new Database;
-  userController::SearchUser($user , $db);
+  $userController = new userController($user , $db);
+  $userController->SearchUser();
 }
 
 ?>

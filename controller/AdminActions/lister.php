@@ -10,11 +10,11 @@ require '../../View/userView.php';
 
 // Verify admin
 
-if($_SESSION['USER']!== 'admin'){ header("Location:Inscriptions.php");}
-
-$db = new Database;
-$connexion= $db->connect();
-$userController=new userController($db , $connexion);
-$userController->showAllUsers();
-
+ if($_SESSION['userType'] !== 'admin'){ header("Location:../../View/authentification.html");}
+  else { 
+    $db = new Database;
+    $user=@unserialize($_SESSION['user']);
+    $userController=new userController($user , $db);
+    $userController->showAllUsers();
+  }
 ?>

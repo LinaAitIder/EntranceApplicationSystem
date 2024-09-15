@@ -3,26 +3,39 @@
      private $db;
      private $user;
 
+     function __construct($db , $user)
+     {
+        $this->db = $db;
+        $this->user = $user;
+     }
+
      function login($login , $pass){
       //Verification de l'existence d'etudiant dans Bd
       $db = new Database;
       $connexion= $db->connect();
-
+    
       //if($connexion) echo "Working !!";
 
       $query="SELECT * FROM etud3a WHERE log = :login Union SELECT * FROM etud4a WHERE log = :login";
       // if($query) echo "the query is okay!!";
       $stmt = $connexion->prepare($query);
-      $stmt->execute(['login' => $login , 'mdp'=>$pass]); 
+      $stmt->execute(['login' => $login ]); 
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-      if ($result && password_verify($pass, $result['mdp'])) {
-          $_SESSION['recap_etud']=$result;
-          $_SESSION['userType'] = 'etud';
-          header("Location:./../View/recap.php?login=".$login);
-      } else {
-          header("Location:./../authentification.html?error=not_existing");
+      if($result){
+        ECHO '<pre>';
+        print_r($result);
+        ECHO '</pre>';
+        if (password_verify($pass, $result['mdp'])) {
+            $_SESSION['recap_etud'] = $result;
+            $_SESSION['userType'] = 'etud';
+            header("Location:./View/recap.php?login=".$login);
+        } else {
+            header("Location:./View/authentification.html?error=wrong_password");
 
+        }
+      }
+      else{
+        header("Location:./View/authentification.html?error=not_existing");
       }
     }
 
@@ -39,9 +52,9 @@
           $this->user->token = $code;
           //Creating an update function
           $this->db->updateVerifStatus($this->user , $connexion);
-          $_SESSION['USER'] == 'etud';
+          $_SESSION['userType'] == 'etud';
           echo "I guess the problem is in the header";
-          header("Location: ../View/authen.html");
+          header("Location: ./View/authentification.html");
           exit();
       }
       else {
@@ -55,7 +68,7 @@
      function logout(){
         session_start();
         session_destroy();
-        header("location: ../authentification.html");
+        header("location: ../View/authentification.html");
      }
   }
 ?>

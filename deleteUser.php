@@ -1,8 +1,8 @@
 <?php
 
   session_start();
-  require '../data/config.php';
-  require '../data/userData.php';
+  require './data/config.php';
+  require './data/userData.php';
 
   $db = new Database;
   $connexion = $db->connect();
@@ -11,7 +11,7 @@
   $user->niveau=$_SESSION['recap_etud']['niveau'];
   $user->deleteAccount($connexion , $user->log , $user->niveau);
   $_SESSION['recap_etud']= NULL;
-  header("Location:../View/authen.html");
+  header("Location:./View/authentification.html");
 
 
 ?>

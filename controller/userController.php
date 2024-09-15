@@ -1,4 +1,5 @@
   <?php
+
   class userController{
     private $user;
     private $db;
@@ -19,17 +20,15 @@
             $this->user->prenom = $_POST['prenom'];
             $this->user->log = $_POST['log'];
             $this->user->email = $_POST['email'];
-            $this->user->mdp = crypt($_POST['mdp'],'blowfish');
+            $this->user->mdp = password_hash($_POST['mdp'],PASSWORD_BCRYPT);
             $this->user->naissance = $_POST['naissance'];
             $this->user->diplome = $_POST['diplome'];
             $this->user->etab = $_POST['etab'];
         
-            // Call function Verifylevel()
-            $niveau3=$_POST['niveau3'];
-            $niveau4=$_POST['niveau4'];
-            $niveau = verifyLevel($niveau3 , $niveau4);  
+       
+            $niveau = verifyLevel($_POST['niveau3'] , $_POST['niveau4']);  
             $this->user->niveau = $niveau;
-            echo "<br> le niveau d'user :" . $this->user->niveau . "</br>" ;
+            // echo "<br> le niveau d'user :" . $this->user->niveau . "</br>" ;
         
             // Uploading Files
             uploadFiles($_FILES['photo'], $_FILES['cv'] , $this->user);
@@ -42,18 +41,18 @@
             //just For testing
             if($tokenpdf){
               echo "pdf is created";
-            } else { echo "There is a problem with the pdf";}
+            } else { echo "<script>alert('There is a problem with the pdf');</script>";}
 
             // Inserting Depending on the Application
             if($this->user->niveau==='3'){
               $this->db->insertData($this->user , $connexion, 'etud3a');
               if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
-                header('Location:../Verify_account.html');
+                header('Location:./View/Verify_account.html');
                 exit();
               };} else if($this->user->niveau==='4'){
               $this->db->insertData($this->user , $connexion , 'etud4a');
               if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
-                header('Location:../Verify_account.html');
+                header('Location:./View/Verify_account.html');
                 exit();
               };} else if($this->user->niveau === '3 et 4'){
               // Constraint : The user should have a diplome of bac+3 and have an application for both the 3thrd year and the 4th year
@@ -61,12 +60,12 @@
                 $this->db->insertData($this->user , $connexion , 'etud3a');
                 $this->db->insertData($this->user , $connexion , 'etud4a');
                 if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
-                  header('Location:../Verify_account.html');
+                  header('Location:./View/Verify_account.html');
                   exit();
                 };
         
               } else{
-                echo '<alert>Un etudiant Bac+3  peut pas présenter sa candidature en 3ème et 4ème année en même temps.</alert>';
+                echo '<script>alert("Un etudiant Bac+3  peut pas présenter sa candidature en 3ème et 4ème année en même temps.");</script>';
               }
             }
         
@@ -81,7 +80,7 @@
       $_SESSION['recap_etud']= NULL;
       session_destroy();
 
-      header("Refresh:1; url=../View/authen.html");
+      header("Refresh:1; url=../View/authentification.html");
       
     }
 
