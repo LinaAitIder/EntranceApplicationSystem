@@ -62,7 +62,7 @@ function uploadFiles($photo , $cv , $user){
       displayErrors($errors);
     } else{
       //Create the uploads folder
-      $uploadDir = "../uploads/";
+      $uploadDir = "uploads/";
       echo $uploadDir;
       if(!is_dir($uploadDir)){
         mkdir($uploadDir , 0777, true);

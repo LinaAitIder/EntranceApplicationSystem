@@ -1,7 +1,7 @@
 <?php 
 
 class User {
-  public $id='';
+  public $id;
   public $nom;
   public $prenom;
   public $log;

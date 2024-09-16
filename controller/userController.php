@@ -130,6 +130,13 @@
       
     }
 
+    public static function getId($connexion , $user){
+      $query = "SELECT id FROM etud3a, etud4a Where login= :log";
+      $stmt = $connexion->prepare($query);
+      $result = $stmt->execute(['log', $user->login]);
+
+    }
+
     
   }
 

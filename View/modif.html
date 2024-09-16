@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <script>
-    function reconnecter() {
-        window.location.href = 'authen.php';
-    }
-    </script>
 </head>
 <body>
 
-<form method="post" action="./../modif.php" enctype="multipart/form-data">
+<form method="POST" action="../userActions.php?action=updateAccount" enctype="multipart/form-data">
   <table>
     <legend>
         <p style="font-family: arial;font-size: 20px; font-weight:bold; text-align:center; color:black; margin-bottom:10px; ">Admission au concours d'accès:</p>
@@ -88,7 +83,6 @@
 </table>
 </form>
 
-<button type="button" onclick=reconnecter() >Se Reconnecter</button>
     
 </body>
 </html>

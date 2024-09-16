@@ -6,12 +6,9 @@
 
   $db = new Database;
   $connexion = $db->connect();
-  $user = new User;
-  $user->log =$_SESSION['recap_etud']['log'];
-  $user->niveau=$_SESSION['recap_etud']['niveau'];
+  $user = unserialize($_SESSION['user']);
   $user->deleteAccount($connexion , $user->log , $user->niveau);
-  $_SESSION['recap_etud']= NULL;
-  header("Location:./View/authentification.html");
+  header("Refresh:2;url=./View/authentification.html");
 
 
 ?>

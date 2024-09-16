@@ -96,16 +96,16 @@
                     <div class="info"><strong>Etablissement :</strong> ' . $userInformations['etablissement'] . '</div>
                     <div class="info"><strong>Email :</strong> ' . $userInformations['email'] . '</div>
                     <br>
-                    <img src="' . $userInformations['photo'] . '" alt="Photo" style="width: 150px; height: auto;" />
+                    <img src="'. '../'. $userInformations['photo'] . '" alt="Photo" style="width: 150px; height: auto;" />
                     <br><br>
-                    <a href="' . $userInformations['cv'] . '" download>Télécharger CV</a>
+                    <a href="' . '../'. $userInformations['cv'] . '" download>Télécharger CV</a>
                 </div>
                 <br>
                 <br>           
                 <div class="button-container">
                     <button type="button" onclick="window.location.href = \'./modif.html\';">Modifier</button> 
-                    <button type="button" onclick="window.location.href =  \'../logout.php \';">Se déconnecter</button>
-                    <button type="button" onclick="window.location.href =  \'../deleteUser.php \'">Supprimer le compte</button>
+                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';">Se déconnecter</button>
+                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'">Supprimer le compte</button>
                     <button type="button" onclick="window.location.href = \'../utils/pdf_gen.php\';">Obtenir votre reçu PDF</button>
                 </div>
                 
@@ -115,7 +115,45 @@
             echo $candidatInfo;
     }
 
-    
+    public static function updateRecap($userData , $niveau){
+        echo $userData->id;
+        $updatedCandidatInfo = '
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Recap</title>
+            </head>
+            <body>
+                <div class="container">
+                    <h2>Informations de Candidature</h2>
+                    <div class="info"><strong>Nom :</strong> ' . $userData->nom . '</div>
+                    <div class="info"><strong>Prénom :</strong> ' . $userData->prenom . '</div>
+                    <div class="info"><strong>Date de naissance :</strong> ' . $userData->naissance . '</div>
+                    <div class="info"><strong>Diplôme :</strong> ' . $userData->diplome . '</div>
+                    <div class="info"><strong>Condidature :</strong> ' . $niveau . '</div>
+                    <div class="info"><strong>Etablissement :</strong> ' . $userData->etab . '</div>
+                    <div class="info"><strong>Email :</strong> ' . $userData->email . '</div>
+                    <br>
+                    <img src="' . '../'. $userData->photo . '" alt="Photo" style="width: 150px; height: auto;" />
+                    <br><br>
+                    <a href="' . '../'. $userData->cv . '" download>Télécharger CV</a>
+                </div>
+                <br>
+                <br>           
+                <div class="button-container">
+                    <button type="button" onclick="window.location.href = \'./View/modif.html\';">Modifier</button> 
+                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=logout \';">Se déconnecter</button>
+                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=deleteAccount \'">Supprimer le compte</button>
+                    <button type="button" onclick="window.location.href = \'./utils/pdf_gen.php\';">Obtenir votre reçu PDF</button>
+                </div>
+                
+                <script src="../scripts/functions.js"></script>
+            </body>
+            </html>';
+            echo $updatedCandidatInfo;
+    }
 
 }
 

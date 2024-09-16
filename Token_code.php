@@ -28,7 +28,7 @@ function CreatefpdfToken($token){
     $pdf->SetFont('Times','',12);
     $pdf->Cell(0,10,"Votre code de verification : $token",0,1);
     #return $pdf;
-    $filename='CodeConfirmation.pdf';
+    $filename='./uploads/CodeConfirmation.pdf';
     $pdf->Output('F', $filename);  // Save to a file
     return $filename;
 

@@ -27,7 +27,7 @@ if (isset($_POST['modifier'])) {
   };
 
  $niveau = nameLevel($user->niveau);
- userView::renderRecap($user , $niveau);
+ userView::updateRecap($user , $niveau);
   
 }
 
