@@ -9,7 +9,7 @@
     $userUrl = './View/recap.php';
     $adminUrl = './View/administration.html ';
     pageAccess($userUrl , $adminUrl);
-
+    
     //Authentification process
     if(isset($_POST['submit'])){
         $login=$_POST['log'];
@@ -22,9 +22,8 @@
         }
 
         else {
-            $user= @unserialize($_SESSION['user']);
             $authController = new authController(new Database , $user);
-            $authController->login($login,$pass);
+             $authController->login($login,$pass);
         }
     }
 

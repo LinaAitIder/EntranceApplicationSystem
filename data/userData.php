@@ -1,6 +1,7 @@
 <?php 
 
 class User {
+  public $id='';
   public $nom;
   public $prenom;
   public $log;
@@ -15,13 +16,34 @@ class User {
   public $token;
   public $verifStatus;
 
-  // function __construct($userDetails)
+  function createUser($userData){
+    $this->id=$userData['id'];
+    $this->nom= $userData['nom'];
+    $this->prenom= $userData['prenom'];
+    $this->log= $userData['log'];
+    $this->email=$userData['email'];
+    $this->mdp= $userData['mdp'];
+    $this->diplome= $userData['diplome'];
+    $this->etab= $userData['etablissement'];
+    $this->naissance= $userData['naissance'];
+    $this->niveau= $userData['niveau'];
+    $this->cv= $userData['cv'];
+    $this->photo= $userData['photo'];
+    $this->token=$userData['token'];
+    $this->verifStatus= $userData['verif_token'];
+  }
 
-  public static function getUserInformation($connexion ,$login){
+  public function getUserInformation($connexion){
     $query="SELECT * FROM etud3a WHERE log = :login Union SELECT * FROM etud4a WHERE log = :login";
     $stmt = $connexion->prepare($query);
+    $login =$this->log ;
     $stmt->execute(['login' => $login]); 
     $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+
+    /* if (!$result) {
+      echo "No results found.";
+    }*/
+
     return $result;
   }
 
@@ -47,8 +69,6 @@ class User {
 
   }
 
-
-
   public static function SearchUsers($connexion , $user){
     $query = "
     SELECT * FROM (
@@ -67,8 +87,8 @@ class User {
 
   }
 
+ 
 
-//updating user information
 
   
 

@@ -3,8 +3,7 @@
      private $db;
      private $user;
 
-     function __construct($db , $user)
-     {
+     function __construct($db , $user){
         $this->db = $db;
         $this->user = $user;
      }
@@ -22,11 +21,15 @@
       $stmt->execute(['login' => $login ]); 
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
       if($result){
-        ECHO '<pre>';
-        print_r($result);
-        ECHO '</pre>';
+
+        $user = new User;
+        $user->createUser($result);
+        $_SESSION['user'] = serialize($user);
+        echo '<pre>';
+        print_r($_SESSION);  //rint out session data for debugging
+        echo '</pre>';
+
         if (password_verify($pass, $result['mdp'])) {
-            $_SESSION['recap_etud'] = $result;
             $_SESSION['userType'] = 'etud';
             header("Location:./View/recap.php?login=".$login);
         } else {
@@ -38,7 +41,6 @@
         header("Location:./View/authentification.html?error=not_existing");
       }
     }
-
 
      function verifyAccount(){
       $connexion = $this->db->connect();
@@ -52,15 +54,15 @@
           $this->user->token = $code;
           //Creating an update function
           $this->db->updateVerifStatus($this->user , $connexion);
-          $_SESSION['userType'] == 'etud';
+          $_SESSION['userType'] = 'etud';
           echo "I guess the problem is in the header";
-          header("Location: ./View/authentification.html");
+          header("Location:./View/authentification.html");
           exit();
       }
       else {
           echo "<script src='errorMessage.js'></script>";
           echo "<script>CodeVerifError();</script>";
-          echo " pas le mm code";
+          header("Location:./View/Verify_account.html?error=codeNotMatching");
   
       }
      }

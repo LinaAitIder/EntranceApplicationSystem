@@ -42,9 +42,9 @@
             if($tokenpdf){
               echo "pdf is created";
             } else { echo "<script>alert('There is a problem with the pdf');</script>";}
-
+            
             // Inserting Depending on the Application
-            if($this->user->niveau==='3'){
+           if($this->user->niveau==='3'){
               $this->db->insertData($this->user , $connexion, 'etud3a');
               if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
                 header('Location:./View/Verify_account.html');
@@ -68,7 +68,54 @@
                 echo '<script>alert("Un etudiant Bac+3  peut pas présenter sa candidature en 3ème et 4ème année en même temps.");</script>';
               }
             }
+    
         
+    }
+
+    function displayUserInfo(){
+      $connexion= $this->db->connect();
+      $userInformations=  $this->user->getUserInformation($connexion);
+      
+      /*
+      echo $this->user->log;
+      if ($userInformations) {
+        echo "Data fetched successfully: ";
+        print_r($userInformations); // Print array for debugging
+      } else {
+          echo "No data returned.";
+      }
+      */
+
+      $niveau = nameLevel($userInformations['niveau']);
+      userView :: renderRecap($userInformations, $niveau);
+            
+    }
+
+    function updateUserInfo($newUserInfo){
+      //Update the user object information
+      $this->user->nom = $_POST['nom'];
+      $this->user->prenom = $_POST['prenom'];
+      $this->user->log = $_POST['log'];
+      $this->user->email = $_POST['email'];
+      $this->user->mdp = password_hash($_POST['mdp'] , PASSWORD_BCRYPT); // securite
+      $this->user->naissance = $_POST['naissance'];
+      $this->user->diplome = $_POST['diplome'];
+      $this->user->etab = $_POST['etab'];
+      
+      // Updating level [In DB]
+      // Call function Verifylevel()
+      $niveau3=$_POST['niveau3'];
+      $niveau4=$_POST['niveau4'];
+      $niveau = verifyLevel($niveau3 , $niveau4);  
+      $this->user->niveau = $niveau;
+      // echo "<br> le niveau d'this->user :" . $this->user->niveau . "</br>" ;
+
+      // Uploading Files
+      uploadFiles($_FILES['photo'], $_FILES['cv'] , $this->user);
+     
+      // SERIALIZE THE this->user OBJECT IN THE SESSION
+      $_SESSION['user'] = serialize($this->user);
+      
     }
 
     function deleteAccount(){    

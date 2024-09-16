@@ -19,8 +19,6 @@
     $connexion = $this->db->connect();
     $Admin= new Admin;
     $users = $Admin->getAllUsers($connexion);
-    
-    // Pass data to the View
     echo UserView::renderUserList($users);
     
   }

@@ -19,7 +19,7 @@ function displayErrors($errors){
         echo "<script>alert('$error');</script>" ;
       }
     }
-  };
+};
 
 function uploadFiles($photo , $cv , $user){
     
@@ -117,7 +117,6 @@ function verifyLevel($niveau3 , $niveau4){
   return $niveau;
 }
 
-
 function generateCandidateApplication($data , $niveau){
  
   
@@ -151,6 +150,21 @@ function generateCandidateApplication($data , $niveau){
   exit;
 }
 
+function nameLevel($niveau){
+  if($niveau === "3"){
+    $niveau ="3ème année";
+    return $niveau;
+  } 
+  else if ($niveau === "4"){
+      $niveau ="4ème année";
+      return $niveau;
+  } 
+  else{
+      $niveau ="3ème année et 4ème année";
+      return $niveau;
+  }
+
+}
 // }
 // function retrieveFormData($postData , $fileData){
 //     if (isset($submit)) {
