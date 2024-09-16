@@ -9,8 +9,8 @@ require '../userController.php';
 if(isset($_POST['user'])){
   $user = (String) trim($_POST['user']);
   $db= new Database;
-  $userController = new userController($user , $db);
-  $userController->SearchUser();
+  $adminController = new adminController;
+  $adminController->search($user);
 }
 
 ?>

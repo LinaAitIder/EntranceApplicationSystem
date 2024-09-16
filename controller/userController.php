@@ -71,7 +71,6 @@
         
     }
 
-
     function deleteAccount(){    
       $connexion = $this->db->connect();
       $this->user->log =$_SESSION['recap_etud']['log'];
@@ -84,21 +83,7 @@
       
     }
 
-    function showAllUsers(){
-      $connexion = $this->db->connect();
-      $users = user::getAllUsers($connexion);
-      
-      // Pass data to the View
-      echo UserView::renderUserList($users);
-      
-    }
-
-    function SearchUser(){
-      $connexion = $this->db->connect();
-      $existingUsers = User::SearchUsers($connexion, $this->user);
-      echo UserView::showFoundUsers($existingUsers);
-    }
-
+    
   }
 
 ?>
