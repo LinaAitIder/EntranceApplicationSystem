@@ -103,7 +103,7 @@
                 <br>
                 <br>           
                 <div class="button-container">
-                    <button type="button" onclick="window.location.href = \'./modif.php\';">Modifier</button> 
+                    <button type="button" onclick="window.location.href = \'./accountUpdating.php\';">Modifier</button> 
                     <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';">Se déconnecter</button>
                     <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'">Supprimer le compte</button>
                     <button type="button" onclick="window.location.href = \'../utils/pdf_gen.php\';">Obtenir votre reçu PDF</button>
@@ -143,7 +143,7 @@
                 <br>
                 <br>           
                 <div class="button-container">
-                    <button type="button" onclick="window.location.href = \'./View/modif.php\';">Modifier</button> 
+                    <button type="button" onclick="window.location.href = \'./View/accountUpdating.php\';">Modifier</button> 
                     <button type="button" onclick="window.location.href =  \'./userActions.php?action=logout \';">Se déconnecter</button>
                     <button type="button" onclick="window.location.href =  \'./userActions.php?action=deleteAccount \'">Supprimer le compte</button>
                     <button type="button" onclick="window.location.href = \'./utils/pdf_gen.php\';">Obtenir votre reçu PDF</button>

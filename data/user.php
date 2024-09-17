@@ -47,7 +47,6 @@ class User {
     return $result;
   }
 
- //deleting user
   function deleteAccount($connexion , $login , $niveau){
 
         if($niveau === '3'){

@@ -38,7 +38,7 @@
    
 
     <div class="childContainer">
-        <button type="button" class="btn btn-danger" onclick="window.location.href='../AdminActions/lister.php';">Lister tous les Condidats</button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='../adminActions.php?action=lister';">Lister tous les Condidats</button>
         <div class="container row ">
             <div class="col"></div>
             <div class="col-sm- text-center"><a href="../logout.php">se deconnecter</a></div>
@@ -62,7 +62,7 @@
             resultElement.removeClass("show").html(''); // Hide results if input is empty
             } else {
              $.ajax({
-                url : '../AdminActions/search.php',
+                url : '../adminActions.php?action=search',
                method :'POST',
                data : {user:dataSearch},
                contentType: 'application/x-www-form-urlencoded', // Default for form data

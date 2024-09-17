@@ -1,8 +1,8 @@
 <?php
 require "./utils/functions.php";
 require "./controller/authController.php";
-require "./data/config.php";
-require "./data/userData.php";
+require "./data/database.php";
+require "./data/user.php";
 
 
 

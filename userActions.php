@@ -1,8 +1,8 @@
 <?php
   session_start();
 
-  require './data/config.php';
-  require './data/userData.php';
+  require './data/database.php';
+  require './data/user.php';
   require './utils/functions.php';
   require './controller/userController.php';
   require './View/userView.php';
