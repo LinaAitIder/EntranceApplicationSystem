@@ -19,9 +19,7 @@ if(isset($_POST['verify'])){
       echo'<pre>';
       print_r($_SESSION);
       echo'</pre>';
-
-}
-   
+    }
 } else {
         echo "verify data not submitted";
 }

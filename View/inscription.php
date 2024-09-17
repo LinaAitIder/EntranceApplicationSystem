@@ -1,4 +1,13 @@
-
+<?php 
+    session_start();
+    if($_SESSION['userType'] !== 'admin'){
+        if($_SESSION['userType'] === 'etud'){
+            header('Location:./recap.php');
+        } else {
+            header('Location:./authentification.php');
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -81,7 +90,7 @@
                         <td> <input type="submit" name="signUp" value="S'inscrire"></td>
                     </tr>
                     <tr>
-                        <td class="Link-align"> <a href="./authentification.html" class="Link">S'authentifier</a></td>
+                        <td class="Link-align"> <a href="./authentification.php" class="Link">S'authentifier</a></td>
                     </tr>
                 </table>
             </form>

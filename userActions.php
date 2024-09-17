@@ -5,7 +5,6 @@
   require './utils/functions.php';
   require './controller/userController.php';
   require './View/userView.php';
-
   require './controller/authController.php';
   require './Token_code.php';
   require './Mail_Handler.php';
@@ -19,7 +18,7 @@
   switch($action){
     case 'signIn':
       $userUrl = './View/recap.php';
-      $adminUrl = './View/administration.html ';
+      $adminUrl = './View/administration.php ';
       pageAccess($userUrl , $adminUrl);
 
       $userController = new userController(new user , new Database);
@@ -32,7 +31,7 @@
       break;
     case 'login':
       $userUrl = './View/recap.php';
-      $adminUrl = './View/administration.html ';
+      $adminUrl = './View/administration.php ';
       pageAccess($userUrl , $adminUrl);
 
       if(isset($_POST['submit'])){
@@ -41,7 +40,7 @@
 
         if( $login ==='admin' && $pass ==='admin') {
             $_SESSION['userType'] = 'admin';
-            header("Location:./View/administration.html");
+            header("Location:./View/administration.php");
             exit();
         }
 
@@ -54,7 +53,7 @@
    
     case 'logout':
       session_destroy();
-      header('Location:./View/authentification.html');
+      header('Location:./View/authentification.php');
       break;
 
     case 'deleteAccount':
@@ -62,7 +61,7 @@
       $connexion = $db->connect();
       $user = unserialize($_SESSION['user']);
       $user->deleteAccount($connexion , $user->log , $user->niveau);
-      header("Location:./View/authentification.html");
+      header("Location:./View/authentification.php");
       break;
 
     case 'updateAccount':

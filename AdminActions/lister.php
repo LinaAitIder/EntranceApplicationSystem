@@ -11,7 +11,7 @@ require '../View/userView.php';
 
 // Verify admin
 
- if($_SESSION['userType'] !== 'admin'){ header("Location:../View/authentification.html");}
+ if($_SESSION['userType'] !== 'admin'){ header("Location:../View/authentification.php");}
   else { 
    $adminController = new adminController;
    $adminController->lister();

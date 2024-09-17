@@ -21,7 +21,6 @@
     
     if ($_SESSION['user']) {
         $userController->displayUserInfo();
-
     } else {
         echo "<p>Aucune information de candidature disponible.</p>";
     }

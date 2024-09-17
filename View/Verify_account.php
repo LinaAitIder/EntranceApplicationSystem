@@ -1,3 +1,13 @@
+<?php 
+    session_start();
+    if($_SESSION['userType'] !== 'admin'){
+        if($_SESSION['userType'] === 'etud'){
+            header('Location:./recap.php');
+        } else {
+            header('Location:./authentification.php');
+        }
+    }
+?>
 <html>
     <head>
     <link rel="stylesheet" href="../styles/StylePage.css">
