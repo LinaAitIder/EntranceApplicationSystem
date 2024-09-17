@@ -7,8 +7,9 @@
   require './controller/userController.php';
   require './View/userView.php';
   require './controller/authController.php';
-  require './Token_code.php';
+  require './pdfGenerator.php';
   require './Mail_Handler.php';
+
  
 
   $action=$_GET['action'];

@@ -106,7 +106,7 @@
                     <button type="button" onclick="window.location.href = \'./accountUpdating.php\';">Modifier</button> 
                     <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';">Se déconnecter</button>
                     <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'">Supprimer le compte</button>
-                    <button type="button" onclick="window.location.href = \'../utils/pdf_gen.php\';">Obtenir votre reçu PDF</button>
+                    <button type="button" onclick="window.location.href = \'../utils/pdfGenerator.php?action=generateRecap\';">Obtenir votre reçu PDF</button>
                 </div>
                 
                 <script src="../scripts/functions.js"></script>
@@ -146,7 +146,7 @@
                     <button type="button" onclick="window.location.href = \'./View/accountUpdating.php\';">Modifier</button> 
                     <button type="button" onclick="window.location.href =  \'./userActions.php?action=logout \';">Se déconnecter</button>
                     <button type="button" onclick="window.location.href =  \'./userActions.php?action=deleteAccount \'">Supprimer le compte</button>
-                    <button type="button" onclick="window.location.href = \'./utils/pdf_gen.php\';">Obtenir votre reçu PDF</button>
+                    <button type="button" onclick="window.location.href = \'./utils/pdfGenerator.php?action=generateRecap\';">Obtenir votre reçu PDF</button>
                 </div>
                 
                 <script src="../scripts/functions.js"></script>
