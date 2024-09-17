@@ -1,5 +1,6 @@
 <?php
   session_start();
+
   require './data/config.php';
   require './data/userData.php';
   require './utils/functions.php';
@@ -11,9 +12,8 @@
  
 
   $action=$_GET['action'];
- echo $action;
- 
- var_dump($_POST);
+  echo $action;
+  var_dump($_POST);
  
   switch($action){
     case 'signIn':

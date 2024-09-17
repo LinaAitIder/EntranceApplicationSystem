@@ -47,12 +47,12 @@
            if($this->user->niveau==='3'){
               $this->db->insertData($this->user , $connexion, 'etud3a');
               if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
-                header('Location:./View/Verify_account.html');
+                header('Location:./View/Verify_account.php');
                 exit();
               };} else if($this->user->niveau==='4'){
               $this->db->insertData($this->user , $connexion , 'etud4a');
               if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
-                header('Location:./View/Verify_account.html');
+                header('Location:./View/Verify_account.php');
                 exit();
               };} else if($this->user->niveau === '3 et 4'){
               // Constraint : The user should have a diplome of bac+3 and have an application for both the 3thrd year and the 4th year
@@ -60,7 +60,7 @@
                 $this->db->insertData($this->user , $connexion , 'etud3a');
                 $this->db->insertData($this->user , $connexion , 'etud4a');
                 if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
-                  header('Location:./View/Verify_account.html');
+                  header('Location:./View/Verify_account.php');
                   exit();
                 };
         
@@ -126,7 +126,7 @@
       $_SESSION['recap_etud']= NULL;
       session_destroy();
 
-      header("Refresh:1; url=../View/authentification.html");
+      header("Refresh:1; url=../View/authentification.php");
       
     }
 

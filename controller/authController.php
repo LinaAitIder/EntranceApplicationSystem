@@ -33,12 +33,12 @@
             $_SESSION['userType'] = 'etud';
             header("Location:./View/recap.php?login=".$login);
         } else {
-            header("Location:./View/authentification.html?error=wrong_password");
+            header("Location:./View/authentification.php?error=wrong_password");
 
         }
       }
       else{
-        header("Location:./View/authentification.html?error=not_existing");
+        header("Location:./View/authentification.php?error=not_existing");
       }
     }
 
@@ -56,13 +56,13 @@
           $this->db->updateVerifStatus($this->user , $connexion);
           $_SESSION['userType'] = 'etud';
           echo "I guess the problem is in the header";
-          header("Location:./View/authentification.html");
+          header("Location:./View/authentification.php");
           exit();
       }
       else {
           echo "<script src='errorMessage.js'></script>";
           echo "<script>CodeVerifError();</script>";
-          header("Location:./View/Verify_account.html?error=codeNotMatching");
+          header("Location:./View/Verify_account.php?error=codeNotMatching");
   
       }
      }
@@ -70,7 +70,7 @@
      function logout(){
         session_start();
         session_destroy();
-        header("location: ../View/authentification.html");
+        header("location: ../View/authentification.php");
      }
   }
 ?>
