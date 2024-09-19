@@ -59,6 +59,7 @@
         
               } else{
                 echo '<script>alert("Un etudiant Bac+3  peut pas présenter sa candidature en 3ème et 4ème année en même temps.");</script>';
+                header('Location:View/authentification.php');
               }
             }
     
