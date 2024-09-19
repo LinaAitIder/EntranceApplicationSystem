@@ -1,12 +1,12 @@
 <?php
   session_start();
 
-  require '../data/database.php';
-  require '../data/user.php';
-  require '../data/admin.php';
-  require '../controller/userController.php';
-  require '../controller/adminController.php';
-  require '../View/userView.php';
+  require './data/database.php';
+  require './data/user.php';
+  require './data/admin.php';
+  require './controller/userController.php';
+  require './controller/adminController.php';
+  require './View/userView.php';
 
   $action = $_GET['action'];
 
@@ -18,6 +18,7 @@
        $adminController->lister();
       }
       break;
+
     case 'search':
       if(isset($_POST['user'])){
         $user = (String) trim($_POST['user']);
@@ -25,6 +26,11 @@
         $adminController = new adminController;
         $adminController->search($user);
       }
+      break;
+      
+    case 'logout':
+      session_destroy();
+      header('Location:./View/authentification.php');
       break;
   }
 

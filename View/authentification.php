@@ -1,12 +1,18 @@
 <?php 
     session_start();
-    if($_SESSION['userType'] !== 'admin'){
+    
+    if(isset($_SESSION['userType'])){
         if($_SESSION['userType'] === 'etud'){
             header('Location:./recap.php');
-        } else {
-            header('Location:./authentification.php');
+            exit();
         }
-    }
+        else if(($_SESSION['userType'] === 'admin')){
+            header('Location:./administration.php');
+            exit();
+        }
+    } 
+    
+
 ?>
 
 <!DOCTYPE html>

@@ -41,7 +41,7 @@
         <button type="button" class="btn btn-danger" onclick="window.location.href='../adminActions.php?action=lister';">Lister tous les Condidats</button>
         <div class="container row ">
             <div class="col"></div>
-            <div class="col-sm- text-center"><a href="../logout.php">se deconnecter</a></div>
+            <div class="col-sm- text-center"><a href="../adminActions.php?action=logout">se deconnecter</a></div>
             <div class="col"></div>
         </div>
     </div>

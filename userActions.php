@@ -7,8 +7,7 @@
   require './controller/userController.php';
   require './View/userView.php';
   require './controller/authController.php';
-  require './pdfGenerator.php';
-  require './Mail_Handler.php';
+  require './utils/pdfGenerator.php';
 
  
 

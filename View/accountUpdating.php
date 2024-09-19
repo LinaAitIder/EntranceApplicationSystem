@@ -1,9 +1,9 @@
 <?php 
     session_start();
-    if($_SESSION['userType'] !== 'admin'){
-        if($_SESSION['userType'] === 'etud'){
-            header('Location:./recap.php');
-        } else {
+    if($_SESSION['userType'] !== 'etud'){
+        if(($_SESSION['userType'] === 'admin')){
+            header('Location:./administration.php');
+        } else{
             header('Location:./authentification.php');
         }
     }
