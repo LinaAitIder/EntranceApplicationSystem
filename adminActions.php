@@ -6,7 +6,7 @@
   require './data/admin.php';
   require './controller/userController.php';
   require './controller/adminController.php';
-  require './View/userView.php';
+  require './controller/viewController.php';
 
   $action = $_GET['action'];
 

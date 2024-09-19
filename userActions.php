@@ -5,7 +5,7 @@
   require './data/user.php';
   require './utils/functions.php';
   require './controller/userController.php';
-  require './View/userView.php';
+  require './controller/viewController.php';
   require './controller/authController.php';
   require './utils/pdfGenerator.php';
 

@@ -15,7 +15,7 @@
     require '../data/user.php';
     require '../controller/userController.php';
     require '../utils/functions.php';
-    require '../View/userView.php';
+    require '../controller/viewController.php';
 
     /*
         echo '<pre>';
