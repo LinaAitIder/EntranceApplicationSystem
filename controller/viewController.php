@@ -1,6 +1,6 @@
 <?php
 
-  class UserView{
+  class userView{
 
     public static function renderUserList($users){
         $htmlCandidatsLists = '

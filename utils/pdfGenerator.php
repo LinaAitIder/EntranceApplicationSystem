@@ -1,28 +1,10 @@
 <?php
-session_start();
-require_once('..\fpdf186\fpdf.php');
-require './functions.php';
-require '../data/user.php';
 
-class PDF extends FPDF
-{
-  public $headerTitle;
-  // En-tête
-  function Header()
-  {     
-      $this->SetFont('Times','UB',25);
-      $this->Cell(100,10,$this->headerTitle,0,0);
-      $this->Ln(20);
-  }
-
-  // Pied de page
-  function Footer()
-  {
-      $this->SetY(-15);
-      $this->SetFont('Arial','I',8);
-      $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-  }
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
 }
+
+require 'pdf.php';
 
 function CreatefpdfToken($token){
     $pdf = new PDF;
@@ -38,6 +20,8 @@ function CreatefpdfToken($token){
 }
 
 function CreateRecap(){
+  require '../data/user.php';
+  require '../utils/functions.php';
   $pdf = new PDF;
   $pdf->headerTitle = 'Information de Condidature :';
   if(isset($_SESSION['user'])){

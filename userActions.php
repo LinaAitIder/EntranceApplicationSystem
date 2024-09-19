@@ -1,22 +1,20 @@
 <?php
   session_start();
 
-  require './data/database.php';
-  require './data/user.php';
-  require './utils/functions.php';
-  require './controller/userController.php';
-  require './controller/viewController.php';
-  require './controller/authController.php';
-  require './utils/pdfGenerator.php';
-
- 
-
   $action=$_GET['action'];
   echo $action;
   var_dump($_POST);
  
   switch($action){
     case 'signIn':
+      require_once 'utils/functions.php';
+      require_once 'verificationActions.php';
+      require_once 'controller/userController.php';
+      require 'utils/pdfGenerator.php';
+      require_once 'data/database.php';
+      require_once 'data/user.php';
+
+
       $userUrl = './View/recap.php';
       $adminUrl = './View/administration.php ';
       pageAccess($userUrl , $adminUrl);
@@ -28,8 +26,14 @@
       } else {
           echo "Sign up data not submitted ";
       }
-      break;
+    break;
+      
     case 'login':
+      require 'data/database.php';
+      require 'data/user.php';
+      require 'controller/authController.php';
+      require 'utils/functions.php';
+
       $userUrl = './View/recap.php';
       $adminUrl = './View/administration.php ';
       pageAccess($userUrl , $adminUrl);
@@ -57,6 +61,8 @@
       break;
 
     case 'deleteAccount':
+      require 'data/database.php';
+      require 'data/user.php';
       $db = new Database;
       $connexion = $db->connect();
       $user = unserialize($_SESSION['user']);
@@ -65,20 +71,26 @@
       break;
 
     case 'updateAccount':
+      require 'controller/userController.php';
+      require 'controller/viewController.php';
+      require 'data/database.php';
+      require 'data/user.php';
+      require 'utils/functions.php';
+
       var_dump($_POST);
       $user = unserialize($_SESSION['user']);
       $db = new Database;
       $userLogin = $user->log;
+      ECHO  "avant la modification de Db ".$user->niveau ;
 
       if (isset($_POST['modifier'])) {
-        $userController = new userController($user , $db);
-        $userController->updateUserInfo($user);
-
         try { 
           $db->updateData($user , $userLogin);
         } catch(Exception $error){
           echo 'Error : '. $error->getMessage();
         };
+       
+        ECHO  "/n apres la modification de Db " . $user->niveau ;
 
       $niveau = nameLevel($user->niveau);
       userView::updateRecap($user , $niveau);

@@ -69,7 +69,7 @@
       $connexion= $this->db->connect();
       $userInformations=  $this->user->getUserInformation($connexion);
       
-      /*
+      
       echo $this->user->log;
       if ($userInformations) {
         echo "Data fetched successfully: ";
@@ -77,10 +77,10 @@
       } else {
           echo "No data returned.";
       }
-      */
+      
 
       $niveau = nameLevel($userInformations['niveau']);
-      userView :: renderRecap($userInformations, $niveau);
+      userView::renderRecap($userInformations, $niveau);
             
     }
 
@@ -108,7 +108,6 @@
       $_SESSION['user'] = serialize($this->user);
       
     }
-
 
     public static function getId($connexion , $user){
       $query = "SELECT id FROM etud3a, etud4a Where login= :log";

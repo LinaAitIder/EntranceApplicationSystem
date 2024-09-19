@@ -18,7 +18,7 @@ class Admin {
   public static function SearchUser($db , $user){
     $connexion = $db->connect();
     $existingUsers = User::SearchUsers($connexion, $user);
-    echo UserView::showFoundUsers($existingUsers);
+    echo userView::showFoundUsers($existingUsers);
   }
 }
 ?>

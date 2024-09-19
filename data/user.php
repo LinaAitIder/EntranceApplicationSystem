@@ -40,9 +40,9 @@ class User {
     $stmt->execute(['login' => $login]); 
     $result = $stmt->fetch(PDO::FETCH_ASSOC); 
 
-    /* if (!$result) {
+    if (!$result) {
       echo "No results found.";
-    }*/
+    }
 
     return $result;
   }

@@ -6,15 +6,13 @@
   require './PHPMailer/src/Exception.php';
   require './PHPMailer/src/PHPMailer.php';
   require './PHPMailer/src/SMTP.php';
-  require_once('.\fpdf186\fpdf.php');
-  require "./utils/functions.php";
-  require "./controller/authController.php";
-  require "./data/database.php";
-  require "./data/user.php";
+  require "controller/authController.php";
+  require 'data/user.php';
+  require 'data/database.php'; 
 
   //Account Verification
 
-  $action = $_SESSION['action'];
+  $action = $_GET['action'];
   if($action === 'verifyAccount'){ 
       if(isset($_POST['verify'])){
           if(isset($_SESSION['user'])){

@@ -19,7 +19,7 @@
     $connexion = $this->db->connect();
     $Admin= new Admin;
     $users = $Admin->getAllUsers($connexion);
-    echo UserView::renderUserList($users);
+    echo userView::renderUserList($users);
     
   }
 

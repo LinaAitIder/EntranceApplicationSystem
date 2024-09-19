@@ -1,6 +1,12 @@
 
 <?php
     session_start();
+    require '../controller/userController.php';
+    require '../data/database.php';
+    require '../data/user.php';
+    require '../controller/viewController.php';
+    require '../utils/functions.php';
+
 
     if($_SESSION['userType'] !== 'etud'){
         if(($_SESSION['userType'] === 'admin')){
@@ -11,11 +17,6 @@
     }
    
 
-    require '../data/database.php';
-    require '../data/user.php';
-    require '../controller/userController.php';
-    require '../utils/functions.php';
-    require '../controller/viewController.php';
 
     /*
         echo '<pre>';

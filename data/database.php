@@ -45,6 +45,35 @@
             
            
         }
+        function insertUpdatedData($user , $connexion , $table , $sameToken){
+            // Preparing parameter
+            $insertReq=$connexion->prepare(" INSERT INTO  $table (nom, prenom, email, naissance, diplome, niveau, etablissement,photo , cv , log , mdp , token , verif_token) 
+            VALUES 
+            (:nom,:prenom,:email,:naissance,:diplome,:niveau,:etablissement,:photo,:cv,:log, :mdp , :token , :verif_token)"
+            );
+            $user->verifStatus =1;
+            $insertReq->bindValue(':nom', $user->nom, PDO::PARAM_STR);
+            $insertReq->bindValue(':prenom', $user->prenom, PDO::PARAM_STR);
+            $insertReq->bindValue(':email', $user->email, PDO::PARAM_STR);
+            $insertReq->bindValue(':naissance', $user->naissance, PDO::PARAM_STR); // Date as a string
+            $insertReq->bindValue(':diplome', $user->diplome, PDO::PARAM_STR);
+            $insertReq->bindValue(':niveau', $user->niveau, PDO::PARAM_STR);
+            $insertReq->bindValue(':etablissement', $user->etab, PDO::PARAM_STR);
+            $insertReq->bindValue(':cv', $user->cv, PDO::PARAM_STR);
+            $insertReq->bindValue(':photo', $user->photo, PDO::PARAM_STR);
+            $insertReq->bindValue(':log', $user->log, PDO::PARAM_STR);
+            $insertReq->bindValue(':mdp', $user->mdp, PDO::PARAM_STR);
+            $insertReq->bindValue(':token', $sameToken, PDO::PARAM_INT);
+            $insertReq->bindValue(':verif_token', $user->verifStatus, PDO::PARAM_BOOL);
+            if ($insertReq->execute()) {
+                echo "<alert> Data inserted successfully! </alert>";
+            } else {
+                $errorInfo = $insertReq->errorInfo();
+                echo "Error inserting data: " . $errorInfo[2];
+            }
+            
+           
+        }
 
         function getToken($user , $connexion){
             echo "Email being used in query: " . htmlspecialchars($user->email) . "<br>";
@@ -141,123 +170,89 @@
           
         }
         
-      
-        function updateData($user,$userLogin) {
-            // Update for niveau 3
+        function updateTableData($table , $user , $previousLogin){   
             $connexion = $this->connect();
-            if ($user->niveau === "3") {
-                $dateUpdateReq = "
-                UPDATE etud3a
-                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
-                WHERE log = :userLogin;
-                ";
-                $stmt = $connexion->prepare($dateUpdateReq);
-                // Binding parameters
-                $stmt->bindParam(':nom', $user->nom);
-                $stmt->bindParam(':prenom', $user->prenom);
-                $stmt->bindParam(':email', $user->email);
-                $stmt->bindParam(':naissance', $user->naissance);
-                $stmt->bindParam(':diplome', $user->diplome);
-                $stmt->bindParam(':niveau', $user->niveau);
-                $stmt->bindParam(':etab', $user->etab);
-                $stmt->bindParam(':photo', $user->photo);
-                $stmt->bindParam(':cv', $user->cv);
-                $stmt->bindParam(':log', $user->log);
-                $stmt->bindParam(':mdp', $user->mdp);
-                $stmt->bindParam(':userLogin', $userLogin);
-                if ($stmt->execute()) {
-                    echo "Updated data in etud3a";
-                } else {
-                    print_r($stmt->errorInfo());
-                }
-            }
-        
-            // Update for niveau 4
-            if ($user->niveau === "4") {
-                $dateUpdateReq = "
-                UPDATE etud4a
-                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
-                WHERE log = :userLogin;
-                ";
-                $stmt = $connexion->prepare($dateUpdateReq);
-                // Binding parameters
-                $stmt->bindParam(':nom', $user->nom);
-                $stmt->bindParam(':prenom', $user->prenom);
-                $stmt->bindParam(':email', $user->email);
-                $stmt->bindParam(':naissance', $user->naissance);
-                $stmt->bindParam(':diplome', $user->diplome);
-                $stmt->bindParam(':niveau', $user->niveau);
-                $stmt->bindParam(':etab', $user->etab);
-                $stmt->bindParam(':photo', $user->photo);
-                $stmt->bindParam(':cv', $user->cv);
-                $stmt->bindParam(':log', $user->log);
-                $stmt->bindParam(':mdp', $user->mdp);
-                $stmt->bindParam(':userLogin', $userLogin);
-                if ($stmt->execute()) {
-                    echo "Updated data in etud4a";
-                } else {
-                    print_r($stmt->errorInfo());
-                }
-            }
-        
-            // Update for niveau 3 et 4
-            if ($user->niveau === "3 et 4") {
-                // Update etud3a
-                $dateUpdateReq = "
-                UPDATE etud3a 
-                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
-                WHERE log = :userLogin;
-                ";
-                $stmt = $connexion->prepare($dateUpdateReq);
-                // Binding parameters
-                $stmt->bindParam(':nom', $user->nom);
-                $stmt->bindParam(':prenom', $user->prenom);
-                $stmt->bindParam(':email', $user->email);
-                $stmt->bindParam(':naissance', $user->naissance);
-                $stmt->bindParam(':diplome', $user->diplome);
-                $stmt->bindParam(':niveau', $user->niveau);
-                $stmt->bindParam(':etab', $user->etab);
-                $stmt->bindParam(':photo', $user->photo);
-                $stmt->bindParam(':cv', $user->cv);
-                $stmt->bindParam(':log', $user->log);
-                $stmt->bindParam(':mdp', $user->mdp);
-                $stmt->bindParam(':userLogin', $userLogin);
-                if ($stmt->execute()) {
-                    echo "Updated data in etud3a";
-                } else {
-                    print_r($stmt->errorInfo());
-                }
-        
-                // Update etud4a
-                $dateUpdateReqS = "
-                UPDATE etud4a 
-                SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp 
-                WHERE log = :userLogin;
-                ";
-                $stmtS = $connexion->prepare($dateUpdateReqS);
-                // Binding parameters
-                $stmtS = $connexion->prepare($dateUpdateReqS);
+            $verificatinStatus = 1;
+            $dateUpdateReq = "
+            UPDATE $table
+            SET nom = :nom, prenom = :prenom, email = :email, naissance = :naissance, diplome = :diplome, niveau = :niveau, etablissement = :etab, photo = :photo, cv = :cv, log = :log, mdp = :mdp , verif_token = :verifStatus
+            WHERE log = :previousLogin;
+            ";
+            $stmt = $connexion->prepare($dateUpdateReq);
+            // Binding parameters
+            $stmt->bindParam(':nom', $user->nom);
+            $stmt->bindParam(':prenom', $user->prenom);
+            $stmt->bindParam(':email', $user->email);
+            $stmt->bindParam(':naissance', $user->naissance);
+            $stmt->bindParam(':diplome', $user->diplome);
+            $stmt->bindParam(':niveau', $user->niveau);
+            $stmt->bindParam(':etab', $user->etab);
+            $stmt->bindParam(':photo', $user->photo);
+            $stmt->bindParam(':cv', $user->cv);
+            $stmt->bindParam(':log', $user->log);
+            $stmt->bindParam(':mdp', $user->mdp);
+            $stmt->bindParam(':previousLogin', $previousLogin);
+            $stmt->bindParam(':verifStatus', $verificatinStatus);
 
-                $stmtS->bindParam(':nom', $user->nom);
-                $stmtS->bindParam(':prenom', $user->prenom);
-                $stmtS->bindParam(':email', $user->email);
-                $stmtS->bindParam(':naissance', $user->naissance);
-                $stmtS->bindParam(':diplome', $user->diplome);
-                $stmtS->bindParam(':niveau', $user->niveau);
-                $stmtS->bindParam(':etab', $user->etab);
-                $stmtS->bindParam(':photo', $user->photo);
-                $stmtS->bindParam(':cv', $user->cv);
-                $stmtS->bindParam(':log', $user->log);
-                $stmtS->bindParam(':mdp', $user->mdp);
-                $stmtS->bindParam(':userLogin', $userLogin);
-                if ($stmtS->execute()) {
-                    echo "Updated data in etud4a";
+            if ($stmt->execute()) {
+                echo "Updated data in etud3a";
+            } else {
+                print_r($stmt->errorInfo());
+            }
+        }
+
+        function updateData($user , $previousLogin) {
+            $connexion = $this->connect();
+            $sameToken = $this->getToken($user , $connexion);
+            if ($user->niveau === "3") {
+                $userController = new userController($user , $this->db);
+                $userController->updateUserInfo($user);
+                $updatedLevel = $user->niveau;
+                if($updatedLevel  === "3"){
+                    $this->updateTableData('etud3a', $user , $previousLogin);
+                } else if ($updatedLevel  === "4"){
+                    $this->insertUpdatedData($user,$connexion ,'etud4a' , $sameToken);
+                    $user->deleteAccount($connexion , $previousLogin , '3');
+                } else if ($updatedLevel  === '3 et 4'){
+                    $this->updateTableData('etud3a', $user , $previousLogin) ;
+                    $this->insertUpdatedData($user,$connexion ,'etud4a', $sameToken);
                 } else {
-                    print_r($stmtS->errorInfo());
+                    echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
                 }
-                
-                $_SESSION['recap_etud']['log']= $user->log;
-                
+             
+            }
+
+            if ($user->niveau === "4") {
+                $userController = new userController($user , $this->db);
+                $userController->updateUserInfo($user);
+                if($user->niveau === "4"){
+                    $this->updateTableData('etud4a', $user , $previousLogin);
+                } else if ($user->niveau === "3"){
+                    $this->insertUpdatedData($user,$connexion ,'etud3a', $sameToken);
+                    $user->deleteAccount($connexion ,  $previousLogin , '4');
+                } else if ($user->niveau === '3 et 4'){
+                    $this->updateTableData('etud4a', $user , $previousLogin);
+                    $this->insertUpdatedData($user,$connexion ,'etud3a', $sameToken);
+                } else {
+                    echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
+                }
+            }
+        
+            if ($user->niveau === "3 et 4") {
+                $userController = new userController($user , $this->db);
+                $userController->updateUserInfo($user);
+                if($user->niveau === "4"){
+                    $this->updateTableData('etud4a', $user ,  $previousLogin);
+                    $user->deleteAccount($connexion ,  $previousLogin , '3');
+                } else if ($user->niveau === "3"){
+                    $this->updateTableData('etud3a', $user ,  $previousLogin);
+                    $user->deleteAccount($connexion ,  $previousLogin ,'4');
+                } else if ($user->niveau === '3 et 4'){
+                    $this->updateTableData('etud4a', $user ,  $previousLogin);
+                    $this->updateTableData('etud3a' , $user ,  $previousLogin);
+                } else {
+                    echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
+                }
             }
         } 
 
