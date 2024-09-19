@@ -61,10 +61,21 @@ class User {
           if($stmt->execute(['login' => $login])){echo "done";};   
         }
 
-        if($niveau === '3 et 4'){
-          $query="DELETE FROM etud3a , etud4a WHERE log = :login AND etud3a.email = etud4a.email";
+        if ($niveau === '3 et 4') {
+          // Delete from both tables at once using JOIN
+          $query = "DELETE etud3a, etud4a 
+                    FROM etud3a 
+                    INNER JOIN etud4a ON etud3a.email = etud4a.email 
+                    WHERE etud3a.log = :login AND etud4a.log = :login";
+      
           $stmt = $connexion->prepare($query);
-          if($stmt->execute(['login' => $login])){echo "done";};   }
+      
+          if ($stmt->execute(['login' => $login])) {
+              echo "done";
+          }
+      }
+      
+      
 
   }
 

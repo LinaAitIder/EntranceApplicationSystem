@@ -39,10 +39,10 @@
                         <td>'.$user['niveau'].'</td>   
                         <td>'.$user['etablissement'].'</td>   
                         <td>
-                            <img src="../'.$user['photo'] . '" alt="Photo" style="width: 150px; height: auto;" />
+                            <img src="'.$user['photo'] . '" alt="Photo" style="width: 150px; height: auto;" />
                         </td>   
                         <td>
-                            <a href="../' . $user['cv'] . '" download>CV</a>
+                            <a href="' . $user['cv'] . '" download>CV</a>
                         </td>
                     </tr>
             ';

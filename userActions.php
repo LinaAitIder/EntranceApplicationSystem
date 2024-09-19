@@ -67,6 +67,7 @@
       $connexion = $db->connect();
       $user = unserialize($_SESSION['user']);
       $user->deleteAccount($connexion , $user->log , $user->niveau);
+      session_destroy();
       header("Location:./View/authentification.php");
       break;
 
