@@ -13,6 +13,7 @@
   //Account Verification
 
   $action = $_GET['action'];
+  
   if($action === 'verifyAccount'){ 
       if(isset($_POST['verify'])){
           if(isset($_SESSION['user'])){
@@ -20,7 +21,7 @@
               $authController = new authController(new Database , $user);
               $authController->verifyAccount();
             
-          } else {
+          }  else {
             echo "user session not working";
             echo'<pre>';
             print_r($_SESSION);
@@ -49,7 +50,7 @@
           $mail->isHTML(true);                                  
           $mail->Subject = 'Code Verification';
           $mail->Body    = "
-          <h3><b>Verification code</b></h3> <p> Please look into the file! </p>";
+          <h3><b>OTP Verification code</b></h3> <p> Please look into the file! </p>";
           $mail->send();
           echo '<script>alert("Message envoye!");</script>';
           return 1;
