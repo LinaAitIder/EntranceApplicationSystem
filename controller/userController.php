@@ -38,20 +38,20 @@
       } else { echo "<script>alert('There is a problem with the pdf');</script>";}
       
       if($this->user->niveau==='3'){
-              $this->db->insertData($this->user , $connexion, 'etud3a');
+              $this->db->insertData($this->user , 'etud3a');
               if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
                 header('Location:./View/accountVerification.php');
                 exit();
               };} else if($this->user->niveau==='4'){
-              $this->db->insertData($this->user , $connexion , 'etud4a');
+              $this->db->insertData($this->user  , 'etud4a');
               if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
                 header('Location:./View/accountVerification.php');
                 exit();
               };} else if($this->user->niveau === '3 et 4'){
               // Constraint : The user should have a diplome of bac+3 and have an application for both the 3thrd year and the 4th year
               if($this->user->diplome === 'Bac+2'){
-                $this->db->insertData($this->user , $connexion , 'etud3a');
-                $this->db->insertData($this->user , $connexion , 'etud4a');
+                $this->db->insertData($this->user  , 'etud3a');
+                $this->db->insertData($this->user  , 'etud4a');
                 if(sendMail($this->user->nom , $this->user->prenom , $this->user->email , $tokenpdf)){
                   header('Location:./View/accountVerification.php');
                   exit();

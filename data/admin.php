@@ -21,9 +21,10 @@ class Admin {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
   public static function SearchUser($db , $user){
     $connexion = $db->connect();
-    $existingUsers = User::SearchUsers($connexion, $user);
+    $existingUsers =  Database::getUsersSearchResult($connexion, $user);
     echo userView::showFoundUsers($existingUsers);
   }
 }

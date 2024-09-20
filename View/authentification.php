@@ -55,8 +55,8 @@
 </body>
 <script src="../scripts/functions.js"></script>
 <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const error = urlParams.get('error');
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
     if(error === 'not_existing'){
         message('Vous n\'etes pas inscrit!, Veuillez verifier vos donnees','notifError');
     }

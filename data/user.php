@@ -79,23 +79,6 @@ class User {
 
   }
 
-  public static function SearchUsers($connexion , $user){
-    $query = "
-    SELECT * FROM (
-        SELECT * FROM etud3a 
-        WHERE etud3a.nom LIKE :user 
-        UNION 
-        SELECT * FROM etud4a 
-        WHERE etud4a.nom LIKE :user
-    ) AS combined_results
-    LIMIT 10
-    ";
-    $stmt = $connexion->prepare($query);
-    $stmt->execute([':user' => '%' . $user . '%']); // Use '%' for the LIKE search
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $results;
-
-  }
 
  
 

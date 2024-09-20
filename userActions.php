@@ -2,8 +2,8 @@
   session_start();
 
   $action=$_GET['action'];
-  echo $action;
-  var_dump($_POST);
+  // echo $action;
+  // var_dump($_POST);
  
   switch($action){
     case 'signIn':
@@ -14,19 +14,18 @@
       require_once 'data/database.php';
       require_once 'data/user.php';
 
-
+      // Managing page Access
       $userUrl = './View/recap.php';
       $adminUrl = './View/administration.php ';
       pageAccess($userUrl , $adminUrl);
 
       $userController = new userController(new user , new Database);
       if(isset($_POST['signUp'])) {
-          $userController->SignIn();
-         
+          $userController->SignIn();        
       } else {
           echo "Sign up data not submitted ";
       }
-    break;
+      break;
       
     case 'login':
       require 'data/database.php';

@@ -5,6 +5,7 @@
 
     $userUrl = './View/recap.php';
     $adminUrl = './View/administration.php ';
+    
     if($_SESSION['userType']){
         pageAccess($userUrl , $adminUrl);
     } else {
