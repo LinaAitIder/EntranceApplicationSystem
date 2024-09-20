@@ -67,19 +67,15 @@
     }
 
     function displayUserInfo(){
-      $connexion= $this->db->connect();
-      $userInformations=  $this->user->getUserInformation($connexion);
-      
-      
-      echo $this->user->log;
+      $userInformations=  $this->user->getUserInformation($this->db);
+      /* echo $this->user->log;
       if ($userInformations) {
         echo "Data fetched successfully: ";
         print_r($userInformations); // Print array for debugging
       } else {
           echo "No data returned.";
       }
-      
-
+      */
       $niveau = nameLevel($userInformations['niveau']);
       userView::renderRecap($userInformations, $niveau);
             

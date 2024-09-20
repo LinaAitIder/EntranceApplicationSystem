@@ -63,9 +63,8 @@
       require 'data/database.php';
       require 'data/user.php';
       $db = new Database;
-      $connexion = $db->connect();
       $user = unserialize($_SESSION['user']);
-      $user->deleteAccount($connexion , $user->log , $user->niveau);
+      $user->deleteAccount($db);
       session_destroy();
       header("Location:./View/authentification.php");
       break;

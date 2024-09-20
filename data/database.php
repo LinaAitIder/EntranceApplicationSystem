@@ -46,8 +46,10 @@
             
            
         }
-        function insertUpdatedData($user , $connexion , $table , $sameToken){
+        
+        function insertUpdatedData($user, $table, $sameToken){
             // Preparing parameter
+            $connexion = $this->connect();
             $insertReq=$connexion->prepare(" INSERT INTO  $table (nom, prenom, email, naissance, diplome, niveau, etablissement,photo , cv , log , mdp , token , verif_token) 
             VALUES 
             (:nom,:prenom,:email,:naissance,:diplome,:niveau,:etablissement,:photo,:cv,:log, :mdp , :token , :verif_token)"
@@ -76,7 +78,8 @@
            
         }
 
-        function getToken($user , $connexion){
+        function getToken($user){
+            $connexion = $this->connect();
             echo "Email being used in query: " . htmlspecialchars($user->email) . "<br>";
 
             if($user->niveau === '3'){
@@ -132,7 +135,8 @@
          
         }
 
-        public static function getUsersSearchResult($connexion , $user){
+        public function getUsersSearchResult($user){
+            $connexion = $this->connect();
             $query = "
             SELECT * FROM (
                 SELECT * FROM etud3a 
@@ -150,68 +154,21 @@
 
         }
 
+        public function getAllUsers() {
+            $connexion = $this->connect();
+            $query = "
+                SELECT nom, prenom, email, naissance, diplome,  niveau, etablissement, photo, cv 
+                FROM etud3a 
+                UNION 
+                SELECT nom, prenom, email, naissance, diplome, niveau, etablissement, photo, cv 
+                FROM etud4a";
         
-        public static function getAllUsers($connexion){
-            $htmlCandidatsLists = '
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>liste des inscriptions</title>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-            </head>
-            <body>
-                <div class="container">
-                    <center><h3><b>Liste des inscriptions</b></h3></center>
-                    <table class="table table-hover">
-                    <tr>  
-                        <th >nom</th>   
-                        <th >prenom</th>   
-                        <th >email</th>   
-                        <th >naissance</th>   
-                        <th >diplome</th>   
-                        <th >niveau</th>   
-                        <th >etablissement</th>   
-                        <th >photo</th>   
-                        <th >cv</th>
-                    </tr>
-                ';
-            $query = "SELECT * FROM etud3a UNION SELECT * FROM etud4a";
-            $data = $connexion->query($query);
-            $rows = $data->fetchAll(PDO::FETCH_ASSOC);
-            foreach($rows as $row){ 
-            $htmlCandidatsLists .=  "
-                    <tr> 
-                        <td >{$row['nom']} </td>   
-                        <td  >{$row['prenom']}</td>   
-                        <td >{$row['email']}</td>   
-                        <td >{$row['naissance']}</td>   
-                        <td >{$row['diplome']}</td>   
-                        <td  >{$row['niveau']}</td>   
-                        <td >{$row['etablissement']}</td>   
-                        <td ><img src='{$row['photo']}' style='width: 100px; height: auto;'></td>   
-                        <td ><a href='{$row['cv']}' download> CV</a></td>
-                    </tr>
-                    
-                    ";
-            } 
-            $htmlCandidatsLists .= '
-            </table>
-            <br>
-            <br>
-            <br>
-
-            <a href="../controller/userActions.php?action=logout">se deconnecter</a>
-            </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-            </body>
-            </html>
-            ';
-            return $htmlCandidatsLists;
-
+            $stmt = $connexion->query($query);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        function updateVerifStatus($user , $connexion){
+        function updateVerifStatus($user){
+            $connexion = $this->connect();
             if($user->niveau === '3' ){
                 $user->verifStatus = true;
                 $updateReq= $connexion->prepare("UPDATE etud3a SET verif_token = :verif_token WHERE email= :email");
@@ -283,7 +240,7 @@
 
         function updateData($user , $previousLogin) {
             $connexion = $this->connect();
-            $sameToken = $this->getToken($user , $connexion);
+            $sameToken = $this->getToken($user);
             if ($user->niveau === "3") {
                 $userController = new userController($user , $this->db);
                 $userController->updateUserInfo($user);
@@ -291,11 +248,11 @@
                 if($updatedLevel  === "3"){
                     $this->updateTableData('etud3a', $user , $previousLogin);
                 } else if ($updatedLevel  === "4"){
-                    $this->insertUpdatedData($user,$connexion ,'etud4a' , $sameToken);
-                    $user->deleteAccount($connexion , $previousLogin , '3');
+                    $this->insertUpdatedData($user,'etud4a' , $sameToken);
+                    $user->deleteAccount($previousLogin , 'etud3a');
                 } else if ($updatedLevel  === '3 et 4'){
+                    $this->insertUpdatedData($user,'etud4a', $sameToken);
                     $this->updateTableData('etud3a', $user , $previousLogin) ;
-                    $this->insertUpdatedData($user,$connexion ,'etud4a', $sameToken);
                 } else {
                     echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
                 }
@@ -308,11 +265,11 @@
                 if($user->niveau === "4"){
                     $this->updateTableData('etud4a', $user , $previousLogin);
                 } else if ($user->niveau === "3"){
-                    $this->insertUpdatedData($user,$connexion ,'etud3a', $sameToken);
-                    $user->deleteAccount($connexion ,  $previousLogin , '4');
+                    $this->insertUpdatedData($user, 'etud3a', $sameToken);
+                    $user->deleteAccount($previousLogin , 'etud4a');
                 } else if ($user->niveau === '3 et 4'){
                     $this->updateTableData('etud4a', $user , $previousLogin);
-                    $this->insertUpdatedData($user,$connexion ,'etud3a', $sameToken);
+                    $this->insertUpdatedData($user, 'etud3a', $sameToken);
                 } else {
                     echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
                 }
@@ -323,10 +280,10 @@
                 $userController->updateUserInfo($user);
                 if($user->niveau === "4"){
                     $this->updateTableData('etud4a', $user ,  $previousLogin);
-                    $user->deleteAccount($connexion ,  $previousLogin , '3');
+                    $user->deleteAccount($previousLogin , 'etud3a');
                 } else if ($user->niveau === "3"){
                     $this->updateTableData('etud3a', $user ,  $previousLogin);
-                    $user->deleteAccount($connexion ,  $previousLogin ,'4');
+                    $user->deleteAccount($previousLogin , 'etud4a');
                 } else if ($user->niveau === '3 et 4'){
                     $this->updateTableData('etud4a', $user ,  $previousLogin);
                     $this->updateTableData('etud3a' , $user ,  $previousLogin);
@@ -336,27 +293,76 @@
             }
         } 
 
-    
-        function deleteUserData($login , $niveau){
+        function deleteUserData($table, $previousLogin){
             $connexion = $this->connect();
-            if($niveau === '3'){
-            $query="DELETE FROM etud3a WHERE log = :login";
+            $query="DELETE FROM $table WHERE log = :login";
             $stmt = $connexion->prepare($query);
-            if($stmt->execute(['login' => $login])){echo "done";}; 
-            }
-            if($niveau === '4'){
-            $query="DELETE FROM etud4a WHERE log = :login";
-            $stmt = $connexion->prepare($query);
-            if($stmt->execute(['login' => $login])){echo "done";};    }
-            if($niveau === '3 et 4'){
-            $query="DELETE FROM etud3a , etud4a WHERE log = :login AND etud3a.email = etud4a.email";
-            $stmt = $connexion->prepare($query);
-            if($stmt->execute(['login' => $login])){echo "done";};   }
-        
+            if($stmt->execute(['login' => $previousLogin])){echo "done";};
         }
-     
-        
-        
 
-}
+        /*
+            public static function getAllUsers($connexion){
+                $htmlCandidatsLists = '
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>liste des inscriptions</title>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+                </head>
+                <body>
+                    <div class="container">
+                        <center><h3><b>Liste des inscriptions</b></h3></center>
+                        <table class="table table-hover">
+                        <tr>  
+                            <th >nom</th>   
+                            <th >prenom</th>   
+                            <th >email</th>   
+                            <th >naissance</th>   
+                            <th >diplome</th>   
+                            <th >niveau</th>   
+                            <th >etablissement</th>   
+                            <th >photo</th>   
+                            <th >cv</th>
+                        </tr>
+                    ';
+                $query = "SELECT * FROM etud3a UNION SELECT * FROM etud4a";
+                $data = $connexion->query($query);
+                $rows = $data->fetchAll(PDO::FETCH_ASSOC);
+                foreach($rows as $row){ 
+                $htmlCandidatsLists .=  "
+                        <tr> 
+                            <td >{$row['nom']} </td>   
+                            <td  >{$row['prenom']}</td>   
+                            <td >{$row['email']}</td>   
+                            <td >{$row['naissance']}</td>   
+                            <td >{$row['diplome']}</td>   
+                            <td  >{$row['niveau']}</td>   
+                            <td >{$row['etablissement']}</td>   
+                            <td ><img src='{$row['photo']}' style='width: 100px; height: auto;'></td>   
+                            <td ><a href='{$row['cv']}' download> CV</a></td>
+                        </tr>
+                        
+                        ";
+                } 
+                $htmlCandidatsLists .= '
+                </table>
+                <br>
+                <br>
+                <br>
+
+                <a href="../controller/userActions.php?action=logout">se deconnecter</a>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                </body>
+                </html>
+                ';
+                return $htmlCandidatsLists;
+
+            }
+        */
+
+    }
+    
+
 ?>

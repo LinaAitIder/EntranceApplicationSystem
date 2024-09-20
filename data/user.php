@@ -33,7 +33,8 @@ class User {
     $this->verifStatus= $userData['verif_token'];
   }
 
-  public function getUserInformation($connexion){
+  public function getUserInformation($db){
+    $connexion = $db->connect();
     $query="SELECT * FROM etud3a WHERE log = :login Union SELECT * FROM etud4a WHERE log = :login";
     $stmt = $connexion->prepare($query);
     $login =$this->log ;
@@ -47,48 +48,34 @@ class User {
     return $result;
   }
 
-  function deleteAccount($connexion , $login , $niveau){
+  function deleteAccount($previousLogin , $table){
+    $db = new Database;
+   
+    if($table === 'etud3a'){
+      $db->deleteUserData($table, $previousLogin); 
+    }
 
-        if($niveau === '3'){
-          $query="DELETE FROM etud3a WHERE log = :login";
-          $stmt = $connexion->prepare($query);
-           if($stmt->execute(['login' => $login])){echo "done";}; 
-        }
+    if($table === '4'){
+      $db->deleteUserData($table, $previousLogin);  
+    }
 
-        if($niveau === '4'){
-          $query="DELETE FROM etud4a WHERE log = :login";
-          $stmt = $connexion->prepare($query);
-          if($stmt->execute(['login' => $login])){echo "done";};   
-        }
-
-        if ($niveau === '3 et 4') {
-          // Delete from both tables at once using JOIN
-          $query = "DELETE etud3a, etud4a 
-                    FROM etud3a 
-                    INNER JOIN etud4a ON etud3a.email = etud4a.email 
-                    WHERE etud3a.log = :login AND etud4a.log = :login";
-      
-          $stmt = $connexion->prepare($query);
-      
-          if ($stmt->execute(['login' => $login])) {
-              echo "done";
-          }
-      }
-      
-      
-
-  }
-
-
- 
-
-
+    if ($table === '3 et 4') {
+      $db->deleteUserData('etud3a', $previousLogin);
+      $db->deleteUserData($table, $previousLogin ); 
+      // $query = "DELETE etud3a, etud4a 
+      //           FROM etud3a 
+      //           INNER JOIN etud4a ON etud3a.email = etud4a.email 
+      //           WHERE etud3a.log = :login AND etud4a.log = :login";
   
-
+      // $stmt = $connexion->prepare($query);
+  
+      // if ($stmt->execute(['login' => $login])) {
+      //     echo "done";
+      // }
+    }
+      
+  }
+  
 }
-
-
-
-
 
 ?>

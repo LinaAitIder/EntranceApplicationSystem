@@ -53,7 +53,7 @@
           $this->user->verifStatus = true;
           $this->user->token = $code;
           //Creating an update function
-          $this->db->updateVerifStatus($this->user , $connexion);
+          $this->db->updateVerifStatus($this->user);
           $_SESSION['userType'] = 'etud';
           echo "I guess the problem is in the header";
           header("Location:./View/authentification.php");

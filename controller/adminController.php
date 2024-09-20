@@ -17,8 +17,8 @@
 
   public function showAllUsers(){
     $connexion = $this->db->connect();
-    $Admin= new Admin;
-    $users = $Admin->getAllUsers($connexion);
+    $db= new Database;
+    $users = $db->getAllUsers();
     echo userView::renderUserList($users);
     
   }
