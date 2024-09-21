@@ -14,4 +14,5 @@ class Admin {
     echo userView::showFoundUsers($existingUsers);
   }
 }
+
 ?>

@@ -73,9 +73,7 @@
         return $html;
     }
     
-    //Create afucntion that gives an id to the use
     public static function renderRecap($userInformations , $niveau){
-        echo $userInformations['cv'];
         $candidatInfo = '
             <!DOCTYPE html>
             <html lang="en">
@@ -116,7 +114,6 @@
     }
 
     public static function updateRecap($userData , $niveau){
-        echo $userData->id;
         $updatedCandidatInfo = '
             <!DOCTYPE html>
             <html lang="en">
@@ -136,9 +133,9 @@
                     <div class="info"><strong>Etablissement :</strong> ' . $userData->etab . '</div>
                     <div class="info"><strong>Email :</strong> ' . $userData->email . '</div>
                     <br>
-                    <img src="' . '../'. $userData->photo . '" alt="Photo" style="width: 150px; height: auto;" />
+                    <img src="' . './'. $userData->photo . '" alt="Photo" style="width: 150px; height: auto;" />
                     <br><br>
-                    <a href="' . '../'. $userData->cv . '" download>Télécharger CV</a>
+                    <a href="' . './'. $userData->cv . '" download>Télécharger CV</a>
                 </div>
                 <br>
                 <br>           
@@ -149,7 +146,7 @@
                     <button type="button" onclick="window.location.href = \'./utils/pdfGenerator.php?action=generateRecap\';">Obtenir votre reçu PDF</button>
                 </div>
                 
-                <script src="../scripts/functions.js"></script>
+                <script src="./scripts/functions.js"></script>
             </body>
             </html>';
             echo $updatedCandidatInfo;

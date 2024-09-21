@@ -42,36 +42,28 @@ class User {
     $result = $stmt->fetch(PDO::FETCH_ASSOC); 
 
     if (!$result) {
-      echo "No results found.";
+      echo "<script>console.log('Pas pu extraire les information de l'/utilisateur');</script>";
     }
 
     return $result;
   }
 
-  function deleteAccount($previousLogin , $table){
+ 
+
+  function deleteAccount($previousLogin , $niveau){
     $db = new Database;
    
-    if($table === 'etud3a'){
-      $db->deleteUserData($table, $previousLogin); 
+    if($niveau === '3' ){
+      $db->deleteUserData('etud3a', $previousLogin); 
     }
 
-    if($table === '4'){
-      $db->deleteUserData($table, $previousLogin);  
+    if($niveau === '4'){
+      $db->deleteUserData('etud4a', $previousLogin);  
     }
 
-    if ($table === '3 et 4') {
+    if ($niveau === '3 et 4') {
       $db->deleteUserData('etud3a', $previousLogin);
-      $db->deleteUserData($table, $previousLogin ); 
-      // $query = "DELETE etud3a, etud4a 
-      //           FROM etud3a 
-      //           INNER JOIN etud4a ON etud3a.email = etud4a.email 
-      //           WHERE etud3a.log = :login AND etud4a.log = :login";
-  
-      // $stmt = $connexion->prepare($query);
-  
-      // if ($stmt->execute(['login' => $login])) {
-      //     echo "done";
-      // }
+      $db->deleteUserData('etud4a', $previousLogin ); 
     }
       
   }

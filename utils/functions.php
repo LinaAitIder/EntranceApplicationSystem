@@ -2,13 +2,12 @@
 
 function pageAccess($userUrl , $adminUrl){
   if(isset($_SESSION['userType'])) {
-      // Redirect based on the user type
       if($_SESSION['userType'] === 'etud') {
           header("location:$userUrl");
-          exit; // Terminate script execution after redirection
+          exit; 
       } else if($_SESSION['userType'] === 'admin') {
           header("location:$adminUrl");
-          exit; // Terminate script execution after redirection
+          exit; 
       }
   }
 }
@@ -16,13 +15,12 @@ function pageAccess($userUrl , $adminUrl){
 function displayErrors($errors){
     if(!empty($errors)){
       foreach($errors as $error){
-        echo "<script>alert('$error');</script>" ;
+        echo "<script>alert('.$error.');</script>" ;
       }
     }
 };
 
 function uploadFiles($photo , $cv , $user){
-    
     //Manage Image
     $photoName = $photo['name'];
     $photoTmpName = $photo['tmp_name'];
@@ -38,32 +36,36 @@ function uploadFiles($photo , $cv , $user){
     $cvType=$cv['type'];
 
     // Track Any Errors
-    echo "Cv Error : $cvError , Photo Error : $photoError";
+    echo "<script> console.log('Cv Erreur : $cvError , Photo Erreur : $photoError');</script>";
 
     $errors=[];
     //Verification type of files
     $validPhotoTypes = ['image/jpg' , 'image/png', 'image/jpeg'];
+
     if($cvType !=='application/pdf'){
-      $errors[] = 'Veuillez entrez un fichier acceptable de type pdf the file you uploaded is of type :'.$cvType;
+      $errors[] = 'Veuillez entrez un fichier acceptable de type pdf le fichier que vous avez fournit est de type ::'.$cvType;
     }
     if (!in_array($photoType, $validPhotoTypes)){
-      $errors[] = 'Veuillez entrez un fichier acceptable de type jpg , png ou jpeg , the file you uploaded is of type :'.$photoType;
+      $errors[] = 'Veuillez entrez un fichier acceptable de type jpg , png ou jpeg , le fichier que vous avez fournit est de type ::'.$photoType;
     }
 
     //Limit file size
     $cvMaxSize = 2 * 1024 * 1024;
     $photoMaxSize = 8 * 1024 * 1024;
-    if($cvSize > $cvMaxSize || $photoSize > $photoMaxSize){
-      $errors[] = 'Veuillez entrer des fichiers de taille acceptable';
+    if($cvSize > $cvMaxSize ){
+      $errors[] = 'Veuillez entrer des fichiers qui ne depasse pas 2Mo ';
     }
-
+    if($photoSize > $photoMaxSize){
+      $errors[] = 'Veuillez entrer des fichiers qui ne depasse pas 8Mo ';
+    }
     // Display errors if there are any
     if(!empty($errors)){
       displayErrors($errors);
     } else{
       //Create the uploads folder
       $uploadDir = "uploads/";
-      echo $uploadDir;
+      // echo $uploadDir;
+      // Create upload directory if there is none
       if(!is_dir($uploadDir)){
         mkdir($uploadDir , 0777, true);
       }
@@ -76,29 +78,21 @@ function uploadFiles($photo , $cv , $user){
       // echo "</br> cv temporary path : $cvTmpName , photo temporary path : $photoTmpName </br> ";
       // echo "</br>Upload path Cv : $uploadPathCv , Upload path  :Photo $uploadPathPhoto</br>";
       
-      //Ensure there are no errors before moving the files
       if($cvError === UPLOAD_ERR_OK && $photoError === UPLOAD_ERR_OK){
         $uploadCOk = move_uploaded_file($cvTmpName,$uploadPathCv);
         $uploadPOk = move_uploaded_file($photoTmpName, $uploadPathPhoto);
+        //Testing 
         if($uploadCOk &&   $uploadPOk){
-          echo " Les fichier sont bien telecharge";
+          echo "<script>console.log('Les fichier ont ete telechargee!')</script>";
         }
         else {
-          echo 'les fichiers ne sont pas uploader!';
+          echo "<script>console.log('les fichiers ne sont pas uploader!')</script>";
         }
+        
         $user->cv = $uploadPathCv ;
         $user->photo = $uploadPathPhoto;
-      } else {
-        echo "File upload errors prevented moving files.";
-      }
+      } 
    
-    
-    
-      // Just to test
-     
-      
-    
-      ;
     }
 }
 
@@ -112,7 +106,7 @@ function verifyLevel($niveau3 , $niveau4){
       $niveau = '3';
     }
   } else{
-    echo "<script>alert('aucun niveau n'a ete selectionne !');</script>";
+    echo "<script>console.log('aucun niveau n'a ete selectionne !');</script>";
   }
   return $niveau;
 }
@@ -165,20 +159,5 @@ function nameLevel($niveau){
   }
 
 }
-// }
-// function retrieveFormData($postData , $fileData){
-//     if (isset($submit)) {
-//       $nom = $_POST['nom'];
-//       $prenom = $_POST['prenom'];
-//       $login = $_POST['log'];
-//       $email = $_POST['email'];
-//       $pass = crypt($_POST['mdp'],'blowfish');
-//       $date = $_POST['naissance'];
-//       $diplome = $_POST['diplome'];
-//       $nv3 = isset($_POST['niveau3']) ;
-//       $nv4 = isset($_POST['niveau4']) ;
-//       $etab = $_POST['etablissement'];
-//       uploadFiles($_FILES['photo'], $_FILES['cv']);
-//     }
-//   };
+
 ?>

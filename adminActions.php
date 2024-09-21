@@ -1,12 +1,10 @@
 <?php
   session_start();
 
-
-  
-
   $action = $_GET['action'];
 
   switch($action){
+
     case 'lister' :
       require 'controller/adminController.php';
       require 'data/admin.php';

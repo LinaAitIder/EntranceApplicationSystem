@@ -20,10 +20,11 @@
       pageAccess($userUrl , $adminUrl);
 
       $userController = new userController(new user , new Database);
+
       if(isset($_POST['signUp'])) {
           $userController->SignIn();        
       } else {
-          echo "Sign up data not submitted ";
+          echo "<script>console.log('Il y'a une erreur dans la transmission des donnes lors d'inscription!')</script>";
       }
       break;
       
@@ -48,7 +49,7 @@
         }
 
         else {
-            $authController = new authController(new Database , $user);
+            $authController = new authController(new Database , new User);
              $authController->login($login,$pass);
         }
       }
@@ -62,9 +63,8 @@
     case 'deleteAccount':
       require 'data/database.php';
       require 'data/user.php';
-      $db = new Database;
       $user = unserialize($_SESSION['user']);
-      $user->deleteAccount($db);
+      $user->deleteAccount($user->log ,$user->niveau );
       session_destroy();
       header("Location:./View/authentification.php");
       break;
@@ -76,20 +76,20 @@
       require 'data/user.php';
       require 'utils/functions.php';
 
-      var_dump($_POST);
+     // var_dump($_POST);
       $user = unserialize($_SESSION['user']);
-      $db = new Database;
       $userLogin = $user->log;
-      ECHO  "avant la modification de Db ".$user->niveau ;
-
+      // echo "avant la modification de Db ".$user->niveau ;
+      
+      $db = new Database;
       if (isset($_POST['modifier'])) {
         try { 
-          $db->updateData($user , $userLogin);
+         $db->updateData($user , $userLogin);
         } catch(Exception $error){
           echo 'Error : '. $error->getMessage();
         };
        
-        ECHO  "/n apres la modification de Db " . $user->niveau ;
+        // ECHO  "/n apres la modification de Db " . $user->niveau ;
 
       $niveau = nameLevel($user->niveau);
       userView::updateRecap($user , $niveau);

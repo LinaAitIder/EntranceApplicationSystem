@@ -1,5 +1,6 @@
 <?php
     ini_set('memory_limit', '1024M');
+
     class Database{
         private $localhost = "localhost";
         private $db = "concours";
@@ -17,10 +18,30 @@
                 return null;
         } 
 
+        
+        function emailExists($email){
+            $connexion=$this->connect();
+            $query = "SELECT COUNT(*) FROM (SELECT email FROM etud3a WHERE email = :email UNION SELECT email FROM etud4a WHERE email =:email)";
+            $stmt = $connexion->prepare($query);
+            $stmt->bindParam(':email',$email);
+            $count = $stmt->fetchColumn();
+            return $count>0;
+        }
+
+        function logExists($login){
+            $connexion=$this->connect();
+            $query = "SELECT COUNT(*) FROM (SELECT log FROM etud3a WHERE log = :login UNION SELECT log FROM etud4a WHERE log =:login)";
+            $stmt = $connexion->prepare($query);
+            $stmt->bindParam(':login',$login);
+            $count = $stmt->fetchColumn();
+            return $count>0;
+
+        }
+
         function insertData($user , $table){
             $connexion = $this->connect();
             // Preparing parameter
-            $insertReq=$connexion->prepare(" INSERT INTO  $table (nom, prenom, email, naissance, diplome, niveau, etablissement,photo , cv , log , mdp , token , verif_token) 
+            $insertReq=$connexion->prepare("INSERT INTO  $table (nom, prenom, email, naissance, diplome, niveau, etablissement,photo , cv , log , mdp , token , verif_token) 
             VALUES 
             (:nom,:prenom,:email,:naissance,:diplome,:niveau,:etablissement,:photo,:cv,:log, :mdp , :token , :verif_token)"
             );
@@ -37,11 +58,12 @@
             $insertReq->bindValue(':mdp', $user->mdp, PDO::PARAM_STR);
             $insertReq->bindValue(':token', $user->token, PDO::PARAM_INT);
             $insertReq->bindValue(':verif_token', $user->verifStatus, PDO::PARAM_BOOL);
+
             if ($insertReq->execute()) {
-                echo "<alert> Data inserted successfully! </alert>";
+                echo "<script>console.log('Data inserted successfully!');</script>";
             } else {
                 $errorInfo = $insertReq->errorInfo();
-                echo "Error inserting data: " . $errorInfo[2];
+                echo "<script> console.log ('Error inserting data: $errorInfo[2]');</script>";
             }
             
            
@@ -50,7 +72,7 @@
         function insertUpdatedData($user, $table, $sameToken){
             // Preparing parameter
             $connexion = $this->connect();
-            $insertReq=$connexion->prepare(" INSERT INTO  $table (nom, prenom, email, naissance, diplome, niveau, etablissement,photo , cv , log , mdp , token , verif_token) 
+            $insertReq=$connexion->prepare(" INSERT INTO  $table (nom, prenom, email, naissance, diplome, niveau, etablissement,photo , cv , log , mdp , token , verif_token)
             VALUES 
             (:nom,:prenom,:email,:naissance,:diplome,:niveau,:etablissement,:photo,:cv,:log, :mdp , :token , :verif_token)"
             );
@@ -68,19 +90,20 @@
             $insertReq->bindValue(':mdp', $user->mdp, PDO::PARAM_STR);
             $insertReq->bindValue(':token', $sameToken, PDO::PARAM_INT);
             $insertReq->bindValue(':verif_token', $user->verifStatus, PDO::PARAM_BOOL);
+
             if ($insertReq->execute()) {
-                echo "<alert> Data inserted successfully! </alert>";
+                echo "<script>console.log('Data inserted successfully!');</script>";
             } else {
                 $errorInfo = $insertReq->errorInfo();
-                echo "Error inserting data: " . $errorInfo[2];
+                echo "<script> console.log ('Error inserting data: $errorInfo[2]');</script>";
             }
-            
            
         }
 
         function getToken($user){
             $connexion = $this->connect();
-            echo "Email being used in query: " . htmlspecialchars($user->email) . "<br>";
+            $email = htmlspecialchars($user->email); 
+            // echo "<script>console.log('email : $email');</script>";
 
             if($user->niveau === '3'){
                 $getReq= $connexion->prepare("SELECT token FROM etud3a WHERE email= :email");
@@ -91,25 +114,27 @@
                     return $tokenV;
                 }
                 else {
-                    echo "Something is wrong with the extration of the data";
-                    return false ;
+                    echo "<script>console.log('probleme d'extraction de token de BD');</script>";
                 }
             }
+
             if($user->niveau === '4'){
                 $getReq= $connexion->prepare("SELECT token FROM etud4a WHERE email= :email");
                 $getReq->bindValue(':email',$user->email , PDO::PARAM_STR);
+
                 if ($getReq->execute()) {
                     $tokenV = $getReq->fetchColumn(); 
         
                     if ($tokenV) {
                         return $tokenV;
                     } else {
-                        echo "No matching token found.";
+                        echo "<script>console.log('Il y'a eu un probleme d'extraction de token de BD');</script>";
                     }
                 } else {
-                    echo "Something is wrong with the extration of the data";
+                    echo "<script>console.log('probleme d'execution de la requete d'extraction de token!');</script>";              
                 }
             }
+
             if($user->niveau === '3 et 4'){
                 $getReq= $connexion->prepare("SELECT etud4a.token FROM etud4a INNER JOIN etud3a ON etud4a.email= etud3a.email WHERE etud4a.email= :email AND  etud3a.token=etud4a.token ");
                 $getReq->bindValue(':email',$user->email , PDO::PARAM_STR);
@@ -126,10 +151,10 @@
                     if ($tokenV) {
                         return $tokenV;
                     } else {
-                        echo "No matching token found.";
+                        echo "<script>console.log('Token untrouvable !');</script>";
                     }
                 } else {
-                    echo "Something is wrong with the extration of the data";
+                    echo "<script>console.log('Un probleme est survenue lors d'extraction de donnees!');</script>";
                 }
             }
          
@@ -169,42 +194,44 @@
 
         function updateVerifStatus($user){
             $connexion = $this->connect();
+
             if($user->niveau === '3' ){
                 $user->verifStatus = true;
                 $updateReq= $connexion->prepare("UPDATE etud3a SET verif_token = :verif_token WHERE email= :email");
                 $updateReq->bindValue(':email',$user->email , PDO::PARAM_STR);
                 $updateReq->bindValue(':verif_token',$user->verifStatus , PDO::PARAM_BOOL);
                 if($updateReq->execute()){
-                    echo " Data updated in etud3a";
+                    echo "<script> console.log('Data updated in etud3a'); </script>";
                 }
                 else {
-                    echo "Something is wrong with the extration of the data";
+                    echo "<script>console.log(' Something is wrong with the extration of the data'); </script>";
                 }
             }
+
             if($user->niveau === '4'){
                 $updateReq= $connexion->prepare("UPDATE etud4a SET verif_token = :verif_token WHERE email= :email");
                 $updateReq->bindValue(':email',$user->email , PDO::PARAM_STR);
                 $updateReq->bindValue(':verif_token',$user->verifStatus , PDO::PARAM_BOOL);
                 if($updateReq->execute()){
-                    echo " Data updated in etud4a";
+                    echo "<script> console.log('Data updated in etud4a'); </script>";
                 }
                 else {
-                    echo "Something is wrong with the extration of the data";
+                    echo "<script> console.log('Something is wrong with the extration of the data'); </script>";
                 }
             }
+
             if($user->niveau === '3 et 4'){
                 $updateReq= $connexion->prepare("UPDATE etud4a , etud3a SET etud3a.verif_token = :verif_token , etud4a.verif_token = :verif_token WHERE etud3a.email= :email AND etud4a.email= :email");
                 $updateReq->bindValue(':email',$user->email , PDO::PARAM_STR);
                 $updateReq->bindValue(':verif_token',$user->verifStatus , PDO::PARAM_BOOL);
                 if($updateReq->execute()){
-                    echo " Data updated in etud4a";
+                    echo "<script> console.log(' Data updated in etud4a '); </script>";
                 }
                 else {
-                    echo "Something is wrong with the extration of the data";
+                    echo "<script> console.log( 'Something is wrong with the extration of the data '); </script>";
                 }
             }
             
-          
         }
         
         function updateTableData($table , $user , $previousLogin){   
@@ -232,27 +259,37 @@
             $stmt->bindParam(':verifStatus', $verificatinStatus);
 
             if ($stmt->execute()) {
-                echo "Updated data in etud3a";
+                echo "<script>console.log('Updated data in $table');</script>";
             } else {
-                print_r($stmt->errorInfo());
+                echo "<script>". print_r($stmt->errorInfo()) ."</script>";
+               
             }
         }
 
         function updateData($user , $previousLogin) {
             $connexion = $this->connect();
             $sameToken = $this->getToken($user);
+
             if ($user->niveau === "3") {
                 $userController = new userController($user , $this->db);
                 $userController->updateUserInfo($user);
                 $updatedLevel = $user->niveau;
+                $updatedDiplome = $user->diplome;
+            
                 if($updatedLevel  === "3"){
                     $this->updateTableData('etud3a', $user , $previousLogin);
                 } else if ($updatedLevel  === "4"){
                     $this->insertUpdatedData($user,'etud4a' , $sameToken);
                     $user->deleteAccount($previousLogin , 'etud3a');
                 } else if ($updatedLevel  === '3 et 4'){
-                    $this->insertUpdatedData($user,'etud4a', $sameToken);
-                    $this->updateTableData('etud3a', $user , $previousLogin) ;
+                    if($user->diplome === 'Bac+2') {
+                        $this->insertUpdatedData($user,'etud4a', $sameToken);
+                        $this->updateTableData('etud3a', $user , $previousLogin) ;
+                    }
+                    else  if($updatedDiplome === 'Bac+3') {
+                        echo "<script>console.log('Un candidat titulaire d’un Bac+3 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ')</script>";
+                        echo "<script>alert('Un candidat titulaire d’un Bac+3 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ');</script>";
+                    }
                 } else {
                     echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
                 }
@@ -262,14 +299,21 @@
             if ($user->niveau === "4") {
                 $userController = new userController($user , $this->db);
                 $userController->updateUserInfo($user);
-                if($user->niveau === "4"){
+                $updatedDiplome = $user->diplome ;
+                $updatedLevel = $user->niveau;
+                if($updatedLevel === "4"){
                     $this->updateTableData('etud4a', $user , $previousLogin);
-                } else if ($user->niveau === "3"){
+                } else if ($updatedLevel === "3"){
                     $this->insertUpdatedData($user, 'etud3a', $sameToken);
                     $user->deleteAccount($previousLogin , 'etud4a');
-                } else if ($user->niveau === '3 et 4'){
-                    $this->updateTableData('etud4a', $user , $previousLogin);
-                    $this->insertUpdatedData($user, 'etud3a', $sameToken);
+                } else if ($updatedLevel === '3 et 4'){
+                    if ($updatedDiplome === 'Bac+2'){
+                        $this->updateTableData('etud4a', $user , $previousLogin);
+                        $this->insertUpdatedData($user, 'etud3a', $sameToken);
+                    } else  if($updatedDiplome === 'Bac+3') {
+                        echo "<script>console.log('Un candidat titulaire d’un Bac+3 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ')</script>";
+                        echo "<script>alert('Un candidat titulaire d’un Bac+3 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ');</script>";
+                    }
                 } else {
                     echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
                 }
@@ -278,15 +322,22 @@
             if ($user->niveau === "3 et 4") {
                 $userController = new userController($user , $this->db);
                 $userController->updateUserInfo($user);
-                if($user->niveau === "4"){
+                $updatedDiplome = $user->diplome;
+                $updatedLevel = $user->niveau;
+                if($updatedLevel === "4"){
                     $this->updateTableData('etud4a', $user ,  $previousLogin);
                     $user->deleteAccount($previousLogin , 'etud3a');
-                } else if ($user->niveau === "3"){
+                } else if ($updatedLevel === "3"){
                     $this->updateTableData('etud3a', $user ,  $previousLogin);
                     $user->deleteAccount($previousLogin , 'etud4a');
-                } else if ($user->niveau === '3 et 4'){
+                } else if ($updatedLevel === '3 et 4'){
+                    if($updatedDiplome === 'Bac+2'){
                     $this->updateTableData('etud4a', $user ,  $previousLogin);
                     $this->updateTableData('etud3a' , $user ,  $previousLogin);
+                    } else if($updatedDiplome === 'Bac+3'){
+                        echo "<script>console.log('Un candidat titulaire d’un Bac+3 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ')</script>";
+                        echo "<script>alert('Un candidat titulaire d’un Bac+3 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ');</script>";;
+                    }
                 } else {
                     echo '<script>alert("Il y\'a eu une erreur avec la mise a jour des informations!");</script>';
                 }
@@ -297,70 +348,12 @@
             $connexion = $this->connect();
             $query="DELETE FROM $table WHERE log = :login";
             $stmt = $connexion->prepare($query);
-            if($stmt->execute(['login' => $previousLogin])){echo "done";};
+            if($stmt->execute(['login' => $previousLogin])){
+                echo "<script> console.log('User Account deleted'); </script>";
+            };
         }
 
-        /*
-            public static function getAllUsers($connexion){
-                $htmlCandidatsLists = '
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>liste des inscriptions</title>
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-                </head>
-                <body>
-                    <div class="container">
-                        <center><h3><b>Liste des inscriptions</b></h3></center>
-                        <table class="table table-hover">
-                        <tr>  
-                            <th >nom</th>   
-                            <th >prenom</th>   
-                            <th >email</th>   
-                            <th >naissance</th>   
-                            <th >diplome</th>   
-                            <th >niveau</th>   
-                            <th >etablissement</th>   
-                            <th >photo</th>   
-                            <th >cv</th>
-                        </tr>
-                    ';
-                $query = "SELECT * FROM etud3a UNION SELECT * FROM etud4a";
-                $data = $connexion->query($query);
-                $rows = $data->fetchAll(PDO::FETCH_ASSOC);
-                foreach($rows as $row){ 
-                $htmlCandidatsLists .=  "
-                        <tr> 
-                            <td >{$row['nom']} </td>   
-                            <td  >{$row['prenom']}</td>   
-                            <td >{$row['email']}</td>   
-                            <td >{$row['naissance']}</td>   
-                            <td >{$row['diplome']}</td>   
-                            <td  >{$row['niveau']}</td>   
-                            <td >{$row['etablissement']}</td>   
-                            <td ><img src='{$row['photo']}' style='width: 100px; height: auto;'></td>   
-                            <td ><a href='{$row['cv']}' download> CV</a></td>
-                        </tr>
-                        
-                        ";
-                } 
-                $htmlCandidatsLists .= '
-                </table>
-                <br>
-                <br>
-                <br>
-
-                <a href="../controller/userActions.php?action=logout">se deconnecter</a>
-                </div>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-                </body>
-                </html>
-                ';
-                return $htmlCandidatsLists;
-
-            }
-        */
+       
 
     }
     

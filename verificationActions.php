@@ -22,13 +22,10 @@
               $authController->verifyAccount();
             
           }  else {
-            echo "user session not working";
-            echo'<pre>';
-            print_r($_SESSION);
-            echo'</pre>';
+            echo " <script> console.log('Verification de compte : la session de user ne marche pas'); </script>";
           }
       } else {
-              echo "verify data not submitted";
+            echo "<script> console.log('Verification de compte : erreur post data pas transmis !'); <script>";
       }
   }
 
@@ -55,7 +52,7 @@
           echo '<script>alert("Message envoye!");</script>';
           return 1;
       } catch (Exception $e) {
-          echo "Message pas envoyee . Error: {$mail->ErrorInfo}";
+          echo "<script> console.log('Message pas envoyee . Error: {$mail->ErrorInfo}'); </script>";
           return 0;
       }
   }

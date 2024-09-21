@@ -1,13 +1,4 @@
-<?php 
-     session_start();
-     if($_SESSION['userType'] === 'etud'){
-         header('Location:./recap.php');
-     }
-     else if(($_SESSION['userType'] === 'admin')){
-         header('Location:./administration.php');
-     }
-?>
-<html>
+\<html>
     <head>
     <link rel="stylesheet" href="../styles/StylePage.css">
     </head>
