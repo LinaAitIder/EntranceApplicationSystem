@@ -88,15 +88,19 @@
 
                     </tr>
                     <tr>
-                        <td> <input type="submit" name="signUp" value="S'inscrire"></td>
+                        <td> <input type="submit" name="signUp" value="S'inscrire" class="js-dblbtnClick"></td>
                     </tr>
                     <tr>
                         <td class="Link-align"> <a href="./authentification.php" class="Link">S'authentifier</a></td>
                     </tr>
                 </table>
             </form>
-      
     </div>
-
+<script>
+    let btnClicked=document.querySelector('.js-dblbtnClick');
+    btnClicked.removeEventListener('ondblclick',()=>{
+            console.log('loading...')
+    });
+</script>
 </body>
 </html>

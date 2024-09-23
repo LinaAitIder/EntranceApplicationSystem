@@ -79,16 +79,19 @@
      // var_dump($_POST);
       $user = unserialize($_SESSION['user']);
       $userLogin = $user->log;
-      // echo "avant la modification de Db ".$user->niveau ;
+
+      echo "<script>console.log('avant la modification de Db .$user->niveau');</script>" ;
       
       $db = new Database;
       if (isset($_POST['modifier'])) {
         try { 
+        
          $db->updateData($user , $userLogin);
         } catch(Exception $error){
           echo 'Error : '. $error->getMessage();
         };
-       
+        
+        echo "<script>console.log('apres la modification de Db .$user->niveau');</script>" ;
         // ECHO  "/n apres la modification de Db " . $user->niveau ;
 
       $niveau = nameLevel($user->niveau);

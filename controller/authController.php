@@ -18,6 +18,9 @@
       if($result){
         $this->user->createUser($result);
         $_SESSION['user'] = serialize($this->user);
+        echo $result['log'];
+        echo $result['mdp'];
+
    
         if (password_verify($pass, $result['mdp'])) {
             $_SESSION['userType'] = 'etud';

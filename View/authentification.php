@@ -51,7 +51,11 @@
             </table>
         </form>
     </div>
-    <div id="notifError"></div>
+    <div class="d-flex align-items center justify-content-center">
+        <div ></div>
+        <div class="notifError"></div>
+        <div></div>
+    </div>
 </body>
 <script src="../scripts/functions.js"></script>
 <script>
@@ -61,7 +65,7 @@
         message('Vous n\'etes pas inscrit!, Veuillez verifier vos donnees','notifError');
     }
     if(error === 'wrong_password'){
-        message('Veuillez verifier vos donnees','notifErrror');
+        message('Veuillez verifier vos donnees','notifError');
     }
 </script>
 </html>
