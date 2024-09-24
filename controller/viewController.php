@@ -42,7 +42,7 @@
                             <img src="'.$user['photo'] . '" alt="Photo" style="width: 150px; height: auto;" />
                         </td>   
                         <td>
-                            <a href="' . $user['cv'] . '" download>CV</a>
+                            <a href="'.$user['cv'].'" download>CV</a>
                         </td>
                     </tr>
             ';
@@ -125,6 +125,7 @@
             <body>
                 <div class="container">
                     <h2>Informations de Candidature</h2>
+                     <div class="info"><strong>Identifiant :</strong> ' . $userData->id . '</div>
                     <div class="info"><strong>Nom :</strong> ' . $userData->nom . '</div>
                     <div class="info"><strong>Prénom :</strong> ' . $userData->prenom . '</div>
                     <div class="info"><strong>Date de naissance :</strong> ' . $userData->naissance . '</div>

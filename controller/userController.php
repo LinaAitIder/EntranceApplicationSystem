@@ -22,12 +22,12 @@
           echo "<script>console.log('Cet Email deja Existe!');</script>";
 
           echo "<script>alert('Cet Email deja Existe!');</script>";
-          header('Refresh:1; url=./View/authentification.php');
+          header('Refresh:0.5; url=./View/authentification.php');
           exit();
         } else if($logExists){
           echo "<script>console.log('Ce login est deja utilise!');</script>";
           echo "<script>alert('Ce login deja Existe!');</script>";
-          header('Refresh:1; url=./View/authentification.php');
+          header('Refresh:0.5; url=./View/authentification.php');
           exit();
         }} else {
         $this->user->token = rand(0000,9999);
@@ -67,7 +67,7 @@
               } 
             } else if ($this->user->diplome === 'Bac+2'){
               echo "<script>alert('Un etudiant bac+2 ne peut pas postuler pour la 4eme annee');</script>";
-              header('Refresh:1;url=View/authentification.php');
+              header('Refresh:0.5;url=View/authentification.php');
             }
           }else if($this->user->niveau === '3 et 4'){
             if($this->user->diplome === 'Bac+3'){
@@ -102,9 +102,9 @@
       $this->user->naissance = $_POST['naissance'];
       $this->user->diplome = $_POST['diplome'];
       $this->user->etab = $_POST['etab'];
-      
-      
-      $niveau = verifyLevel($_POST['niveau3'] , $_POST['niveau4']);  
+      $niveau3 = isset($_POST['niveau3']) ? $_POST['niveau3'] : null;  
+      $niveau4= isset($_POST['niveau4']) ? $_POST['niveau4'] : null;  
+      $niveau = verifyLevel($niveau3 , $niveau4);  
       $this->user->niveau = $niveau;
 
       $this->user->verifStatus = true;

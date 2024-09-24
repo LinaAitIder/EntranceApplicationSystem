@@ -7,6 +7,7 @@
   require 'pdf.php';
 
   $action = $_GET['action'];
+  
 
   function CreatefpdfToken($token){
       $pdf = new PDF;
@@ -49,7 +50,7 @@
       $pdf->Image($photo,10,110,65);
     
       // Nom du fichier PDF généré
-      $filename = 'Reçu de Condidature' . date('Y-m-d_H-i-s') . '.pdf';
+      $filename = 'Reçu de Condidature' .$data->nom.' '.$data->prenom  . '.pdf';
     
     
       $pdf->Output();
