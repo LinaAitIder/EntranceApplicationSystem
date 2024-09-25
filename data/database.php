@@ -324,11 +324,7 @@
                         $userController->updateUserInfo();
                         $this->insertUpdatedData($user, 'etud3a', $sameToken);
                         $user->deleteAccount($previousLogin , '4');
-                    } else {
-                        $_SESSION['user'] = serialize($user);
-                        echo "<script>console.log('Un candidat titulaire d’un Bac+2 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ')</script>";
-                        echo "<script>alert('Un candidat titulaire d’un Bac+2 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ');</script>";
-                    }
+                    } 
                    
                 } else if ($updatedLevel === '3 et 4'){
                     if ($updatedDiplome === 'Bac+3'){
@@ -359,10 +355,6 @@
                         $userController->updateUserInfo();
                         $this->updateTableData('etud3a', $user ,  $previousLogin);
                         $user->deleteAccount($previousLogin , '4');
-                    } else {
-                        $_SESSION['user'] = serialize($user);
-                        echo "<script>console.log('Un candidat titulaire d’un Bac+2 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ')</script>";
-                        echo "<script>alert('Un candidat titulaire d’un Bac+2 ne peut pas présenter sa candidature en 3ème et 4ème année en même temps. ');</script>";
                     } 
                 } else if ($updatedLevel === '3 et 4'){
                     if($updatedDiplome === 'Bac+3'){

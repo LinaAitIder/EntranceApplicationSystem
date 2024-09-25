@@ -117,30 +117,6 @@
       
     }
 
-    function cloneUser($oldUser){
-       //Update the user object information
-       $this->user->nom = $oldUser->nom;
-       $this->user->prenom =$oldUser->prenom;
-       $this->user->log  = $oldUser->log;
-       $this->user->email = $oldUser->email;
-       $this->user->mdp = $oldUser->mdp;
-       $this->user->naissance = $oldUser->naissance;
-       $this->user->diplome = $oldUser->diplome;
-       $this->user->etab= $oldUser->etab;
-       
-       
-       $niveau = verifyLevel($_POST['niveau3'] , $_POST['niveau4']);  
-       $this->user->niveau = $niveau;
- 
-       $this->user->verifStatus = true;
- 
-       // Uploading Files
-       uploadFiles($_FILES['photo'], $_FILES['cv'] , $this->user);
-      
-       // SERIALIZE THE this->user OBJECT IN THE SESSION
-       $_SESSION['user'] = serialize($this->user);
-      return $this->user;
-    }
 
    
   }

@@ -50,7 +50,7 @@
       $pdf->Image($photo,10,110,65);
     
       // Nom du fichier PDF généré
-      $filename = 'Reçu de Condidature' .$data->nom.' '.$data->prenom  . '.pdf';
+      $filename = 'Reçu de Condidature_' . strtoupper($data->nom).' '. strtoupper($data->prenom)  . '.pdf';
     
     
       $pdf->Output();
@@ -58,7 +58,6 @@
     } else {
       echo "<script>console.log('Creation de pdf Recap : Y'a eu un problem ave la session user');</script>";
     }
-    
   }
 
   if($action === 'generateRecap'){
