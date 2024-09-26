@@ -1,0 +1,67 @@
+html {
+  width:100% !important;
+  height:100% !important;
+}
+
+
+.childContainer{
+  position : absolute;
+  top : 50%;
+  left : 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgb(255, 155, 155);
+  padding:10px ;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+
+  
+}
+
+
+.search-input  {
+  width:100%;
+  border : 0px;
+  padding : 10px 15px;
+  background-color: rgb(0, 0, 0) !important;
+  color : white;
+}
+
+.search-input:focus {
+  outline :none;
+  caret-color: white;
+}
+
+.search-bar{
+  display: flex;
+  border-radius: 50px;
+  width : 50%;
+  background-color: rgb(0, 0, 0);
+  padding :10px;
+  margin : 20px auto;
+}
+
+.input-container{
+  flex:1;
+}
+.search-icon {
+  background-color: rgb(255, 218, 218); /* Sets a light pink background */
+  padding: 10px; /* Adds padding inside the icon */
+  border-radius: 20px; /* Rounds the icon container */
+}
+.icon-container{
+  display: flex; /* Sets up a flex container for the icon */
+  justify-content: center; /* Centers the icon horizontally */
+  align-items: center; /* Centers the icon vertically */
+  padding: 0 10px;
+}
+
+.icon-container:hover , .icon-container:active {
+  cursor :pointer;
+
+}
+
+
+.show {
+  opacity: 1 !important; /* Final opacity */
+  color: white;
+}

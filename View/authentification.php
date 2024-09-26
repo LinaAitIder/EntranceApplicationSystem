@@ -20,7 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/StylePage.css">
+    <link rel="stylesheet" href="../styles/StyleAuth.css">
     <title>Authentification</title>
 </head>
 <body>
@@ -51,13 +51,16 @@
             </table>
         </form>
     </div>
+
     <div class="d-flex align-items center justify-content-center">
         <div ></div>
         <div class="notifError"></div>
         <div></div>
     </div>
 </body>
+
 <script src="../scripts/functions.js"></script>
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get('error');

@@ -80,11 +80,15 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link rel="stylesheet" href="../styles/studentPortral.css">
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
                 <title>Recap</title>
             </head>
             <body>
-                <div class="container">
-                    <h2>Informations de Candidature</h2>
+                <div class="container-fluid container">
+                    <h2 class="text-center pt-4">Informations de Candidature</h2>
+                    <hr>
                     <div class="info"><strong>Identifiant :</strong> ' . $userInformations['id'] . '</div>
                     <div class="info"><strong>Nom :</strong> ' . $userInformations['nom'] . '</div>
                     <div class="info"><strong>Prénom :</strong> ' . $userInformations['prenom'] . '</div>
