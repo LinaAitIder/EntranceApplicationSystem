@@ -1,3 +1,38 @@
 body{
   color: white;
 }
+
+@mixin positionning($p , $t, $l){
+  position: $p;
+  top:$t;
+  left:$l;
+}
+
+@mixin button-style($bg-color , $bp , $tp , $lrp){
+  background-color: $bg-color;
+  border : none;
+  border-radius: 20px;
+  padding-left: $lrp;
+  padding-right: $lrp;
+  padding-top: $tp;
+  padding-bottom: $bp;
+}
+
+.button-container{
+  @include positionning(absolute , 80% , 0%);
+  display: flex;
+  flex-direction: row;
+
+}
+.btn-recap {
+  @include button-style(rgb(255, 165, 54), 20 ,40 , 20);
+  padding : 10px;
+  margin : 5px;
+}
+.first-btn-recap {
+  @include button-style(rgb(87, 199, 113), 20 ,40 , 20);
+  padding : 10px;
+  margin : 5px;
+  margin-left: 80px;
+}
+
