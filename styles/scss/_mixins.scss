@@ -1,0 +1,15 @@
+@mixin positionning($p , $t, $l){
+  position: $p;
+  top:$t;
+  left:$l;
+}
+
+@mixin button-style($bg-color , $bp , $tp , $lrp){
+  background-color: $bg-color;
+  border : none;
+  border-radius: 20px;
+  padding-left: $lrp;
+  padding-right: $lrp;
+  padding-top: $tp;
+  padding-bottom: $bp;
+}

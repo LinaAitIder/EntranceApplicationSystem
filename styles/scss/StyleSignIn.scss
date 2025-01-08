@@ -1,0 +1,40 @@
+@import 'mixins';
+
+html {
+  height : 100% !important;
+.container {
+  @include positionning(absolute , 0%, 50%);
+  transform: translate(-50%,0%);
+  display:flex;
+  flex-direction:column;
+  margin : 10px;
+  div {
+     display:flex;
+     padding : 5px;
+     justify-content: center;
+  }
+  input {
+    border-radius: 20px;
+    padding: 10px;
+    
+  }
+  .file-form{
+    display: flex;
+    flex-direction: column;
+  }
+  .checkbox-form{
+    @extend .file-form
+  }
+  .form-check{
+    justify-content: flex-start;
+    margin-left: 40px;
+    margin-top: 0px;
+    .form-check-input{
+      margin-right: 10px;
+    }
+  }
+  .btnSignIn{
+   @include button-style( rgb(175, 175, 255) , 15px , 15px , 15px);
+  }
+}
+}

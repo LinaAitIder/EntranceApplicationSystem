@@ -1,270 +1,44 @@
-html{
-    width:100%;
-    height:auto;
+html {
+  height: 100% !important;
 }
-body { 
-    background-color: rgba(47, 60, 126 , 0.8);
-    margin-top:0;
-    margin-left:0px;
-    margin-right:0px;
-    height : 100%;
-    width : 100%;
-    }
-
-.container{
-    display:flex;
-    height:50%;
-    width:50%;
-    flex-direction: column;   
-    align-items: center;
-    justify-content: center;;
-    transform: translate(50%,5%);
-    background-color: white;
-    padding:30 30 30 30 ;
-    border-radius: 20px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+html .container {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
-
-.form{
-    border:none;
-    border-radius:20px;
-    padding:10px 10px 10px 10px;
+html .container div {
+  display: flex;
+  padding: 5px;
+  justify-content: center;
 }
-
-input{
-    width: 100%;
-    box-sizing: border-box;
+html .container input {
+  border-radius: 20px;
+  padding: 10px;
 }
-
-input[type=checkbox]{
-    width: 50%;
-    box-sizing: border-box;
-    border : none;
-    box-shadow: none !important;
+html .container .file-form, html .container .checkbox-form {
+  display: flex;
+  flex-direction: column;
 }
-input[type=text], input[type=password], input[type=email], input[type=date], input[type=checkbox],.select-class {
-    padding: 10px 25px 10px 10px;
-    box-shadow: 1px 1px 1px rgba(128,128,128,0.4);
-    border-radius:10px;
-    background-color: rgba(211, 211, 211 , 0.3);
-    border: none;
-    margin-bottom:2px;
+html .container .form-check {
+  justify-content: flex-start;
+  margin-left: 40px;
+  margin-top: 0px;
+}
+html .container .form-check .form-check-input {
+  margin-right: 10px;
+}
+html .container .btnSignIn {
+  background-color: rgb(175, 175, 255);
+  border: none;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
-input[type=file]{
-    color:none;
-    border:none;
-    border-radius:8px;
-    margin: 10px 6px 6px 6px;
-    padding:10px 10px 10px 10px ;
-    background-color: #ffffff;
-    box-shadow:1px 1px 5px rgba(0, 0, 0, 0.6);
-    font-weight: bolder;
-    font-style:italic;
-    border:none;
-    color:rgb(0, 0, 0);
-    font-family: Arial;
-    cursor: pointer;
-
-}
-input[type=submit] {
-    color:none;
-    border:none;
-    border-radius:8px;
-    margin: 10px 6px 6px 6px;
-    padding:10px 10px 10px 10px ;
-    background-color: #2F3C7E;
-    box-shadow:1px 1px 5px rgba(0, 0, 0, 0.6);
-    font-weight: bolder;
-    font-style:italic;
-    border:none;
-    color:white;
-    font-family: Arial;
-    cursor: pointer;
-}
-
-input[type=submit]:hover{
-    background-color:rgb(47, 60, 126);
-    transition-duration:0.3s;
-    color:white;
-}
-
-input[type=submit]:active{
-    background-color:rgb(47, 60, 126);
-    transition-duration:0.3s;
-    color:white;
-    box-shadow:1px 1px 5px rgba(0, 0, 0, 0.8);
-}
-
-.select-class{
-    padding-right: 30px;
-}
-
-.Link-align{
-    text-align: center;
-}
-.Link {
-text-decoration: wavy;
-font-family: Arial;
-        color:black;
-        padding : 10px;
-        font-weight: bolder;
-        font-style:italic;
-        text-align: center;
-
-     
-}
-.Link:hover{
-   color:#2F3C7E;
-   opacity:0.7;
-   text-decoration: underline;
- 
-}
-
-input[type=text]:focus, input[type=password]:focus{
-    outline:NONE;
-    border: 1px solid black ;
-    box-sizing: border-box;
-
-}
-
-.message{
- opacity: 0;
- background-color: rgba(255, 103, 103, 0.37);
- border : 1 solid ;
- text-align: center;
-}
-
-
-@media(min-width:825px){
-    input[type=text], input[type=password], input[type=email], input[type=date], input[type=checkbox],.select-class {
-        padding: 10px 40px 10px 10px;
-        box-shadow: 1px 1px 1px rgba(128,128,128,0.4);
-        border-radius:10px;
-        border: none;
-        margin-bottom:2px;
-    }
-    
-    input[type=submit]{
-        padding:8 90 8 90;
-        border-radius: 4px;
-        margin-top:10px;
-        margin-bottom: 10px;
-        border:none;
-        font-family: 'Courier New', Courier, monospace;
-        cursor: pointer;
-    }
-    .Link-align{
-        text-align: center;
-        font-size: 15px;
-    }
-
-}
-
-@media(min-width:920px){
-    input[type=text], input[type=password] , input[type=email], input[type=date], input[type=checkbox],.select-class {
-        padding: 10px 115px 10px 10px;
-        box-shadow: 1px 1px 1px rgba(128,128,128,0.4);
-        border-radius:10px;
-        border: none;
-        margin-bottom:2px;
-    }
-    
-    input[type=submit]{
-        padding:8 120 8 120;
-        border-radius: 4px;
-        margin-top:10px;
-        margin-bottom: 10px;
-        border:none;
-        font-family: 'Courier New', Courier, monospace;
-        cursor: pointer;
-    }
-    .Link-align{
-        text-align: center;
-        font-size: 15px;
-    }
-
-}
-
-@media(max-width:400px){
-    input[type=text], input[type=password], input[type=email], input[type=date], input[type=checkbox],.select-class{
-        padding: 10px 0px 10px 10px;
-        box-shadow: 1px 1px 1px rgba(128,128,128,0.4);
-        border-radius:10px;
-        border: none;
-        margin-bottom:2px;
-    }
-    
-    input[type=submit]{
-        padding:8 70 8 70;
-        border-radius: 4px;
-        margin-top:10px;
-        margin-bottom: 10px;
-        border:none;
-        font-family: 'Courier New', Courier, monospace;
-        cursor: pointer;
-    }
-    .Link-align{
-        text-align: center;
-        font-size: 15px;
-    }
-
-    .container{
-        display:flex;
-        height:50%;
-        WIDTH:50%;
-        flex-direction: column;   
-        align-items: center;
-        transform: translate(50%,5%);
-        background-color: rgb(255, 255, 255);
-        padding:50 50 50 50 ;
-        border-radius: 20px;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-    }
-
-}
-
-@media(max-height:520px){
-    .container{
-        display:flex;
-        height:50%;
-        WIDTH:50%;
-        flex-direction: column;   
-        align-items: center;
-        transform: translate(50%,50%);
-        background-color: rgb(255, 255, 255);
-        padding: 15 15 60 15 ;
-        margin : 0 -15 0 -15;
-        border-radius: 20px;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-    }
-    input[type=text], input[type=password], input[type=email], input[type=date], input[type=checkbox],.select-class{
-        padding: 10px 0px 10px 10px;
-        box-shadow: 1px 1px 1px rgba(128,128,128,0.4);
-        border-radius:10px;
-        border: none;
-        margin-bottom:2px;
-    }
-    
-    input[type=submit]{
-        padding:8 70 8 70;
-        border-radius: 4px;
-        margin-top:10px;
-        margin-bottom: 10px;
-        border:none;
-        font-family: 'Courier New', Courier, monospace;
-        cursor: pointer;
-    }
-    .Link-align{
-        text-align: center;
-        font-size: 15px;
-    }
-
-    input{
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-
-}
-
+/*# sourceMappingURL=StyleSignIn.css.map */
