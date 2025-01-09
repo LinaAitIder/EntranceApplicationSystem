@@ -5,7 +5,7 @@
 }
 
 @mixin button-style($bg-color , $bp , $tp , $lrp){
-  background-color: $bg-color;
+  background-color: $bg-color !important;
   border : none;
   border-radius: 20px;
   padding-left: $lrp;

@@ -1,44 +1,82 @@
 html {
   height: 100% !important;
 }
-html .container {
+html body {
+  background-color: rgba(47, 60, 126, 0.8) !important;
+  font-family: Arial;
+}
+html body .container {
   position: absolute;
   top: 0%;
   left: 50%;
+  background-color: white;
+  padding: 15 15 15 15;
   transform: translate(-50%, 0%);
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   margin: 10px;
 }
-html .container div {
+html body .container div {
   display: flex;
-  padding: 5px;
+  padding: 2px;
   justify-content: center;
+  margin: 0px;
 }
-html .container input {
-  border-radius: 20px;
+html body .container input, html body .container select {
+  background-color: rgba(211, 211, 211, 0.3);
+  padding: 10px 25px 10px 10px;
+  box-shadow: 1px 1px 1px rgba(128, 128, 128, 0.4);
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 2px;
+}
+html body .container input::placeholder {
   padding: 10px;
+  padding-left: 0%;
+  font-size: 20px;
+  font-family: Arial;
 }
-html .container .file-form, html .container .checkbox-form {
+html body .container .file-form, html body .container .checkbox-form {
   display: flex;
   flex-direction: column;
 }
-html .container .form-check {
+html body .container .form-check {
   justify-content: flex-start;
   margin-left: 40px;
   margin-top: 0px;
 }
-html .container .form-check .form-check-input {
+html body .container .form-check .form-check-input {
   margin-right: 10px;
 }
-html .container .btnSignIn {
-  background-color: rgb(175, 175, 255);
+html body .container .btnSignIn {
+  background-color: rgb(47, 60, 126);
   border: none;
   border-radius: 20px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px !important;
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 20px;
+}
+html body .container .Link {
+  color: black;
+  font-style: italic;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+html body .container .Link:hover {
+  color: rgba(47, 60, 126, 0.8);
+  font-style: italic;
+  font-size: small;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=StyleSignIn.css.map */

@@ -104,7 +104,7 @@
                 </div>
                 <br>
                 <br>           
-                <div class="button-container">
+                <div class="button-container ">
                     <button type="button" onclick="window.location.href = \'./accountUpdating.php\';" class="first-btn-recap" >Modifier</button> 
                     <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';" class="btn-recap">Se déconnecter</button>
                     <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'" class="btn-recap">Supprimer le compte</button>

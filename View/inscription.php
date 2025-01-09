@@ -14,14 +14,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/css/StyleSignIn.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <title>Inscription</title>
 </head>
 <body>
-        <div class="container container-sm ">
-            <form method="post" action="../userActions.php?action=signIn" enctype="multipart/form-data" class="form row">
-                    <h5 style="font-family: arial;  font-weight:bold; text-align:center; color:black; margin:20px; ">Admission au concours d'accès:</h5>
+        <div class="container container-sm">
+            <form method="post" action="../userActions.php?action=signIn" enctype="multipart/form-data" class="form row  container-md p-5 ">
+                    <h5 style="font-family: arial;font-size: 20px; font-weight:bold; text-align:center; color:black; margin-bottom:30px; ">Admission au concours d'accès:</h5>
                     <div>
                         <input type="text" name="nom"  id="nom" placeholder="Nom" class="form-control" required>
                     </div>

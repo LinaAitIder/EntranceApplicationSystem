@@ -26,7 +26,7 @@
     require '../data/user.php';
     require '../utils/functions.php';
     $pdf = new PDF;
-    $pdf->headerTitle = 'Information de Condidature :';
+    $pdf->headerTitle = 'Information de Candidature :';
     if(isset($_SESSION['user'])){
       $data = unserialize($_SESSION['user']);
       $pdf->AddPage();
@@ -36,12 +36,12 @@
       $niveau = nameLevel($data->niveau);
     
       // Informations 
-      $pdf->SetFont('Times', '', 18);
+      $pdf->SetFont('Times', '', 14);
       // $pdf->Cell(0, 10, 'Identifiant : ' . $data->id, 0, 1);
       $pdf->Cell(0, 10, 'Nom : ' . $data->nom, 0, 1);
-      $pdf->Cell(0, 10, 'Prénom : ' . $data->prenom, 0, 1);
+      $pdf->Cell(0, 10, 'Prenom : ' . $data->prenom, 0, 1);
       $pdf->Cell(0, 10, 'Date de naissance : ' . $data->naissance, 0, 1);
-      $pdf->Cell(0, 10, 'Diplôme : ' . $data->diplome , 0, 1);
+      $pdf->Cell(0, 10, 'Diplome : ' . $data->diplome , 0, 1);
       $pdf->Cell(0, 10, 'niveau : ' .$niveau , 0, 1);
     
       //level required
