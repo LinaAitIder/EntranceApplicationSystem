@@ -3,7 +3,7 @@
 body {
   color: white;
   .button-container {
-    @include positionning(absolute , 80% , 8%);
+    @include positionning(absolute , 80% , 6%);
     display: flex;
     flex-direction: row;
     margin: 10px;

@@ -105,10 +105,10 @@
                 <br>
                 <br>           
                 <div class="button-container">
-                    <button type="button" onclick="window.location.href = \'./accountUpdating.php\';" class="btn-recap" >Modifier</button> 
-                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';" class="btn-recap">Se déconnecter</button>
-                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'" class="btn-recap">Supprimer le compte</button>
-                    <button type="button" onclick="window.location.href = \'../utils/pdfGenerator.php?action=generateRecap\';" class="btn-recap">Obtenir votre reçu PDF</button>
+                    <button type="button" onclick="window.location.href = \'./accountUpdating.php\';" class="btn-recap btn" >Modifier</button> 
+                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';" class="btn-recap btn ">Se déconnecter</button>
+                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'" class="btn-recap btn">Supprimer le compte</button>
+                    <button type="button" onclick="window.location.href = \'../utils/pdfGenerator.php?action=generateRecap\';" class="btn-recap btn">Obtenir votre reçu PDF</button>
                 </div>
                 
                 <script src="../scripts/functions.js"></script>

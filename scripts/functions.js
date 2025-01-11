@@ -6,7 +6,7 @@ function CodeVerifError(msgCodeVError){
 
 function message(msg,className) {
     let msgElement = document.querySelector(`.${className}`);
-    msgElement.innerHTML = `<div><p>${msg}</p></div>`;
+    msgElement.innerHTML = `<div style="position: absolute; top: 80%; padding: 10px; max-width: 90%; word-wrap: break-word;"><p>${msg}</p></div>`;
     msgElement.style.backgroundColor='rgba(255, 15, 11, 0.46)'  ;
 }
 
