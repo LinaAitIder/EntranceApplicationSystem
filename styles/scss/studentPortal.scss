@@ -16,10 +16,4 @@ body{
   padding : 10px;
   margin : 5px;
 }
-.first-btn-recap {
-  @include button-style(rgba(47, 60, 126 , 0.8), 20 ,40 , 20);
-  padding : 10px;
-  margin : 5px;
-  margin-left: 80px;
-}
 
