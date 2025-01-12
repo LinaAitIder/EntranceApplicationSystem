@@ -1,67 +1,80 @@
-html {
-  width:100% !important;
-  height:100% !important;
+body {
+  background-color: rgba(47, 60, 126, 0.8);
 }
-
-
-.childContainer{
-  position : absolute;
-  top : 50%;
-  left : 50%;
-  transform: translate(-50%,-50%);
-  background-color: rgb(255, 155, 155);
-  padding:10px ;
-  border-radius: 20px;
+body .container-searchbar {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  background-color: white;
+  padding-left: 5px;
+  padding-top: 15px;
+  padding-right: 5px;
+  padding-bottom: 15px;
+  width: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 50px !important;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-
-  
-}
-
-
-.search-input  {
-  width:100%;
-  border : 0px;
-  padding : 10px 15px;
-  background-color: rgb(0, 0, 0) !important;
-  color : white;
-}
-
-.search-input:focus {
-  outline :none;
-  caret-color: white;
-}
-
-.search-bar{
   display: flex;
-  border-radius: 50px;
-  width : 50%;
-  background-color: rgb(0, 0, 0);
-  padding :10px;
-  margin : 20px auto;
+  flex-direction: column;
+  margin: 10px;
+}
+body .container-searchbar .search-input {
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  padding-right: 50%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin: 15px;
+}
+body .container-searchbar .search-input:focus {
+  border: none;
+  outline: none;
+}
+body .container-searchbar .icon-container {
+  margin: 10px;
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .container-searchbar .icon-container :hover {
+  cursor: pointer;
+}
+body .container-searchbar .search-result {
+  padding: 20px;
+  position: relative;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  color: black;
+  z-index: 0;
+}
+body .container-searchbar .show {
+  opacity: 1 !important;
+  color: rgb(0, 0, 0) !important;
+}
+body .childContainer {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  background-color: white;
+  padding: 40px;
+  transform: translate(-50%, 0%);
+  border-radius: 20px !important;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+body .list-btn {
+  background-color: rgba(47, 60, 126, 0.8);
+  border: none;
+  border-radius: 25px !important;
+  padding-left: 20;
+  padding-right: 20;
+  padding-top: 40;
+  padding-bottom: 20;
 }
 
-.input-container{
-  flex:1;
-}
-.search-icon {
-  background-color: rgb(255, 218, 218); /* Sets a light pink background */
-  padding: 10px; /* Adds padding inside the icon */
-  border-radius: 20px; /* Rounds the icon container */
-}
-.icon-container{
-  display: flex; /* Sets up a flex container for the icon */
-  justify-content: center; /* Centers the icon horizontally */
-  align-items: center; /* Centers the icon vertically */
-  padding: 0 10px;
-}
-
-.icon-container:hover , .icon-container:active {
-  cursor :pointer;
-
-}
-
-
-.show {
-  opacity: 1 !important; /* Final opacity */
-  color: white;
-}
+/*# sourceMappingURL=homeAdminPageStyle.css.map */

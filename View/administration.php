@@ -22,7 +22,7 @@
 <body>
 
 <body>
-    <div class="container position-relative p-4 m-4 ">
+    <div class="container-searchbar">
         <div class= "search-bar d-flex  align-items-center mb-0">
             <div class="input-container flex-grow-1 ">
                 <input type="text" name="searchKey" class="search-input js-search-input " placeholder="Search...">
@@ -31,11 +31,10 @@
                 <i class="fa fa-search search-icon" onclick="searchEnter()"></i>
             </div>
         </div>
-        <div class="search-result js-search-result container position-relative  mt-1 pt-4 text-light rounded bg-dark opacity-0 ">
-            
-        </div>
+        <div class="search-result js-search-result container rounded  opacity-0 ">
     </div>
-   
+    </div>
+    
 
     <div class="childContainer">
         <button type="button" class="btn btn-danger" onclick="window.location.href='../adminActions.php?action=lister';">Lister tous les Condidats</button>
@@ -55,7 +54,7 @@
         }
     
        $(document).ready(()=>{
-        const resultElement = $(".search-result.js-search-result");
+        const resultElement = $(".js-search-result");
         $(".js-search-input").on("keyup", ()=>{
             let dataSearch = $('.js-search-input').val();
             if (dataSearch.trim() === '') {
