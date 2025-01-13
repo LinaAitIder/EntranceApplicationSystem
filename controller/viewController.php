@@ -4,45 +4,45 @@
 
     public static function renderUserList($users){
         $htmlCandidatsLists = '
-        <html>
+        <html lang="fr">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>liste des inscriptions</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+             <link rel="stylesheet" href="./styles/css/AdminStylesheet.css">
         </head>
         <body>
-            <div class="container">
-                <center><h3><b>Liste des inscriptions</b></h3></center>
-                <table class="table table-hover">
-                <tr>  
-                    <th >nom</th>   
-                    <th >prenom</th>   
-                    <th >email</th>   
-                    <th >naissance</th>   
-                    <th >diplome</th>   
-                    <th >niveau</th>   
-                    <th >etablissement</th>   
-                    <th >photo</th>   
-                    <th >cv</th>
+         <center><h3 class="pb-3 pt-3 text-dark"><b>Liste des inscriptions</b></h3></center>
+                <table class="table-hover table-sm container-sm table-bordered table-dark text-dark">
+                <tr class="text-dark">  
+                    <th >Nom</th>   
+                    <th >Prénom</th>   
+                    <th >Email</th>   
+                    <th >Naissance</th>   
+                    <th >Diplome</th>   
+                    <th >Niveau</th>   
+                    <th >Établissement</th>   
+                    <th >Photo</th>   
+                    <th >Cv</th>
                 </tr>
             ';
 
             foreach ($users as $user) { 
                 $htmlCandidatsLists .=  '
-                    <tr> 
-                        <td>'.$user['nom'].'</td>   
-                        <td>'.$user['prenom'].'</td>   
-                        <td>'.$user['email'].'</td>   
+                    <tr class="text-dark"> 
+                        <td class="text-break">'.$user['nom'].'</td>   
+                        <td class="text-break">'.$user['prenom'].'</td>   
+                        <td class="text-wrap text-break">'.$user['email'].'</td>   
                         <td>'.$user['naissance'].'</td>   
                         <td>'.$user['diplome'].'</td>   
                         <td>'.$user['niveau'].'</td>   
                         <td>'.$user['etablissement'].'</td>   
                         <td>
-                            <img src="'.$user['photo'] . '" alt="Photo" style="width: 150px; height: auto;" />
+                            <img src="'.$user['photo'] . '" alt="Photo" style="width: 80px; height: auto;" />
                         </td>   
-                        <td>
-                            <a href="'.$user['cv'].'" download>CV</a>
+                        <td >
+                            <a class="Link" href="'.$user['cv'].'" download>CV</a>
                         </td>
                     </tr>
             ';
@@ -52,9 +52,9 @@
         <br>
         <br>
         <br>
-
-        <a href="./adminActions.php?action=logout">se deconnecter</a>
-        </div>
+        <div class="d-flex justify-content-center">
+        <button onclick="window.location.href=\'./adminActions.php?action=logout\'" class="signOut-btn">Se déconnecter</button>
+        <div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         </body>
         </html>

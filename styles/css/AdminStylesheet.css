@@ -1,24 +1,31 @@
-body {
-  background-color: rgba(47, 60, 126, 0.8);
+body a {
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  font-weight: bolder;
+  padding: 5px;
+  font-style: italic;
+  text-align: center;
+  font-size: 15px;
+}
+body a:hover {
+  color: rgba(47, 60, 126, 0.8);
+  text-decoration: underline;
+  font-weight: bolder;
 }
 body .container-searchbar {
   position: absolute;
   top: 10%;
   left: 50%;
+  width: 60%;
   background-color: white;
-  padding-left: 5px;
-  padding-top: 15px;
-  padding-right: 5px;
-  padding-bottom: 15px;
-  width: 50%;
   transform: translate(-50%, 0%);
   border-radius: 50px !important;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   margin: 10px;
 }
 body .container-searchbar .search-input {
+  background-color: transparent;
   border-radius: 20px;
   border: none;
   padding: 10px;
@@ -43,12 +50,13 @@ body .container-searchbar .icon-container :hover {
 }
 body .container-searchbar .search-result {
   padding: 20px;
-  position: relative;
-  top: 20%;
+  position: absolute;
+  top: 120%;
   left: 50%;
   transform: translate(-50%, 0%);
   color: black;
-  z-index: 0;
+  background-color: white;
+  z-index: 1;
 }
 body .container-searchbar .show {
   opacity: 1 !important;
@@ -56,7 +64,7 @@ body .container-searchbar .show {
 }
 body .childContainer {
   position: absolute;
-  top: 80%;
+  top: 70%;
   left: 50%;
   background-color: white;
   padding: 40px;
@@ -65,16 +73,48 @@ body .childContainer {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 10px;
 }
-body .list-btn {
-  background-color: rgba(47, 60, 126, 0.8);
+body .childContainer .list-btn {
+  background-color: rgb(47, 60, 126);
   border: none;
   border-radius: 25px !important;
   padding-left: 20;
   padding-right: 20;
   padding-top: 40;
   padding-bottom: 20;
+  color: white;
+}
+body .signOut-btn {
+  background-color: rgb(47, 60, 126);
+  border: none;
+  border-radius: 25px !important;
+  padding-left: 20;
+  padding-right: 20;
+  padding-top: 20;
+  padding-bottom: 20;
+  border-radius: 60px !important;
+  color: white;
+  font-weight: bold;
+}
+body .signOut-btn:hover {
+  background-color: rgb(47, 60, 126);
+  border: none;
+  border-radius: 25px !important;
+  padding-left: 60;
+  padding-right: 60;
+  padding-top: 20;
+  padding-bottom: 20;
+  color: rgb(255, 255, 255);
+  transition: ease-in;
+  border-radius: 60px !important;
+}
+body .Link {
+  color: dark;
+}
+body .Link:hover {
+  color: rgb(121, 120, 120);
 }
 
-/*# sourceMappingURL=homeAdminPageStyle.css.map */
+/*# sourceMappingURL=AdminStylesheet.css.map */

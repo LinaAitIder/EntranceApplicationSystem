@@ -103,15 +103,13 @@ input[type=submit]:active{
     text-align: center;
 }
 .Link {
-text-decoration: wavy;
-font-family: Arial;
-        color:black;
-        padding : 10px;
-        font-weight: bolder;
-        font-style:italic;
-        text-align: center;
-
-     
+    text-decoration: wavy;
+    font-family: Arial;
+    color:black;
+    padding : 10px;
+    font-weight: bolder;
+    font-style:italic;
+    text-align: center;
 }
 .Link:hover{
    color:#2F3C7E;

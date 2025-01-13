@@ -10,18 +10,18 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../styles/css/homeAdminPageStyle.css">
+    <link rel="stylesheet" href="../styles/css/AdminStylesheet.css">
     <title>AdminPanel</title>
 </head>
 <body>
 
-<body>
+<body style="background-color: rgba(47, 60, 126 , 0.8);">
     <div class="container-searchbar">
         <div class= "search-bar d-flex  align-items-center mb-0">
             <div class="input-container flex-grow-1 ">
@@ -37,10 +37,10 @@
     
 
     <div class="childContainer">
-        <button type="button" class="btn btn-danger" onclick="window.location.href='../adminActions.php?action=lister';">Lister tous les Condidats</button>
+        <button type="button" class="btn list-btn" onclick="window.location.href='../adminActions.php?action=lister';">Lister tous les Candidats</button>
         <div class="container row ">
             <div class="col"></div>
-            <div class="col-sm- text-center"><a href="../adminActions.php?action=logout">se deconnecter</a></div>
+            <div class="text-center pt-2 link"><a href="../adminActions.php?action=logout">Se déconnecter</a></div>
             <div class="col"></div>
         </div>
     </div>
