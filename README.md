@@ -1,7 +1,14 @@
-# System de Gestion des Concours
+# Système de Gestion des Concours
 Ce projet représente un simple site web créé dans le but d'améliorer mes compétences en PHP. À l'origine, l'idée du projet était un travail pratique proposé dans notre établissement académique, l'ENSA, conçu pour nous permettre de pratiquer ce langage de programmation. Cependant, j'ai choisi de corriger et d'améliorer ce devoir afin qu'il devienne une application complète et fonctionnelle. 
+
 ## Objet du projet
-Ce site web est concus pour gere les inscription au concours des ecoles , il fournit l;utilisateur l'abilite de s;iniscrire avec toute les information nevessaire , verifier son compte , lorsque le compte est verifie l'utilisateur se retrouve avec une page qui affiche ses information , l;utilisateur peut modifier ses informations , telecharger le recu de candidature , se deconnecter , et mm supprimer le compte  . Un admin peut voir la listes des candidata et chercher un candidat par son nom .
+Ce site web est conçu pour gérer les inscriptions au concours des écoles. Il offre aux utilisateurs la possibilité de s'inscrire en fournissant toutes les informations nécessaires et de vérifier leur compte. Une fois le compte vérifié, l'utilisateur accède à une page affichant ses informations. À partir de cette page, il peut :
+- Modifier ses informations,
+- Télécharger le reçu de candidature,
+- Se déconnecter,
+- Supprimer son compte.
+Le site gère également plusieurs contraintes, par exemple : un étudiant ayant un niveau Bac+2 ne peut pas postuler pour la 4ᵉ année, parmi d'autres règles spécifiques. De plus, un administrateur a la possibilité de rechercher les candidats par leur nom et de consulter la liste complète des candidats inscrits.
+
 ## Fonctionnalités Clés et Concepts Utilisés
 ### Authentification et gestion des utilisateurs:
   - Gestion des inscriptions (création de compte).
@@ -29,7 +36,7 @@ Ce site web est concus pour gere les inscription au concours des ecoles , il fou
 ### Interface utilisateur responsive :
 - Utilisation de JavaScript et AJAX pour des fonctionnalités interactives.
 - Mise à jour en temps réel des données affichées (par exemple, résultats de recherche, état de la candidature).
-## Languages Utilise 
+## Languages utilisé :
 - PHP
 - CSS
 - Bootstrap
@@ -37,5 +44,8 @@ Ce site web est concus pour gere les inscription au concours des ecoles , il fou
 - SASS
 - HTML
 - MySql
-## ShowCase Video :
+  
+## ShowCase Video 🔅 :
+# My Project
+[Watch the video](https://github.com/LinaAitIder/EntranceApplicationSystem/blob/uploads/Authentification.mp4?raw=true)
 
