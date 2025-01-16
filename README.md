@@ -46,5 +46,11 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - MySql
   
 ## ShowCase Video 🔅 :
-[Watch the Authentication Demo](https://raw.githubusercontent.com/LinaAitIder/EntranceApplicationSystem/uploads/Authentification.mp4)
+## TextifyApp
+
+Here is a demo of the application:
+
+[![Watch the video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://github.com/EntranceApplicationSystem/master/uploads/Authentification.mp4)
+
+
 
