@@ -46,6 +46,6 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - MySql
   
 ## ShowCase Video 🔅 :
-[Watch the Authentication Demo](https://linaaitider.github.io/EntranceApplicationSystem/uploads/Authentification.mp4)
+[![Watch the video](https://raw.githubusercontent.com/LinaAitIder/EntranceApplicationSystem/master/uploads/Authentification.mp4)]
 
 
