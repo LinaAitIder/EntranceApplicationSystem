@@ -47,5 +47,5 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
   
 ## ShowCase Video 🔅 :
 # My Project
-[Watch the video](https://github.com/LinaAitIder/EntranceApplicationSystem/uploads/Authentification.mp4?raw=true)
+[Watch the video](https://github.com/LinaAitIder/EntranceApplicationSystem/blob/uploads/Authentification.mp4?raw=true)
 
