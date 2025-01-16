@@ -166,13 +166,14 @@
         public function getUsersSearchResult($user){
             $connexion = $this->connect();
             $query = "
-            SELECT * FROM (
+            SELECT DISTINCT * FROM (
                 SELECT * FROM etud3a 
                 WHERE etud3a.nom LIKE :user 
                 UNION 
                 SELECT * FROM etud4a 
                 WHERE etud4a.nom LIKE :user
             ) AS combined_results
+            GROUP BY nom
             LIMIT 10
             ";
             $stmt = $connexion->prepare($query);
@@ -356,7 +357,11 @@
                         $userController->updateUserInfo();
                         $this->updateTableData('etud3a', $user ,  $previousLogin);
                         $user->deleteAccount($previousLogin , '4');
-                    } 
+                    } else {
+                        $userController->updateUserInfo();
+                        $this->updateTableData('etud3a', $user , $previousLogin);
+                        $user->deleteAccount($previousLogin , '4');
+                    }
                 } else if ($updatedLevel === '3 et 4'){
                     if($updatedDiplome === 'Bac+3'){
                         $userController->updateUserInfo();
