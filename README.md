@@ -45,9 +45,8 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - HTML
 - MySql
 
-  https://github.com/LinaAitIder/EntranceApplicationSystem/raw/master/assets/authentification.gif
 
 
-
-
+Showcase video:
+[TextifyApp-ShowcaseVideo.mp4](assets/authentification.gif)
 
