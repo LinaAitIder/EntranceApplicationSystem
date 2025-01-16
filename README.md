@@ -44,7 +44,9 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - SASS
 - HTML
 - MySql
-  
+
+  https://github.com/LinaAitIder/EntranceApplicationSystem/raw/master/assets/authentification.gif
+
 
 
 
