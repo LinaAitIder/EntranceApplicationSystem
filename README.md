@@ -45,10 +45,6 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - HTML
 - MySql
   
-## ShowCase Video 🔅 :
-# Entrance System Video Showcase
-
-[Watch the Entrance System Video](https://github.com/LinaAitIder/EntranceApplicationSystem/raw/master/assets/Authentification.mp4)
 
 
 
