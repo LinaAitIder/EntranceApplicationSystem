@@ -79,6 +79,7 @@
             (:nom,:prenom,:email,:naissance,:diplome,:niveau,:etablissement,:photo,:cv,:log, :mdp , :token , :verif_token)"
             );
             $user->verifStatus =1;
+            
             $insertReq->bindValue(':nom', $user->nom, PDO::PARAM_STR);
             $insertReq->bindValue(':prenom', $user->prenom, PDO::PARAM_STR);
             $insertReq->bindValue(':email', $user->email, PDO::PARAM_STR);
@@ -283,11 +284,11 @@
                     $userController->updateUserInfo();
                     $this->updateTableData('etud3a', $user , $previousLogin);
                 } else if ($updatedLevel  === "4"){
-                    if($user->diplome === 'Bac+3'){
+                    if($updatedDiplome=== 'Bac+3'){
                         $userController->updateUserInfo();
                         $this->insertUpdatedData($user,'etud4a' , $sameToken);
                         $user->deleteAccount($previousLogin , '3');
-                    } else if($user->diplome === 'Bac+2'){
+                    } else if($updatedDiplome === 'Bac+2'){
                         $_SESSION['user'] = serialize($user);
                         echo "<script>alert('Un etudiant Bac+2 ne peut pas postuler sa canditure en 4 eme annes');</script>";
                     }

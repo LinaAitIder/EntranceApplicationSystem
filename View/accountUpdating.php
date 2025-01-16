@@ -70,7 +70,7 @@
                                 <label for="anotherCheck" class="form-check-label"> 3 ème année </label> 
                         </div>
                     <div>
-                     <input type="submit" name="signUp" value="Confirmer" class=" btnSignIn">
+                     <input type="submit" name="modifier" value="Confirmer" class="btnSignIn">
                     </div>
                    
             </form>

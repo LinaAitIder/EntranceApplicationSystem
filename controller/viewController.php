@@ -76,7 +76,7 @@
     public static function renderRecap($userInformations , $niveau){
         $candidatInfo = '
             <!DOCTYPE html>
-            <html lang="en">
+            <html lang="fr">
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,7 +89,6 @@
                 <div class="container-fluid container">
                     <h2 class="text-center pt-4">Informations de Candidature</h2>
                     <hr>
-                    <div class="info"><strong>Identifiant :</strong> ' . $userInformations['id'] . '</div>
                     <div class="info"><strong>Nom :</strong> ' . $userInformations['nom'] . '</div>
                     <div class="info"><strong>Prénom :</strong> ' . $userInformations['prenom'] . '</div>
                     <div class="info"><strong>Date de naissance :</strong> ' . $userInformations['naissance'] . '</div>
@@ -120,16 +119,18 @@
     public static function updateRecap($userData , $niveau){
         $updatedCandidatInfo = '
             <!DOCTYPE html>
-            <html lang="en">
+            <html lang="fr">
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                 <link rel="stylesheet" href="./styles/css/studentPortal.css">
+                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
                 <title>Recap</title>
             </head>
             <body>
-                <div class="container">
-                    <h2>Informations de Candidature</h2>
-                     <div class="info"><strong>Identifiant :</strong> ' . $userData->id . '</div>
+                <div class="container container-fluid">
+                   <h2 class="text-center pt-4">Informations de Candidature</h2>
+                    <hr>
                     <div class="info"><strong>Nom :</strong> ' . $userData->nom . '</div>
                     <div class="info"><strong>Prénom :</strong> ' . $userData->prenom . '</div>
                     <div class="info"><strong>Date de naissance :</strong> ' . $userData->naissance . '</div>
@@ -145,10 +146,10 @@
                 <br>
                 <br>           
                 <div class="button-container">
-                    <button type="button" onclick="window.location.href = \'./View/accountUpdating.php\';">Modifier</button> 
-                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=logout \';">Se déconnecter</button>
-                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=deleteAccount \'">Supprimer le compte</button>
-                    <button type="button" onclick="window.location.href = \'./utils/pdfGenerator.php?action=generateRecap\';">Obtenir votre reçu PDF</button>
+                    <button type="button" onclick="window.location.href = \'./View/accountUpdating.php\';" class="btn-recap btn">Modifier</button> 
+                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=logout \';" class="btn-recap btn">Se déconnecter</button>
+                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=deleteAccount \'" class="btn-recap btn">Supprimer le compte</button>
+                    <button type="button" onclick="window.location.href = \'./utils/pdfGenerator.php?action=generateRecap\';" class="btn-recap btn">Obtenir votre reçu PDF</button>
                 </div>
                 
                 <script src="./scripts/functions.js"></script>

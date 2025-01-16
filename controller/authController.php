@@ -21,7 +21,9 @@
         echo $result['log'];
         echo $result['mdp'];
 
-   
+        //Forgot : if the user was verified then accept the auth else display a message and redirect to the verification pafe 
+        //This does not affect too much the functionality 
+        
         if (password_verify($pass, $result['mdp'])) {
             $_SESSION['userType'] = 'etud';
             header("Location:./View/recap.php?login=".$login);
