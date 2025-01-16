@@ -47,6 +47,5 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 
 
 
-Showcase video:
-[TextifyApp-ShowcaseVideo.mp4](assets/Authentification.gif)
-
+#Showcase video:
+https://github.com/user-attachments/assets/d5c73a0f-15aa-4144-ab88-5bbd259d1543
