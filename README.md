@@ -45,12 +45,7 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - HTML
 - MySql
   
-## ShowCase Video 🔅 :
-## TextifyApp
 
-Here is a demo of the application:
-
-[![Watch the video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://github.com/EntranceApplicationSystem/master/uploads/Authentification.mp4)
 
 
 
