@@ -104,10 +104,10 @@
                 <br>
                 <br>           
                 <div class="button-container">
-                    <button type="button" onclick="window.location.href = \'./accountUpdating.php\';" class="btn-recap btn" >Modifier</button> 
-                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';" class="btn-recap btn ">Se déconnecter</button>
-                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'" class="btn-recap btn">Supprimer le compte</button>
-                    <button type="button" onclick="window.location.href = \'../utils/pdfGenerator.php?action=generateRecap\';" class="btn-recap btn">Obtenir votre reçu PDF</button>
+                    <button type="button" onclick="window.location.href = \'./accountUpdating.php\';" class="btn-recap btn text-light" >Modifier</button> 
+                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=logout \';" class="btn-recap btn text-light">Se déconnecter</button>
+                    <button type="button" onclick="window.location.href =  \'../userActions.php?action=deleteAccount \'" class="btn-recap btn text-light">Supprimer le compte</button>
+                    <button type="button" onclick="window.location.href = \'../utils/pdfGenerator.php?action=generateRecap\';" class="btn-recap btn text-light">Obtenir votre reçu PDF</button>
                 </div>
                 
                 <script src="../scripts/functions.js"></script>
@@ -146,10 +146,10 @@
                 <br>
                 <br>           
                 <div class="button-container">
-                    <button type="button" onclick="window.location.href = \'./View/accountUpdating.php\';" class="btn-recap btn">Modifier</button> 
-                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=logout \';" class="btn-recap btn">Se déconnecter</button>
-                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=deleteAccount \'" class="btn-recap btn">Supprimer le compte</button>
-                    <button type="button" onclick="window.location.href = \'./utils/pdfGenerator.php?action=generateRecap\';" class="btn-recap btn">Obtenir votre reçu PDF</button>
+                    <button type="button" onclick="window.location.href = \'./View/accountUpdating.php\';" class="btn-recap btn text-light">Modifier</button> 
+                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=logout \';" class="btn-recap btn text-light">Se déconnecter</button>
+                    <button type="button" onclick="window.location.href =  \'./userActions.php?action=deleteAccount \'" class="btn-recap btn text-light">Supprimer le compte</button>
+                    <button type="button" onclick="window.location.href = \'./utils/pdfGenerator.php?action=generateRecap\';" class="btn-recap btn text-light">Obtenir votre reçu PDF</button>
                 </div>
                 
                 <script src="./scripts/functions.js"></script>
