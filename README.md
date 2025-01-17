@@ -44,8 +44,11 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - SASS
 - HTML
 - MySql
-  
 
 
 
+# Showcase video:
 
+https://github.com/user-attachments/assets/d5c73a0f-15aa-4144-ab88-5bbd259d1543
+
+https://github.com/user-attachments/assets/26b58806-33a4-4dba-8049-44fee7570ad6
