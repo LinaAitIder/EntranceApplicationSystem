@@ -45,11 +45,11 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - HTML
 - MySql
 
-
-
 # Showcase video:
 
 https://github.com/user-attachments/assets/4f653208-df43-442a-914d-ebae35834891
+
+https://github.com/user-attachments/assets/d0adb2d1-2f54-4bbf-acc0-d2f79a27909c
 
 
 
