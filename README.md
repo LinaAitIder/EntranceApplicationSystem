@@ -11,11 +11,11 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 
 ## Fonctionnalités Clés et Concepts Utilisés
 ### Authentification et gestion des utilisateurs:
-  - Gestion des inscriptions (création de compte).
+  - Création de compte.
   - Authentification des utilisateurs.
-  - Vérification des comptes via email ou autres moyens.
+  - Vérification des comptes via email .
 ### Session PHP :
-  - Utilisation des sesions pour gerer les connexions des utilisateurs
+  - Utilisation des sessions pour gerer les connexions des utilisateurs
   - Maintien de l'état de l'utilisateur pendant la navigation.
 ### Opérations CRUD : 
   - Création, modification, suppression et affichage des données.
