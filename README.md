@@ -7,15 +7,16 @@ Ce site web est conçu pour gérer les inscriptions au concours des écoles. Il 
 - Télécharger le reçu de candidature,
 - Se déconnecter,
 - Supprimer son compte.
+  
 Le site gère également plusieurs contraintes, par exemple : un étudiant ayant un niveau Bac+2 ne peut pas postuler pour la 4ᵉ année, parmi d'autres règles spécifiques. De plus, un administrateur a la possibilité de rechercher les candidats par leur nom et de consulter la liste complète des candidats inscrits.
 
 ## Fonctionnalités Clés et Concepts Utilisés
 ### Authentification et gestion des utilisateurs:
-  - Gestion des inscriptions (création de compte).
+  - Création de compte.
   - Authentification des utilisateurs.
-  - Vérification des comptes via email ou autres moyens.
+  - Vérification des comptes via email .
 ### Session PHP :
-  - Utilisation des sesions pour gerer les connexions des utilisateurs
+  - Utilisation des sessions pour gerer les connexions des utilisateurs
   - Maintien de l'état de l'utilisateur pendant la navigation.
 ### Opérations CRUD : 
   - Création, modification, suppression et affichage des données.
@@ -28,14 +29,14 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - Requêtes préparées pour éviter les vulnérabilités liées à l'injection SQL.
 -Conception et gestion des tables pour stocker les informations des utilisateurs et des candidatures.
 ### Téléchargement et gestion des fichiers
-- Téléchargement sécurisé des fichiers (par exemple, pièces justificatives).
+- Téléchargement des fichiers.
 - Génération de documents PDF pour les reçus de candidature.
 ### Contraintes :
-- Mise en place de règles spécifiques (par exemple, les restrictions pour postuler en fonction du niveau d'études).
+- Mise en place de règles spécifiques (les restrictions pour postuler en fonction du niveau d'études).
 - Gestion des erreurs et des exceptions pour assurer une expérience utilisateur fluide.
 ### Interface utilisateur responsive :
 - Utilisation de JavaScript et AJAX pour des fonctionnalités interactives.
-- Mise à jour en temps réel des données affichées (par exemple, résultats de recherche, état de la candidature).
+- Mise à jour en temps réel des données affichées (résultats de recherche).
 ## Languages utilisé :
 - PHP
 - CSS
@@ -47,8 +48,4 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 
 
 
-# Showcase video:
 
-https://github.com/user-attachments/assets/d5c73a0f-15aa-4144-ab88-5bbd259d1543
-
-https://github.com/user-attachments/assets/26b58806-33a4-4dba-8049-44fee7570ad6
