@@ -7,6 +7,7 @@ Ce site web est conçu pour gérer les inscriptions au concours des écoles. Il 
 - Télécharger le reçu de candidature,
 - Se déconnecter,
 - Supprimer son compte.
+  
 Le site gère également plusieurs contraintes, par exemple : un étudiant ayant un niveau Bac+2 ne peut pas postuler pour la 4ᵉ année, parmi d'autres règles spécifiques. De plus, un administrateur a la possibilité de rechercher les candidats par leur nom et de consulter la liste complète des candidats inscrits.
 
 ## Fonctionnalités Clés et Concepts Utilisés
@@ -28,14 +29,14 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - Requêtes préparées pour éviter les vulnérabilités liées à l'injection SQL.
 -Conception et gestion des tables pour stocker les informations des utilisateurs et des candidatures.
 ### Téléchargement et gestion des fichiers
-- Téléchargement sécurisé des fichiers (par exemple, pièces justificatives).
+- Téléchargement des fichiers.
 - Génération de documents PDF pour les reçus de candidature.
 ### Contraintes :
-- Mise en place de règles spécifiques (par exemple, les restrictions pour postuler en fonction du niveau d'études).
+- Mise en place de règles spécifiques (les restrictions pour postuler en fonction du niveau d'études).
 - Gestion des erreurs et des exceptions pour assurer une expérience utilisateur fluide.
 ### Interface utilisateur responsive :
 - Utilisation de JavaScript et AJAX pour des fonctionnalités interactives.
-- Mise à jour en temps réel des données affichées (par exemple, résultats de recherche, état de la candidature).
+- Mise à jour en temps réel des données affichées (résultats de recherche).
 ## Languages utilisé :
 - PHP
 - CSS
@@ -44,12 +45,6 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - SASS
 - HTML
 - MySql
-
-# Showcase video:
-
-https://github.com/user-attachments/assets/4f653208-df43-442a-914d-ebae35834891
-
-https://github.com/user-attachments/assets/d0adb2d1-2f54-4bbf-acc0-d2f79a27909c
 
 
 
