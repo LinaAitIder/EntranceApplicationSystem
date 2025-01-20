@@ -72,11 +72,6 @@ function uploadFiles($photo , $cv , $user){
   
       $uploadPathCv= $uploadDir . $cvName;
       $uploadPathPhoto= $uploadDir . $photoName;
-
-      //Moving Files Verifivation Path
-      // echo "</br> Attempting to move files </br>";
-      // echo "</br> cv temporary path : $cvTmpName , photo temporary path : $photoTmpName </br> ";
-      // echo "</br>Upload path Cv : $uploadPathCv , Upload path  :Photo $uploadPathPhoto</br>";
       
       if($cvError === UPLOAD_ERR_OK && $photoError === UPLOAD_ERR_OK){
         $uploadCOk = move_uploaded_file($cvTmpName,$uploadPathCv);

@@ -58,7 +58,7 @@
       } else {
           echo "<script src='errorMessage.js'></script>";
           echo "<script>CodeVerifError();</script>";
-          header("Location:./View/Verify_account.php?error=codeNotMatching");
+          header("Location:./View/accountVerification.php?error=codeNotMatching");
       }
      }
 
