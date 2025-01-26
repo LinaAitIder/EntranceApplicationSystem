@@ -27,7 +27,7 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 ### Base de données avec MySQLi :
 - Connexion sécurisée à une base de données MySQL.
 - Requêtes préparées pour éviter les vulnérabilités liées à l'injection SQL.
--Conception et gestion des tables pour stocker les informations des utilisateurs et des candidatures.
+- Conception et gestion des tables pour stocker les informations des utilisateurs et des candidatures.
 ### Téléchargement et gestion des fichiers
 - Téléchargement des fichiers.
 - Génération de documents PDF pour les reçus de candidature.
