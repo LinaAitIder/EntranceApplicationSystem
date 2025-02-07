@@ -46,6 +46,9 @@ Le site gère également plusieurs contraintes, par exemple : un étudiant ayant
 - HTML
 - MySql
 
+## ✨ Vidéos Illustrant le projet
 
+https://github.com/user-attachments/assets/0c5e788e-1163-4d3e-910c-f53ec32e25f4
 
+https://github.com/user-attachments/assets/5a60c431-a6b8-4f3d-a4f3-cd72f87dcc6c
 
